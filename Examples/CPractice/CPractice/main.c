@@ -1,12 +1,15 @@
 /*
 Programmer: Jesse Watson
 Date: January 14, 2022
+Class: Cpt_S 122 Spring 2022
+Description: Example of reading and parsing a csv file
 */
 
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h> // atoi() ascii to int
 
 typedef struct student // name on this line optional
 {
@@ -35,6 +38,18 @@ int main(void)
 		{
 			puts(line);
 			// strtok () to parse a line; .csv file
+			strcpy(studentData[lineCount].lastname, strtok(line, ",")); // last name; strtok returns address of first char of new substring (char*)
+																		// strtok starts at line(address of first character) and goes until delimiter
+																		// then replaces delimiter with '\0' and returns address of first char of that string
+			printf("last: %s\n", studentData[lineCount].lastname);
+			strcpy(studentData[lineCount].firstname, strtok(NULL, ",")); // The NULL here has it start after the last strtok call (first char after delimiter)
+																		 // remembers its place with a static variable (is retained between function calls)
+			printf("first: %s\n", studentData[lineCount].firstname);
+			studentData[lineCount].id = atoi(strtok(NULL, ","));
+			printf("id: %d\n", studentData[lineCount].id);
+
+			studentData[lineCount].gpa = atof(strtok(NULL, "\n"));
+			printf("gpa: %lf\n", studentData[lineCount].gpa);
 		}
 		fclose(infile);
 	}
