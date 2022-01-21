@@ -13,7 +13,7 @@ int main(void)
 	FILE* infile = fopen(INPUTFILE, "r");
 
 	int lineCount = 0;
-	char line[100] = "";
+	char line[100] = "", usableLine[100] = "";
 	char target[10] = "";
 	FitbitData data[1440] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
 
@@ -34,7 +34,14 @@ int main(void)
 		// Populates fields of each struct in data[]
 		while (fgets(line, 100, infile) != NULL)
 		{
+			//strcpy(lineCopy, line); // Makes copy of current line to replace empty fields
+			
 			puts(line);
+			//puts(lineCopy);
+
+			populateEmptyFields(line, usableLine);
+			puts(usableLine);
+
 			strcpy(data[lineCount].patient, strtok(line, ","));
 			printf("patient: %s\n", data[lineCount].patient);
 			

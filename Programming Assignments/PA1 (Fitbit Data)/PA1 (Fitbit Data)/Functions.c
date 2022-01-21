@@ -8,29 +8,132 @@
 
 #include "PA1.h"
 
-void populateEmptyFields(char* line)
+/* Name: populateEmptyFields
+*  Preconditions: line[] must contain a line's worth of data from the input file, usableLine[] must be declared
+*  Postconditions: if a line was missing data, usableLine[] will be a version of said line with neutral values to be used
+*  Description: takes a copy of a line, compares each token to the null character, if not null, concatenates value into
+*				usableLine[], if null, concatenates neutral value into usableLine[].
+*/
+int populateEmptyFields(char* line[], char* usableLine[])
 {
-	char* line[100] = "";
-	
-	fgets(line, 100, infile); // reads in one less than max count to leave room for '\0'
-	puts(line);
+	char invalidID[] = "AAAAA", invalid[] = "-1", invalidTime[] = "-1:00:00", comma[] = ",",lineCopy[100] = "", lineCopy2[100] = "", token[20] = "";
 
-	while (fgets(line, 100, infile) != NULL) // !feof(infile) fgets returns max count unless there is no data left
+	usableLine[0] = '\0';
+
+	strcpy(lineCopy, line);
+	strcpy(lineCopy2, line);
+
+	// patient
+	if (strtok(lineCopy, ",") == NULL)
 	{
-		puts(line);
-		// strtok () to parse a line; .csv file
-		strcpy(studentData[lineCount].lastname, strtok(line, ",")); // last name; strtok returns address of first char of new substring (char*)
-																	// strtok starts at line(address of first character) and goes until delimiter
-																	// then replaces delimiter with '\0' and returns address of first char of that string
-		printf("last: %s\n", studentData[lineCount].lastname);
-		strcpy(studentData[lineCount].firstname, strtok(NULL, ",")); // The NULL here has it start after the last strtok call (first char after delimiter)
-																	 // remembers its place with a static variable (is retained between function calls)
-		printf("first: %s\n", studentData[lineCount].firstname);
-		studentData[lineCount].id = atoi(strtok(NULL, ","));
-		printf("id: %d\n", studentData[lineCount].id);
-
-		studentData[lineCount].gpa = atof(strtok(NULL, "\n"));
-		printf("gpa: %lf\n", studentData[lineCount].gpa);
+		strcat(usableLine, invalidID);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
 	}
-	fclose(infile);
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// minute
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalidTime);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// calories
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// distance
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// floors
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// heartrate
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// steps
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+		strcat(usableLine, comma);
+	}
+	token[0] = '\0';
+	// sleep lvl
+	if (strtok(NULL, ",") == NULL)
+	{
+		strcat(usableLine, invalid);
+		strcat(usableLine, comma);
+		strcpy(token, strtok(lineCopy2, ","));
+	}
+	else
+	{
+		strcpy(token, strtok(lineCopy2, ","));
+		strcat(usableLine, token);
+	}
+	token[0] = '\0';
+
+	return 0;
 }

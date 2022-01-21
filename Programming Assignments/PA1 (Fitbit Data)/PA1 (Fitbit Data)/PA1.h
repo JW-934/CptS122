@@ -33,6 +33,11 @@ typedef struct fitbit
     Sleep sleepLevel;
 } FitbitData;
 
-void populateEmptyFields(char* line);
+/* Name: populateEmptyFields
+*  Preconditions: line[] must contain a line's worth of data from the input file, usableLine[] must be declared
+*  Postconditions: if a line was missing data, usableLine[] will be a version of said line with neutral values to be used
+*  Description: takes a copy of a line, compares each token to the null character, if null, replaces empty space with neutral value
+*/
+int populateEmptyFields(char* line[], char* usableLine[]);
 
 #endif
