@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -38,7 +38,7 @@ int main(void)
 				//puts(line);
 
 				// Fills empty fields with spaces
-				spacesInEmptyFields(line, strlen(line));
+				starsInEmptyFields(line, strlen(line));
 
 				puts(line);
 

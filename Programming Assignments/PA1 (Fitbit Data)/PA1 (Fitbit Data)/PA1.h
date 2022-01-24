@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -27,17 +27,17 @@ typedef struct fitbit
     char minute[9];
     double calories;
     double distance;
-    int floors;
-    int heartRate;
-    int steps;
+    unsigned int floors;
+    unsigned int heartRate;
+    unsigned int steps;
     Sleep sleepLevel;
 } FitbitData;
 
-/* Name: spacesInEmptyFields()
+/* Name: starsInEmptyFields()
 *  Preconditions: line populated with strtok
-*  Postconditions: any empty fields in the line will be have a space inserted
+*  Postconditions: any empty fields in the line will be have a star inserted
 */
-void spacesInEmptyFields(char* str, int length);
+void starsInEmptyFields(char* str, int length);
 
 /* Name: populateArray()
 *  Preconditions: line cleaned with spacesInEmptyFields(), line verified to have target patient ID

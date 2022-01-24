@@ -2,17 +2,17 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022
 * Description: This program analyzes Fitbit data
 */
 
 #include "PA1.h"
 
-/* Name: spacesInEmptyFields()
+/* Name: starssInEmptyFields()
 *  Preconditions: line populated with strtok
-*  Postconditions: any empty fields in the line will be have a space inserted
+*  Postconditions: any empty fields in the line will be have a star inserted
 */
-void spacesInEmptyFields(char* str, int length)
+void starsInEmptyFields(char* str, int length)
 {
 	for (int i = 0; i < length; i++)
 	{
@@ -22,11 +22,11 @@ void spacesInEmptyFields(char* str, int length)
 			{
 				str[(length - j) + 1] = str[length - j];
 			}
-			str[i + 1] = ' ';
+			str[i + 1] = '*';
 		}
 		if (str[i] == ',' && str[i + 1] == '\n') // comma at the end of a line (missing sleep level)
 		{
-			str[i + 1] = ' ';
+			str[i + 1] = '*';
 			str[i + 2] = '/n';
 		}
 	}
@@ -58,7 +58,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// minute
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		strcpy(data[*lineCount].minute, currentToken);
 	}
@@ -72,7 +72,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// calories
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].calories = atof(currentToken);
 	}
@@ -86,7 +86,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// distance
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].distance = atof(currentToken);
 	}
@@ -100,7 +100,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// floors
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].floors = atoi(currentToken);
 	}
@@ -114,7 +114,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// heartrate
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].heartRate = atoi(currentToken);
 	}
@@ -128,7 +128,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// steps
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].steps = atoi(currentToken);
 	}
@@ -142,7 +142,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// sleep level
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != ' ')
+	if (currentToken[0] != '*')
 	{
 		data[*lineCount].sleepLevel = atoi(currentToken);
 	}
