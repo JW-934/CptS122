@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -36,35 +36,17 @@ int main(void)
 		{
 			//strcpy(lineCopy, line); // Makes copy of current line to replace empty fields
 			
+			printf("raw line: ");
 			puts(line);
-			//puts(lineCopy);
-
-			populateEmptyFields(line, usableLine);
-			puts(usableLine);
-
-			strcpy(data[lineCount].patient, strtok(line, ","));
-			printf("patient: %s\n", data[lineCount].patient);
 			
-			strcpy(data[lineCount].minute, strtok(NULL, ","));
-			printf("minute: %s\n", data[lineCount].minute);
+			// Fills empty fields with spaces
+			spacesInEmptyFields(line, strlen(line));
+			printf("spaced line: ");
+			puts(line); 
 
-			data[lineCount].calories = atof(strtok(NULL, ","));
-			printf("calories: %lf\n", data[lineCount].calories);
+			
 
-			data[lineCount].distance = atof(strtok(NULL, ","));
-			printf("distance: %lf\n", data[lineCount].distance);
-
-			data[lineCount].floors = atoi(strtok(NULL, ","));
-			printf("floors: %d\n", data[lineCount].floors);
-
-			data[lineCount].heartRate = atoi(strtok(NULL, ","));
-			printf("heartrate: %d\n", data[lineCount].heartRate);
-
-			data[lineCount].steps = atoi(strtok(NULL, ","));
-			printf("steps: %d\n", data[lineCount].steps);
-
-			data[lineCount].sleepLevel = atoi(strtok(NULL, ","));
-			printf("sleep lvl: %d\n\n", data[lineCount].sleepLevel);
+			populateArray(data, lineCount, line);
 
 			++lineCount;
 		}
