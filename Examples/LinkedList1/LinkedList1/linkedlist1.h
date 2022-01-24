@@ -31,4 +31,5 @@ Node* makeNode(char *newMovieTitle, int newYear); // passing by array name -->ch
 
 int insertFront(Node **pList, char* newMovieTitle, int newYear);
 
+void printListRec(Node *pHead); // not changing head pointer so not Node **
 #endif

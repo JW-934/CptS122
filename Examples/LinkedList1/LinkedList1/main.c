@@ -10,10 +10,18 @@ Description: Example of a linked list
 int main(int argc, char *argv[])
 {
 	Node* pHead = NULL; // empty list - initList would set head to NULL
+	int success = 0;
 
-	pHead = makeNode("Inception", 2006); // hardcoded not maintainable
+	//pHead = makeNode("Inception", 2006); // hardcoded not maintainable
 
-	printf("first movie: title: %s, year: %d\n", pHead->movieTitle, pHead->year);
+	//printf("first movie: title: %s, year: %d\n", pHead->movieTitle, pHead->year);
+
+	success = insertFront(&pHead, "Inception", 2006);
+	success = insertFront(&pHead, "Spiderman", 2021);
+	success = insertFront(&pHead, "Star Wars", 2006);
+	success = insertFront(&pHead, "BTF", 1986);
+
+	printListRec(pHead);
 
 	return 0;
 }

@@ -37,7 +37,23 @@ int insertFront(Node** pList, char* newMovieTitle, int newYear)
 		}
 		else // not empty
 		{
-
+			pMem->pNext = *pList;
+			*pList = pMem;
 		}
+		success = 1;
+	}
+	return success;
+}
+
+void printListRec(Node* pHead)
+{
+	if (pHead != NULL) // there is a movie to print, recursive step
+	{
+		printf("--> %s, %d", pHead->movieTitle, pHead->year); // arrow before to keep aesthetically clean
+		printListRec(pHead->pNext); // pNext is address of next node
+	}
+	else // base case
+	{
+		printf(" -->\n");
 	}
 }
