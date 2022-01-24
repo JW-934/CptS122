@@ -1,9 +1,9 @@
 /*
-Programmer: Jesse Watson
-Date:
-Class: Cpt_S 122 Spring 2022
-Description:
+* Programmer: Jesse Watson
+* Class: CptS 122, Spring 2022; Lab Section 6
+* Assignment:
+* Date:
+* Description:
 */
 
-#include ""
-
+#include "header.h"
