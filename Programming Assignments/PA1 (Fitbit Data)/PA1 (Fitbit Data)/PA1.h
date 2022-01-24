@@ -10,7 +10,7 @@
 
 #define PA1_H
 #define _CRT_SECURE_NO_WARNINGS
-#define INPUTFILE "FitbitData.csv"
+#define INPUTFILE "TestData.csv"
 
 #include <stdio.h>
 #include <string.h>
@@ -27,9 +27,9 @@ typedef struct fitbit
     char minute[9];
     double calories;
     double distance;
-    unsigned int floors;
-    unsigned int heartRate;
-    unsigned int steps;
+    int floors;
+    int heartRate;
+    int steps;
     Sleep sleepLevel;
 } FitbitData;
 

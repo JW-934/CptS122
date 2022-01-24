@@ -13,7 +13,7 @@ int main(void)
 	FILE* infile = fopen(INPUTFILE, "r");
 
 	int lineCount = 0;
-	char line[100] = "", usableLine[100] = "";
+	char line[100] = "", usableLine[100] = "", lineCopy[100] = "";
 	char target[10] = "";
 	FitbitData data[1440] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
 
@@ -24,8 +24,6 @@ int main(void)
 		
 		fgets(line, 100, infile);
 		strcpy(target, strtok(line, ","));
-		
-		printf("target: %s\n\n", target);
 
 		// Skips over header line
 		fgets(line, 100, infile);
@@ -33,13 +31,23 @@ int main(void)
 		// Populates fields of each struct in data[] after error correction
 		while (fgets(line, 100, infile) != NULL)
 		{
-			// Fills empty fields with spaces
-			spacesInEmptyFields(line, strlen(line));
+			// Checks if patient ID in line matches the target ID
+			strcpy(lineCopy, line);
+			if (strcmp(strtok(lineCopy, ","), target) == 0)
+			{
+				//puts(line);
 
-			// Replaces spaces with -1 and fills structs in array
-			populateArray(data, &lineCount, line);
+				// Fills empty fields with spaces
+				spacesInEmptyFields(line, strlen(line));
 
-			++lineCount;
+				puts(line);
+
+				// Replaces spaces with -1 and fills structs in array
+				populateArray(data, &lineCount, line, target);
+
+				++lineCount;
+			}
+			lineCopy[0] = '\0';
 		}
 		fclose(infile);
 	}

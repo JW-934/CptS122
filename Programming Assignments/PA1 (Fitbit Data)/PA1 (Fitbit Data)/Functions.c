@@ -39,19 +39,20 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 {
 	char currentToken[20] = "", invalid[] = "-1";
 	
-	// patient
-	strcpy(currentToken, strtok(line, ","));
-	if (currentToken[0] != ' ')
-	{
-		strcpy(data[*lineCount].patient, currentToken);
-	}
-	else
-	{
-		strcpy(data[*lineCount].patient, invalid);
-	}
-	printf("patient: %s\n", data[*lineCount].patient);
-
-	currentToken[0] = '\0';
+	//// patient
+	//strcpy(currentToken, strtok(line, ","));
+	//if (currentToken[0] != ' ')
+	//{
+	//	strcpy(data[*lineCount].patient, currentToken);
+	//}
+	//else
+	//{
+	//	strcpy(data[*lineCount].patient, invalid);
+	//}
+	//printf("patient: %s\n", data[*lineCount].patient);
+	
+	// Inserts target patient ID (if wrong data, line will be skipped in main)
+	strcpy(data[*lineCount].patient, target);
 
 	// minute
 	strcpy(currentToken, strtok(NULL, ","));
