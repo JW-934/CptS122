@@ -20,3 +20,24 @@ Node* makeNode(char* newMovieTitle, int newYear)
 	}
 	return pMem;
 }
+
+int insertFront(Node** pList, char* newMovieTitle, int newYear)
+{
+	Node* pMem = makeNode(newMovieTitle, newYear);
+	int success = 0;
+
+	// think state of linked list
+	// 2 states: empty, not empty
+
+	if (pMem != NULL) // successfully allocated space on heap for Node
+	{
+		if (*pList == NULL) // if null, list empty
+		{
+			*pList = pMem;
+		}
+		else // not empty
+		{
+
+		}
+	}
+}

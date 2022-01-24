@@ -29,4 +29,6 @@ typedef struct node
 
 Node* makeNode(char *newMovieTitle, int newYear); // passing by array name -->char *
 
+int insertFront(Node **pList, char* newMovieTitle, int newYear);
+
 #endif
