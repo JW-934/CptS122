@@ -10,7 +10,7 @@
 
 #define PA1_H
 #define _CRT_SECURE_NO_WARNINGS
-#define INPUTFILE "TestData.csv"
+#define INPUTFILE "FitbitData.csv"
 
 #include <stdio.h>
 #include <string.h>
@@ -33,14 +33,12 @@ typedef struct fitbit
     Sleep sleepLevel;
 } FitbitData;
 
-///* Name: populateEmptyFields
-//*  Preconditions: line[] must contain a line's worth of data from the input file, usableLine[] must be declared
-//*  Postconditions: if a line was missing data, usableLine[] will be a version of said line with neutral values to be used
-//*  Description: takes a copy of a line, compares each token to the null character, if null, replaces empty space with neutral value
-//*/
-//int populateEmptyFields(char* line[], char* usableLine[]);
+/* Name: spacesInEmptyFields
+*  Preconditions:
+*  Postconditions:
+*  Description: 
+*/
 
 void spacesInEmptyFields(char* str, int length);
-//void insertInvalidValues(char* str);
-void populateArray(FitbitData data[], int* lineCount, char line[]);
+void populateArray(FitbitData data[], int* lineCount, char line[], char target[]);
 #endif

@@ -29,29 +29,23 @@ int main(void)
 
 		// Skips over header line
 		fgets(line, 100, infile);
-		//puts(line);
 
-		// Populates fields of each struct in data[]
+		// Populates fields of each struct in data[] after error correction
 		while (fgets(line, 100, infile) != NULL)
 		{
-			//strcpy(lineCopy, line); // Makes copy of current line to replace empty fields
-			
-			printf("raw line: ");
-			puts(line);
-			
 			// Fills empty fields with spaces
 			spacesInEmptyFields(line, strlen(line));
-			printf("spaced line: ");
-			puts(line); 
 
-			
-
-			populateArray(data, lineCount, line);
+			// Replaces spaces with -1 and fills structs in array
+			populateArray(data, &lineCount, line);
 
 			++lineCount;
 		}
 		fclose(infile);
 	}
+	
+	
+	
 	FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
 	fclose(outfile);
 	
