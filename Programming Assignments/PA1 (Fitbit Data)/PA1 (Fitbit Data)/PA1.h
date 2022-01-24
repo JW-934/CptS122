@@ -33,12 +33,15 @@ typedef struct fitbit
     Sleep sleepLevel;
 } FitbitData;
 
-/* Name: spacesInEmptyFields
-*  Preconditions:
-*  Postconditions:
-*  Description: 
+/* Name: spacesInEmptyFields()
+*  Preconditions: line populated with strtok
+*  Postconditions: any empty fields in the line will be have a space inserted
 */
-
 void spacesInEmptyFields(char* str, int length);
+
+/* Name: populateArray()
+*  Preconditions: line cleaned with spacesInEmptyFields(), line verified to have target patient ID
+*  Postconditions: structs in data[] will be populated with information by the minute, any empty fields set to -1
+*/
 void populateArray(FitbitData data[], int* lineCount, char line[], char target[]);
 #endif
