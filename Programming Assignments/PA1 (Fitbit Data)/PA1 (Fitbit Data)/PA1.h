@@ -39,11 +39,11 @@ typedef struct fitbit
 */
 int computeAverageHR(FitbitData data[], int lineCount);
 
-/* Name: computeTotalCalories()
+/* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
-*  Postconditions: calories from all structs in data[] will be summed
+*  Postconditions: data fields from all structs in data[] will be summed individually
 */
-double computeTotalCalories(FitbitData data[], int lineCount);
+void computeTotals(FitbitData data[], int lineCount, double* totalCalories, double* totalDistance, int* totalFloors, int* totalSteps);
 
 /* Name: starsInEmptyFields()
 *  Preconditions: line populated with strtok

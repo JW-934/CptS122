@@ -12,10 +12,10 @@ int main(void)
 {
 	FILE* infile = fopen(INPUTFILE, "r");
 
-	int lineCount = 0, averageHR;
+	int lineCount = 0, totalFloors = 0, totalSteps = 0, averageHR = 0;
 	char line[100] = "", usableLine[100] = "", lineCopy[100] = "";
 	char target[10] = "";
-	double calories;
+	double totalCalories = 0, totalDistance = 0;
 	
 	FitbitData data[1445] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
 
@@ -53,9 +53,14 @@ int main(void)
 		}
 		fclose(infile);
 
-		calories = computeTotalCalories(data, lineCount);
-		printf("calories: %lf\n", calories);
+		// Calculates all totals
+		computeTotals(data, lineCount, &totalCalories, &totalDistance, &totalFloors, &totalSteps);
+		printf("total calories: %lf\n", totalCalories);
+		printf("total distance: %lf\n", totalDistance);
+		printf("total floors: %d\n", totalFloors);
+		printf("total steps: %d\n", totalSteps);
 
+		// Calculates average heart rate
 		averageHR = computeAverageHR(data, lineCount);
 		printf("average heartrate: %d\n", averageHR);
 	}

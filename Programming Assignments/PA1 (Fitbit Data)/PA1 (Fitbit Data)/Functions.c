@@ -26,23 +26,31 @@ int computeAverageHR(FitbitData data[], int lineCount)
 	return sum / lineCount;
 }
 
-/* Name: computeTotalCalories()
+/* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
-*  Postconditions: calories from all structs in data[] will be summed
+*  Postconditions: data fields from all structs in data[] will be summed individually
 */
-
-double computeTotalCalories(FitbitData data[], int lineCount)
+void computeTotals(FitbitData data[], int lineCount, double *totalCalories, double *totalDistance, int *totalFloors, int *totalSteps)
 {
-	double calories = 0;
-
 	for (int i = 0; i < lineCount; ++i)
 	{
 		if (data[i].calories != -1)
 		{
-			calories += data[i].calories;
+			*totalCalories += data[i].calories;
+		}
+		if (data[i].distance != -1)
+		{
+			*totalDistance += data[i].distance;
+		}
+		if (data[i].floors != -1)
+		{
+			*totalFloors += data[i].floors;
+		}
+		if (data[i].steps != -1)
+		{
+			*totalSteps += data[i].steps;
 		}
 	}
-	return calories;
 }
 
 /* Name: starssInEmptyFields()
