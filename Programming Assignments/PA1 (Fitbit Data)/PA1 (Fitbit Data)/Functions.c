@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022, January 25, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -54,7 +54,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	//printf("patient: %s\n", data[*lineCount].patient);
 	
 	// Inserts target patient ID (if wrong data, line will be skipped in main)
-	strcpy(data[*lineCount].patient, target);
+	strcpy(data[*lineCount].patient, strtok(line, ","));
 
 	// minute
 	strcpy(currentToken, strtok(NULL, ","));
