@@ -26,6 +26,29 @@ int computeAverageHR(FitbitData data[], int lineCount)
 	return sum / lineCount;
 }
 
+int determineMaxSteps(FitbitData data[], int lineCount, char* maxStepEntry)
+{
+	int max = 0;
+
+	for (int i = 0; i < lineCount; ++i)
+	{
+		if (data[i].steps > max) // More steps than current max
+		{
+			// Update maximum step number and the time of the maximum
+			max = data[i].steps;
+			maxStepEntry[0] = '\0';
+			strcpy(maxStepEntry, data[i].minute);
+		}
+		else if (data[i].steps == max) // Same number of steps as max but later in day
+		{
+			// Only update the time of the maximum to latest occurance
+			maxStepEntry[0] = '\0';
+			strcpy(maxStepEntry, data[i].minute);
+		}
+	}
+	return max;
+}
+
 /* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
 *  Postconditions: data fields from all structs in data[] will be summed individually

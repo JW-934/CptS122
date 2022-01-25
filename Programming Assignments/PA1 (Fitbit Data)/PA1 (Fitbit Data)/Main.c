@@ -12,9 +12,9 @@ int main(void)
 {
 	FILE* infile = fopen(INPUTFILE, "r");
 
-	int lineCount = 0, totalFloors = 0, totalSteps = 0, averageHR = 0;
-	char line[100] = "", usableLine[100] = "", lineCopy[100] = "";
-	char target[10] = "";
+	int lineCount = 0, totalFloors = 0, totalSteps = 0, averageHR = 0, maxSteps;
+	char line[100] = "", usableLine[100] = "", lineCopy[100] = "", target[10] = "", maxStepEntry[15] = "";
+	
 	double totalCalories = 0, totalDistance = 0;
 	
 	FitbitData data[1445] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
@@ -63,6 +63,10 @@ int main(void)
 		// Calculates average heart rate
 		averageHR = computeAverageHR(data, lineCount);
 		printf("average heartrate: %d\n", averageHR);
+
+		// Finds maximum steps and when it happened
+		maxSteps = determineMaxSteps(data, lineCount, maxStepEntry);
+		printf("max steps in one minute: %d at %s\n", maxSteps, maxStepEntry);
 	}
 	FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
 	fclose(outfile);

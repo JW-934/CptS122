@@ -39,6 +39,8 @@ typedef struct fitbit
 */
 int computeAverageHR(FitbitData data[], int lineCount);
 
+int determineMaxSteps(FitbitData data[], int lineCount, char* maxStepEntry);
+
 /* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
 *  Postconditions: data fields from all structs in data[] will be summed individually
