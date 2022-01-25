@@ -10,7 +10,7 @@
 
 #define PA1_H
 #define _CRT_SECURE_NO_WARNINGS
-#define INPUTFILE "TestData.csv"
+#define INPUTFILE "FitbitData.csv"
 
 #include <stdio.h>
 #include <string.h>
@@ -32,6 +32,18 @@ typedef struct fitbit
     unsigned int steps;
     Sleep sleepLevel;
 } FitbitData;
+
+/* Name: computeAverageHR()
+*  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
+*  Postconditions: heart rate from all structs in data[] will be averaged
+*/
+int computeAverageHR(FitbitData data[], int lineCount);
+
+/* Name: computeTotalCalories()
+*  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
+*  Postconditions: calories from all structs in data[] will be summed
+*/
+double computeTotalCalories(FitbitData data[], int lineCount);
 
 /* Name: starsInEmptyFields()
 *  Preconditions: line populated with strtok

@@ -8,6 +8,43 @@
 
 #include "PA1.h"
 
+/* Name: computeAverageHR()
+*  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
+*  Postconditions: heart rate from all structs in data[] will be averaged
+*/
+int computeAverageHR(FitbitData data[], int lineCount)
+{
+	int sum = 0;
+
+	for (int i = 0; i < lineCount; ++i)
+	{
+		if (data[i].heartRate != -1)
+		{
+			sum += data[i].heartRate;
+		}
+	}
+	return sum / lineCount;
+}
+
+/* Name: computeTotalCalories()
+*  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
+*  Postconditions: calories from all structs in data[] will be summed
+*/
+
+double computeTotalCalories(FitbitData data[], int lineCount)
+{
+	double calories = 0;
+
+	for (int i = 0; i < lineCount; ++i)
+	{
+		if (data[i].calories != -1)
+		{
+			calories += data[i].calories;
+		}
+	}
+	return calories;
+}
+
 /* Name: starssInEmptyFields()
 *  Preconditions: line populated with strtok
 *  Postconditions: any empty fields in the line will be have a star inserted
@@ -66,7 +103,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		strcpy(data[*lineCount].minute, currentToken);
 	}
-	printf("minute: %s\n", data[*lineCount].minute);
+	//printf("minute: %s\n", data[*lineCount].minute);
 
 	currentToken[0] = '\0';
 
@@ -80,7 +117,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].calories = -1;
 	}
-	printf("calories: %lf\n", data[*lineCount].calories);
+	//printf("calories: %lf\n", data[*lineCount].calories);
 
 	currentToken[0] = '\0';
 
@@ -94,7 +131,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].distance = -1;
 	}
-	printf("distance: %lf\n", data[*lineCount].distance);
+	//printf("distance: %lf\n", data[*lineCount].distance);
 
 	currentToken[0] = '\0';
 
@@ -108,7 +145,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].floors = -1;
 	}
-	printf("floors: %d\n", data[*lineCount].floors);
+	//printf("floors: %d\n", data[*lineCount].floors);
 
 	currentToken[0] = '\0';
 
@@ -122,7 +159,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].heartRate = -1;
 	}
-	printf("heart rate: %d\n", data[*lineCount].heartRate);
+	//printf("heart rate: %d\n", data[*lineCount].heartRate);
 
 	currentToken[0] = '\0';
 
@@ -136,7 +173,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].steps = -1;
 	}
-	printf("steps: %d\n", data[*lineCount].steps);
+	//printf("steps: %d\n", data[*lineCount].steps);
 
 	currentToken[0] = '\0';
 
@@ -150,7 +187,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		data[*lineCount].sleepLevel = -1;
 	}
-	printf("sleep level: %d\n", data[*lineCount].sleepLevel);
+	//printf("sleep level: %d\n", data[*lineCount].sleepLevel);
 
-	putchar('\n');
+	//putchar('\n');
 }

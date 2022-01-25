@@ -12,10 +12,12 @@ int main(void)
 {
 	FILE* infile = fopen(INPUTFILE, "r");
 
-	int lineCount = 0;
+	int lineCount = 0, averageHR;
 	char line[100] = "", usableLine[100] = "", lineCopy[100] = "";
 	char target[10] = "";
-	FitbitData data[1440] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
+	double calories;
+	
+	FitbitData data[1445] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
 
 	if (infile != NULL) // Input file successfully opened
 	{
@@ -40,7 +42,7 @@ int main(void)
 				// Fills empty fields with spaces
 				starsInEmptyFields(line, strlen(line));
 
-				puts(line);
+				//puts(line);
 
 				// Replaces spaces with -1 and fills structs in array
 				populateArray(data, &lineCount, line, target);
@@ -50,6 +52,12 @@ int main(void)
 			lineCopy[0] = '\0';
 		}
 		fclose(infile);
+
+		calories = computeTotalCalories(data, lineCount);
+		printf("calories: %lf\n", calories);
+
+		averageHR = computeAverageHR(data, lineCount);
+		printf("average heartrate: %d\n", averageHR);
 	}
 	FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
 	fclose(outfile);
