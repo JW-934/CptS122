@@ -34,7 +34,7 @@ void starsInEmptyFields(char* str, int length)
 }
 
 /* Name: populateArray()
-*  Preconditions: line cleaned with spacesInEmptyFields(), line verified to have target patient ID
+*  Preconditions: line cleaned with starsInEmptyFields(), line verified to have target patient ID
 *  Postconditions: structs in data[] will be populated with information by the minute, any empty fields set to -1
 */
 void populateArray(FitbitData data[], int *lineCount, char line[], char target[])
@@ -58,13 +58,13 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 
 	// minute
 	strcpy(currentToken, strtok(NULL, ","));
-	if (currentToken[0] != '*')
+	if (currentToken[0] == '*')
 	{
-		strcpy(data[*lineCount].minute, currentToken);
+		strcpy(data[*lineCount].minute, invalid);
 	}
 	else
 	{
-		strcpy(data[*lineCount].minute, invalid);
+		strcpy(data[*lineCount].minute, currentToken);
 	}
 	printf("minute: %s\n", data[*lineCount].minute);
 
