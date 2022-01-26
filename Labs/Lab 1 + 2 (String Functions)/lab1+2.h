@@ -16,6 +16,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+char* myStrTok(char *str, char* delimiter);
+
 void myStrrev(char* str, int* index);
 
 
