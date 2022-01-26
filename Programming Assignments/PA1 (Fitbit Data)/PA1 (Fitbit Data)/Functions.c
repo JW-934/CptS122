@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022, January 25, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022, January 25, 2022, January 26, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -76,7 +76,7 @@ void computeTotals(FitbitData data[], int lineCount, double *totalCalories, doub
 	}
 }
 
-/* Name: starssInEmptyFields()
+/* Name: starsInEmptyFields()
 *  Preconditions: line populated with strtok
 *  Postconditions: any empty fields in the line will be have a star inserted
 */

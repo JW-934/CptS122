@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Programming Assignment: PA1
-* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022, January 25, 2022
+* Date: January 18, 2022, January 19, 2022, January 20, 2022, January 23, 2022, January 24, 2022, January 25, 2022, January 26, 2022
 * Description: This program analyzes Fitbit data
 */
 
@@ -17,7 +17,7 @@ int main(void)
 	
 	double totalCalories = 0, totalDistance = 0;
 	
-	FitbitData data[1445] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } };
+	FitbitData data[1440] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } }; // Warning message can be prevented if array size increased slightly
 
 	if (infile != NULL) // Input file successfully opened
 	{
@@ -67,9 +67,19 @@ int main(void)
 		// Finds maximum steps and when it happened
 		maxSteps = determineMaxSteps(data, lineCount, maxStepEntry);
 		printf("max steps in one minute: %d at %s\n", maxSteps, maxStepEntry);
+
+		//FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
+
+		//// Print header to screen and to results file
+		//printf("Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
+		//fprintf(outfile, "Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
+		//
+		//// ADD MORE PLACEHOLDERS FOR SLEEP LEVEL RANGEprintf(outfile, "%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
+		//// Print values to screen and to results file
+		//printf("%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
+		//fprintf(outfile, "%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
+
+		//fclose(outfile);
 	}
-	FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
-	fclose(outfile);
-	
 	return 0;
 }
