@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="header.h" />
+    <ClInclude Include="lab1+2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="functions.c" />
