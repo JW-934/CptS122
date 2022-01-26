@@ -18,20 +18,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="header.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="functions.c" />
-    <ClCompile Include="main.c" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e514933b-4ff3-40e6-a47a-bdc82b5b7d60}</ProjectGuid>
-    <RootNamespace>GenericCProject</RootNamespace>
+    <ProjectGuid>{7445aa6c-496a-4e19-9709-bd2990b0179d}</ProjectGuid>
+    <RootNamespace>Lab12StringFunctions</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Lab 1 + 2 (String Functions)</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,6 +138,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="functions.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
