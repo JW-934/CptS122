@@ -1,6 +1,6 @@
 /*
 Programmer: Jesse Watson
-Date: January 21, 2022
+Date: January 21, 2022, January 24, 2022, January 26, 2022
 Class: Cpt_S 122 Spring 2022
 Description: Example of a linked list
 */
@@ -30,6 +30,8 @@ typedef struct node
 Node* makeNode(char *newMovieTitle, int newYear); // passing by array name -->char *
 
 int insertFront(Node **pList, char* newMovieTitle, int newYear);
+
+int insertInOrder(Node** pList, char* newMovieTitle, int newYear);
 
 void printListRec(Node *pHead); // not changing head pointer so not Node **
 #endif

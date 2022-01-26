@@ -1,7 +1,7 @@
 /*
 Programmer: Jesse Watson
 Date: January 21, 2022
-Class: Cpt_S 122 Spring 2022
+Class: Cpt_S 122 Spring 2022, January 24, 2022, January 26, 2022
 Description: Example of a linked list
 */
 
@@ -31,13 +31,49 @@ int insertFront(Node** pList, char* newMovieTitle, int newYear)
 
 	if (pMem != NULL) // successfully allocated space on heap for Node
 	{
-		if (*pList == NULL) // if null, list empty
+		//if (*pList == NULL) // if null, list empty
+		//{
+		//	*pList = pMem;
+		//}
+		//else // not empty
+		//{
+		//	pMem->pNext = *pList;
+		//	*pList = pMem;
+		//}
+
+		pMem->pNext = *pList;
+		*pList = pMem;
+
+
+		success = 1;
+	}
+	return success;
+}
+
+int insertInOrder(Node** pList, char* newMovieTitle, int newYear)
+{
+	Node* pMem = makeNode(newMovieTitle, newYear), * pCur = *pList, *pPrev = NULL;
+	int success = 0;
+
+	if (pMem != NULL) // successfully allocated a Node
+	{
+		while (pCur != NULL && strcmp(pCur->movieTitle, pMem->movieTitle) < 0) // empty/end of list; order matters here so strcmp doesn't get passed NULL
 		{
-			*pList = pMem;
+			// intent is to position the pointers to insertion point
+			pPrev = pCur;
+			pCur = pCur->pNext;
 		}
-		else // not empty
+		// should insert Node
+		pMem->pNext = pCur;
+
+		if (pPrev != NULL)
 		{
-			pMem->pNext = *pList;
+			// inserting somewhere after first node, middle, or at end
+			pPrev->pNext = pMem;
+		}
+		else
+		{
+			// inserting at front
 			*pList = pMem;
 		}
 		success = 1;
