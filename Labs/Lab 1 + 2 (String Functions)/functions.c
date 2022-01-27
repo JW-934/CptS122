@@ -11,11 +11,40 @@
 
 char* myStrTok(char* str, char* delimiter)
 {
-	static char* pToken;
-	pToken = str;
 	int delimFound = 0, i = 0, k = 0, j = 0, charFound = 0, tokenLength = 0, g = 0, firstDelimLen = 0;
+	static char* pToken = NULL;
 
-	if (pToken != NULL) // first call
+	if (str != NULL) // first call
+	{
+		pToken = str;
+		for (; i < strlen(pToken) && charFound == 0; ++i) // looking for first non-delimiter
+		{
+			if (pToken[i] != delimiter[0] && pToken[i] != delimiter[1])	// i will mark the location of the first non-delimiter
+			{
+				charFound = 1;
+			}
+			++firstDelimLen;
+		}
+		if (charFound == 0) // no delimiters in string or no non-delimiter characters
+		{
+			return NULL;
+		}
+		k = i + 1;
+		for (; k < strlen(pToken) && delimFound == 0; ++k) // looks for next delimiter
+		{
+			if (pToken[k] == delimiter[0] || pToken[k] == delimiter[1]) // k will mark the location of the next delimiter
+			{
+				delimFound = 1;
+				pToken[k] = '\0';
+			}
+		}
+		//tokenLength = strlen(pToken) - i; // length of token if no second delimiter
+		for (; g < strlen(pToken); ++g) // shift characters in pToken left by the length of the token
+		{
+			pToken[g] = pToken[g + (firstDelimLen - 1)];
+		}
+	}
+	else // consecutive calls
 	{
 		for (; i < strlen(pToken) && charFound == 0; ++i) // looking for first non-delimiter
 		{
@@ -35,18 +64,14 @@ char* myStrTok(char* str, char* delimiter)
 			if (pToken[k] == delimiter[0] || pToken[k] == delimiter[1]) // k will mark the location of the next delimiter
 			{
 				delimFound = 1;
+				pToken[k] = '\0';
 			}
 		}
 		//tokenLength = strlen(pToken) - i; // length of token if no second delimiter
 		for (; g < strlen(pToken); ++g) // shift characters in pToken left by the length of the token
 		{
 			pToken[g] = pToken[g + (firstDelimLen - 1)];
-
 		}
-	}
-	else // consecutive calls
-	{
-		
 	}
 
 
