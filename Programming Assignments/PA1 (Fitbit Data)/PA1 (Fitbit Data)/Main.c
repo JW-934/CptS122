@@ -12,12 +12,12 @@ int main(void)
 {
 	FILE* infile = fopen(INPUTFILE, "r");
 
-	int lineCount = 0, totalFloors = 0, totalSteps = 0, averageHR = 0, maxSteps;
-	char line[100] = "", usableLine[100] = "", lineCopy[100] = "", target[10] = "", maxStepEntry[15] = "";
+	int lineCount = 0, totalFloors = 0, totalSteps = 0, averageHR = 0, maxSteps, maxBadSleep;
+	char line[100] = "", usableLine[100] = "", lineCopy[100] = "", target[10] = "", maxStepEntry[15] = "", sleepStart[15] = "", sleepEnd[15] = "";
 	
 	double totalCalories = 0, totalDistance = 0;
 	
-	FitbitData data[1440] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } }; // Warning message can be prevented if array size increased slightly
+	FitbitData data[1445] = { { '\0', '\0', 0.0, 0.0, 0, 0, 0, 0 } }; // Warning message can be prevented if array size increased slightly
 
 	if (infile != NULL) // Input file successfully opened
 	{
@@ -55,31 +55,40 @@ int main(void)
 
 		// Calculates all totals
 		computeTotals(data, lineCount, &totalCalories, &totalDistance, &totalFloors, &totalSteps);
-		printf("total calories: %lf\n", totalCalories);
+		/*printf("total calories: %lf\n", totalCalories);
 		printf("total distance: %lf\n", totalDistance);
 		printf("total floors: %d\n", totalFloors);
-		printf("total steps: %d\n", totalSteps);
+		printf("total steps: %d\n", totalSteps);*/
 
 		// Calculates average heart rate
 		averageHR = computeAverageHR(data, lineCount);
-		printf("average heartrate: %d\n", averageHR);
+		//printf("average heartrate: %d\n", averageHR);
 
 		// Finds maximum steps and when it happened
 		maxSteps = determineMaxSteps(data, lineCount, maxStepEntry);
-		printf("max steps in one minute: %d at %s\n", maxSteps, maxStepEntry);
+		//printf("max steps in one minute: %d at %s\n", maxSteps, maxStepEntry);
 
-		//FILE* outfile = fopen("Results.csv", "w"); // Likely move this line
+		maxBadSleep = determineBadSleepRange(data, lineCount, sleepStart, sleepEnd);
 
-		//// Print header to screen and to results file
-		//printf("Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
-		//fprintf(outfile, "Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
-		//
-		//// ADD MORE PLACEHOLDERS FOR SLEEP LEVEL RANGEprintf(outfile, "%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
-		//// Print values to screen and to results file
-		//printf("%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
-		//fprintf(outfile, "%lf, %d, %d, %d\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps);
+		/*printf("bad sleep range start: ");
+		puts(sleepStart);
+		printf("bad sleep range end: ");
+		puts(sleepEnd);*/
 
-		//fclose(outfile);
+		FILE* outfile = fopen("Results.csv", "w");
+
+		// Print header to screen and to results file
+		printf("Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
+		fprintf(outfile, "Total Calories,Total Distance,Total Floors,Total Steps,Avg Heartrate,Max Steps,Sleep\n");
+
+		printf("%lf, %lf, %d, %d, %d, %d at %s, start: %s, end: %s\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps, maxStepEntry, sleepStart, sleepEnd);
+		fprintf(outfile, "%lf, %lf, %d, %d, %d, %d at %s, start: %s, end: %s\n", totalCalories, totalDistance, totalFloors, totalSteps, averageHR, maxSteps, maxStepEntry, sleepStart, sleepEnd);
+		
+		// Print cleaned data to screen and output file
+		printData(data, lineCount);
+		filePrintData(outfile, data, lineCount);
+
+		fclose(outfile);
 	}
 	return 0;
 }

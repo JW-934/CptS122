@@ -49,6 +49,36 @@ int determineMaxSteps(FitbitData data[], int lineCount, char* maxStepEntry)
 	return max;
 }
 
+int determineBadSleepRange(FitbitData data[], int lineCount, char* startMin, char* endMin)
+{
+	int maxSum = 0, currSum = 0, counting = 0;
+	char start[15] = "";
+
+	for (int i = 0; i < lineCount; ++i)
+	{
+		if (data[i].sleepLevel > 1)
+		{
+			counting = 1;
+			if (data[i - 1].sleepLevel <= 1)
+			{
+				strcpy(start, data[i].minute);
+			}
+			currSum += data[i].sleepLevel;
+		}
+		else
+		{
+			if (currSum > maxSum && counting == 1)
+			{
+				maxSum = currSum;
+				strcpy(endMin, data[i - 1].minute);
+				strcpy(startMin, start);
+			}
+			counting = 0;
+		}
+	}
+	return maxSum;
+}
+
 /* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
 *  Postconditions: data fields from all structs in data[] will be summed individually
@@ -119,7 +149,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	//{
 	//	strcpy(data[*lineCount].patient, invalid);
 	//}
-	//printf("patient: %s\n", data[*lineCount].patient);
+	//printf("patient: %s", data[*lineCount].patient);
 	
 	// Inserts target patient ID (if wrong data, line will be skipped in main)
 	strcpy(data[*lineCount].patient, strtok(line, ","));
@@ -134,7 +164,7 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	{
 		strcpy(data[*lineCount].minute, currentToken);
 	}
-	//printf("minute: %s\n", data[*lineCount].minute);
+	//printf("minute: %s", data[*lineCount].minute);
 
 	currentToken[0] = '\0';
 
@@ -221,4 +251,34 @@ void populateArray(FitbitData data[], int *lineCount, char line[], char target[]
 	//printf("sleep level: %d\n", data[*lineCount].sleepLevel);
 
 	//putchar('\n');
+}
+
+void printData(FitbitData data[], int lineCount)
+{
+	for (int i = 0; i < lineCount; ++i)
+	{
+		printf("%s,", data[i].patient);
+		printf("%s,", data[i].minute);
+		printf("%lf,", data[i].calories);
+		printf("%lf,", data[i].distance);
+		printf("%d,", data[i].floors);
+		printf("%d,", data[i].heartRate);
+		printf("%d,", data[i].steps);
+		printf("%d\n", data[i].sleepLevel);
+	}
+}
+
+void filePrintData(FILE* outfile, FitbitData data[], int lineCount)
+{
+	for (int i = 0; i < lineCount; ++i)
+	{
+		fprintf(outfile, "%s,", data[i].patient);
+		fprintf(outfile, "%s,", data[i].minute);
+		fprintf(outfile, "%lf,", data[i].calories);
+		fprintf(outfile, "%lf,", data[i].distance);
+		fprintf(outfile, "%d,", data[i].floors);
+		fprintf(outfile, "%d,", data[i].heartRate);
+		fprintf(outfile, "%d,", data[i].steps);
+		fprintf(outfile, "%d\n", data[i].sleepLevel);
+	}
 }

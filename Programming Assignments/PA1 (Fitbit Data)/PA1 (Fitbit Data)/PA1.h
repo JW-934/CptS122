@@ -41,6 +41,8 @@ int computeAverageHR(FitbitData data[], int lineCount);
 
 int determineMaxSteps(FitbitData data[], int lineCount, char* maxStepEntry);
 
+int determineBadSleepRange(FitbitData data[], int lineCount, char* startMin, char* endMin);
+
 /* Name: computeTotals()
 *  Preconditions: data[] populated with all data, lineCount accurate, empty fields made to be -1 in structs
 *  Postconditions: data fields from all structs in data[] will be summed individually
@@ -58,4 +60,8 @@ void starsInEmptyFields(char* str, int length);
 *  Postconditions: structs in data[] will be populated with information by the minute, any empty fields set to -1
 */
 void populateArray(FitbitData data[], int* lineCount, char line[], char target[]);
+
+void printData(FitbitData data[], int lineCount);
+
+void filePrintData(FILE* outfile, FitbitData data[], int lineCount);
 #endif
