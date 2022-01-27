@@ -16,7 +16,7 @@ int main(void)
 	/*char str1[] = "abcdefg";
 	myStrrev(str1, reverseIndex);*/
 
-	char str2[] = ",,hello,world,test";
+	char str2[] = ",,hello";
 	printf("%s", myStrTok(str2, ","));
 
 	return 0;
