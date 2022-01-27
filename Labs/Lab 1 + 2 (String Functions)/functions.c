@@ -35,7 +35,6 @@ char* myStrTok(char* str, char* delimiter)
 			if (pToken[k] == delimiter[0] || pToken[k] == delimiter[1]) // k will mark the location of the next delimiter
 			{
 				delimFound = 1;
-				pToken[k] = '\0';
 			}
 		}
 		//tokenLength = strlen(pToken) - i; // length of token if no second delimiter
@@ -43,6 +42,7 @@ char* myStrTok(char* str, char* delimiter)
 		{
 			pToken[g] = pToken[g + (firstDelimLen - 1)];
 		}
+		pToken[g + 1] = '\0';
 	}
 	else // consecutive calls
 	{
@@ -73,8 +73,6 @@ char* myStrTok(char* str, char* delimiter)
 			pToken[g] = pToken[g + (firstDelimLen - 1)];
 		}
 	}
-
-
 	return pToken;
 }
 	
