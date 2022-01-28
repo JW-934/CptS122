@@ -16,15 +16,25 @@ int main(int argc, char *argv[])
 
 	//printf("first movie: title: %s, year: %d\n", pHead->movieTitle, pHead->year);
 
-	/*success = insertFront(&pHead, "Inception", 2006);
+	success = insertFront(&pHead, "Inception", 2006);
 	success = insertFront(&pHead, "Spiderman", 2021);
 	success = insertFront(&pHead, "Star Wars", 2006);
-	success = insertFront(&pHead, "BTF", 1986);*/
+	success = insertFront(&pHead, "BTF", 1986);
 
-	success = insertInOrder(&pHead, "BTF", 1986);
+	/*success = insertInOrder(&pHead, "BTF", 1986);
 	success = insertInOrder(&pHead, "Alien", 1986);
 	success = insertInOrder(&pHead, "Spiderman", 2021);
-	success = insertInOrder(&pHead, "Inception", 2006);
+	success = insertInOrder(&pHead, "Inception", 2006);*/
+	printListRec(pHead);
+	puts("-----------");
+
+	success = deleteItem(&pHead, "Spiderman");
+
+	printListRec(pHead);
+
+	puts("-----------");
+
+	success = deleteItem(&pHead, "Alien");
 
 	printListRec(pHead);
 

@@ -25,13 +25,16 @@ typedef struct node
 	
 	// link
 	struct node* pNext; // generally 4 bytes
-}Node; // 58 bytes
+	struct node* pPrev; // 4 more bytes
+}Node; // 62 bytes
 
 Node* makeNode(char *newMovieTitle, int newYear); // passing by array name -->char *
 
 int insertFront(Node **pList, char* newMovieTitle, int newYear);
 
-int insertInOrder(Node** pList, char* newMovieTitle, int newYear);
+int insertInOrder(Node **pList, char* newMovieTitle, int newYear);
+
+int deleteItem(Node **pList, char *movieTitleSrch);
 
 void printListRec(Node *pHead); // not changing head pointer so not Node **
 #endif
