@@ -72,7 +72,7 @@ int promptForOption()
 	{
 		printf("Make your selection > ");
 		scanf(" %d", &option);
-	} while (option < 1 || option > 11);
+	} while (option < 1 || option > 11 || option == 0); // reprompt until valid option value entered
 
 	return option;
 }
@@ -111,22 +111,66 @@ Node* makeNode(char* artist, char* albumTitle, char* songTitle, char* genre, int
 
 void scanSongFile(FILE* infile, char* line, char* artist, char* albumTitle, char* songTitle, char* genre, int* minutes, int* seconds, int* timesPlayed, int* rating)
 {
-	strcpy(artist, strtok(line, ","));
+	char firstName[15] = "", lastName[15] = "";
+	if (line[0] == '"') // artist with full name
+	{
+		strcpy(lastName, strtok(line, ","));
+		strcpy(firstName, strtok(NULL, ","));
+
+		// replace double quotes with spaces
+		lastName[0] = ' ';
+		firstName[strlen(firstName) - 1] = ' ';
+
+		// move last name back by one space to eliminate extra space before names
+		for (int i = 0; i < strlen(firstName); ++i)
+		{
+			firstName[i] = firstName[i + 1];
+		}
+
+		// move last name back by one space to eliminate extra space between names
+		for (int j = 0; j < strlen(lastName); ++j)
+		{
+			lastName[j] = lastName[j + 1];
+		}
+
+		// put names together in artist string
+		strcpy(artist, firstName);
+		strcat(artist, lastName);
+		
+		//// move characters in artist string over to eliminate extra spaces
+		//for (int i = 0; i < strlen(artist); ++i)
+		//{
+		//	artist[i] = artist[i + 1];
+		//}
+
+		//// move last name back by one space to eliminate extra space between names
+		//for (int j = strlen(firstName) + 1; j < strlen(artist); ++j)
+		//{
+		//	artist[j] = artist[j + 1];
+		//}
+
+		/*strcpy(artist, strtok(line, ","));
+		strcat(artist, strtok(NULL, ","));*/
+	}
+	else // artist with one name
+	{
+		strcpy(artist, strtok(line, ","));
+	}
 	strcpy(albumTitle, strtok(NULL, ","));
 	strcpy(songTitle, strtok(NULL, ","));
 	strcpy(genre, strtok(NULL, ","));
 
-	*minutes = strtok(NULL, ",:");
-	*seconds = strtok(NULL, ",");
-	*timesPlayed = strtok(NULL, ",");
-	*rating = strtok(NULL, ",");
+	*minutes = atoi(strtok(NULL, ":"));
+	*seconds = atoi(strtok(NULL, ","));
+	*timesPlayed = atoi(strtok(NULL, ","));
+	*rating = atoi(strtok(NULL, ","));
 }
 
 void printListRec(Node* pHead)
 {
 	if (pHead != NULL) // there is a movie to print, recursive step
 	{
-		printf("--> %s, %s, %s, %s, %d:%d, %d times, rating: %d", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating); // arrow before to keep aesthetically clean
+		printf("--> %s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating); // arrow before to keep aesthetically clean
 		printListRec(pHead->pNext); // pNext is address of next node
 	}
 	else // base case
@@ -150,15 +194,18 @@ void setVarsToDefault(char *artist, char* album, char* song, char* genre, int* m
 void printMenu()
 {
 	printf("********** Music Playlist **********\n");
-	printf("1. Load\n");
-	printf("2. Store\n");
-	printf("3. Display\n");
-	printf("4. Insert\n");
-	printf("5. Delete\n");
-	printf("6. Edit\n");
-	printf("7. Sort\n");
-	printf("8. Rate\n");
-	printf("9. Play\n");
-	printf("10. Shuffle\n");
-	printf("11. Exit\n");
+	printf("*                                  *\n");
+	printf("*            1.  Load              *\n");
+	printf("*            2.  Store             *\n");
+	printf("*            3.  Display           *\n");
+	printf("*            4.  Insert            *\n");
+	printf("*            5.  Delete            *\n");
+	printf("*            6.  Edit              *\n");
+	printf("*            7.  Sort              *\n");
+	printf("*            8.  Rate              *\n");
+	printf("*            9.  Play              *\n");
+	printf("*            10. Shuffle           *\n");
+	printf("*            11. Exit              *\n");
+	printf("*                                  *\n");
+	printf("************************************\n");
 }

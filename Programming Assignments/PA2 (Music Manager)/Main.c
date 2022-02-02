@@ -27,55 +27,60 @@ int main(void)
 		case 1: // load
 			infile = fopen(INPUTFILE, "r");
 
+			system("cls");
+
 			if (infile != NULL)
 			{
 				while (fgets(line, 100, infile) != NULL)
 				{
 					scanSongFile(infile, line, artist, album, song, genre, &minutes, &seconds, &timesPlayed, &rating);
 
-					success = insertFront(&pHead, artist, album, song, genre, minutes, seconds, timesPlayed, rating);
-
-					printListRec(pHead);
+					success = insertFront(&pHead, artist, album, song, genre, minutes, seconds, timesPlayed, rating);			
 
 					setVarsToDefault(artist, album, song, genre, &minutes, &seconds, &timesPlayed, &rating);
 				}
 				fclose(infile);
+				printf("Playlist loaded!\n\n");
+			}
+			else
+			{
+				printf("Could not open file!\n\n");
 			}
 			break;
 		case 2: // store
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 
 		case 3: // display
+			system("cls");
 
+			printListRec(pHead);
 			break;
 		case 4: // insert
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 5: // delete
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 6: // edit
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 7: // sort
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 8: // rate
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 9: // play
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 10: // shuffle
-
+			printf("Feature coming soon! Release date: 2-9-2022\n");
 			break;
 		case 11: // exit
 
 			break;
 		}
 	} while (option != 11);
-
-
 	return 0;
 }
