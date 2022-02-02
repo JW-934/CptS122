@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: January 31, 2022
+* Date: January 31, 2022, February 2, 2022
 * Description: Stack Example
 */
 
@@ -21,7 +21,7 @@ typedef struct data
 
 typedef struct node
 {
-	Data* pItem;
+	Data* pItem; // only an address that can refer to Data
 	struct node* pNext;
 }Node;
 
@@ -33,5 +33,8 @@ typedef struct stack
 Node* makeNode(const Data * const pNewItem);
 
 int push(Stack *pStack, const Data* const pNewItem); // not ** because one of the stars is encapsulated inside the Stack struct
+// defensive vs. cooperative programming, defensive checks if empty etc, cooperative sets a precondition
+// precondition: stack is not empty
+void pop(Stack* pStack);
 
 #endif

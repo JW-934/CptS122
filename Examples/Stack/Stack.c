@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: January 31, 2022
+* Date: January 31, 2022, February 2, 2022
 * Description: Stack Example
 */
 
@@ -49,4 +49,14 @@ int push(Stack* pStack, const Data* const pNewItem) // essentially insert at fro
 		pStack->pTop = pMem;
 	}
 	return success;
+}
+
+// precondition: stack is not empty
+void pop(Stack* pStack)
+{
+	Node* pTemp = pStack->pTop;
+
+	pStack->pTop = pStack->pTop->pNext; // or pTemp->pNext;
+
+	free(pTemp);
 }
