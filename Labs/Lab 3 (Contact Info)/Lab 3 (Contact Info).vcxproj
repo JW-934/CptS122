@@ -145,6 +145,9 @@
   <ItemGroup>
     <ClInclude Include="Lab3.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Contacts.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
