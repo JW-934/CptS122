@@ -23,6 +23,19 @@ Node* makeNode(Contact newData)
 	return newNode;
 }
 
+Contact searchForContact(Node* pList, char* name, Node** pPrevDelete)
+{
+	Node* pCur = pList, * pPrev = NULL;
+
+	while (pCur != NULL && strcmp(pCur->data.name, name) != 0)
+	{
+		pPrev = pCur;
+		pCur = pCur->pNext;
+	}
+	*pPrevDelete = pPrev;
+	return pCur->data;
+}
+
 // Description: Uses makeNode () to allocate space for a new Node and inserts the new Node into the front of the list.
 // Returns: TRUE if memory was allocated for a Node; FALSE otherwise
 Boolean insertContactAtFront(Node** pList, Contact newData)
@@ -61,9 +74,37 @@ Boolean insertContactInOrder(Node** pList, Contact newData)
 
 // Description: Deletes a Contact in the list based on the name field; deletes the first occurrence of the name
 // Returns: TRUE if the Contact was found; FALSE otherwise
-Boolean deleteContact(Node** pList, Contact searchContact)
+Boolean deleteContact(Node** pList, Contact searchContact, Node* pPrevDelete)
 {
+	Node* pCur = *pList;
+	Boolean success = FALSE;
 
+	//while (pCur != NULL && strcmp(pCur->data.name, searchContact.name) != 0)
+	//{
+	//	// move the pointers to correct position in list
+	//	pPrev = pCur;
+	//	pCur = pCur->pNext;
+	//}
+	// guarantees we've positioned pointers correctly
+	if (pCur != NULL)
+	{
+		success = TRUE;
+
+		if (pPrevDelete == NULL)
+		{
+			// removing the first node
+			// *pList = pCur
+			*pList = pCur->pNext; // (* pList)->pNext;
+		}
+		else
+		{
+			// removing a node after the first one -- end/last node/middle
+			// pPrev not null
+			pPrevDelete->pNext = pCur->pNext;
+		}
+		free(pCur);
+	}
+	return success;
 }
 
 // Description: Edits a Contact in the list based on the name field; edits the first occurrence of the name

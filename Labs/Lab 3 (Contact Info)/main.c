@@ -11,9 +11,11 @@
 int main(void)
 {
 	int option = 0;
-	Node* pHead = NULL;
+	Node* pHead = NULL, * pPrevDelete = NULL;
 	FILE* infile = NULL;
 	Boolean loadSuccess = FALSE;
+	char nameRemove[25] = "";
+	Contact delete;
 
 	do
 	{
@@ -24,6 +26,18 @@ int main(void)
 		case 1: // add
 			break;
 		case 2: // remove
+			system("cls");
+			printList(pHead);
+
+			printf("Enter the name of the contact to delete > ");
+			scanf(" %[^\n]s", nameRemove);
+
+			delete = searchForContact(pHead, nameRemove, &pPrevDelete);
+
+			deleteContact(&pHead, delete, pPrevDelete);
+
+			printList(pHead);
+			//puts(nameRemove);
 			break;
 		case 3: // edit
 			break;

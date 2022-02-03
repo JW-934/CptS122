@@ -40,6 +40,8 @@ typedef struct node
 // Returns: The address of the start of the block of memory on the heap or NULL if no memory was allocated
 Node* makeNode(Contact newData);
 
+Contact searchForContact(Node* pList, char* name, Node** pPrevDelete);
+
 // Description: Uses makeNode () to allocate space for a new Node and inserts the new Node into the front of the list.
 // Returns: TRUE if memory was allocated for a Node; FALSE otherwise
 Boolean insertContactAtFront(Node** pList, Contact newData);
@@ -51,7 +53,7 @@ Boolean insertContactInOrder(Node** pList, Contact newData);
 
 // Description: Deletes a Contact in the list based on the name field; deletes the first occurrence of the name
 // Returns: TRUE if the Contact was found; FALSE otherwise
-Boolean deleteContact(Node** pList, Contact searchContact);
+Boolean deleteContact(Node** pList, Contact searchContact, Node* pPrevDelete);
 
 // Description: Edits a Contact in the list based on the name field; edits the first occurrence of the name
 // Returns: TRUE if the Contact was found; FALSE otherwise
