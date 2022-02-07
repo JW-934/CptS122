@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: January 31, 2022, February 2, 2022
+* Date: January 31, 2022, February 2, 2022, February 7, 2022
 * Description: Stack Example
 */
 
@@ -59,4 +59,14 @@ void pop(Stack* pStack)
 	pStack->pTop = pStack->pTop->pNext; // or pTemp->pNext;
 
 	free(pTemp);
+}
+
+Data peek(Stack* pStack)
+{
+	return *(pStack->pTop->pItem);
+}
+
+int isEmpty(Stack* pStack)
+{
+	return pStack->pTop == NULL; // return !pStack->pTop
 }

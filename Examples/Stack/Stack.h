@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: January 31, 2022, February 2, 2022
+* Date: January 31, 2022, February 2, 2022, February 7, 2022
 * Description: Stack Example
 */
 
@@ -36,5 +36,7 @@ int push(Stack *pStack, const Data* const pNewItem); // not ** because one of th
 // defensive vs. cooperative programming, defensive checks if empty etc, cooperative sets a precondition
 // precondition: stack is not empty
 void pop(Stack* pStack);
+Data peek(Stack* pStack); // No star required bc not modifying stack, just has one to save space to not copy stack
 
+int isEmpty(Stack* pStack);
 #endif

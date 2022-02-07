@@ -5,15 +5,16 @@
 * Description: Stack Example
 */
 
-#ifndef TESTSTACK_H
+#ifndef REVERSE_STRING_H
 
-#define TESTSTACK_H
-#define _CRT_SECURE_NO_WARNINGS
+#define REVERSE_STRING_H
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+#include "Stack.h"
 
+char* reverseString(char* const str);
 
 #endif

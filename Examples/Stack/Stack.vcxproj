@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="reverseString.c" />
     <ClCompile Include="Stack.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="TestStack.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="reverseString.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="TestStack.h" />
   </ItemGroup>
