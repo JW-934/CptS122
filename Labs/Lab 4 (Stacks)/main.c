@@ -11,9 +11,10 @@
 
 int main(void)
 {
-	testPush();
+	/*testPush();
 	testIsEmpty();
-	testPop();
+	testPeek();
+	testPop();*/
 
 	return 0;
 }

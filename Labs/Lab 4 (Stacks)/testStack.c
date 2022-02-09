@@ -10,6 +10,8 @@
 
 void testPush()
 {
+	printf("********** push() test **********\n");
+
 	Stack s = {NULL};
 	int success = 0;
 
@@ -42,7 +44,7 @@ void testPush()
 	}
 	if (success == 1)
 	{
-		printf("push() success: returned the correct success state.\n");
+		printf("push() Success: returned the correct success state.\n");
 	}
 	else
 	{
@@ -56,56 +58,107 @@ void testPush()
 	{
 		printf("Failed to push to stack.\n");
 	}*/
-	putchar('\n');
+	puts("Test Complete.\n");
 }
 
 void testIsEmpty()
 {
+	printf("********** isEmpty() test **********\n");
+
 	Stack empty = { NULL };
 	Stack notEmpty = { NULL };
 	int isEmptyEmpty = 0, isNotEmptyEmpty = 0;
 
 	push(&notEmpty, 10);
 
-	isNotEmptyEmpty = isEmpty(&notEmpty);
-
-	if (isNotEmptyEmpty == 0)
+	if (notEmpty.pTop->number == 10)
 	{
-		printf("isEmpty() Success: determined that populated stack is not empty.\n");
+		printf("Pushed test node to non-empty test stack.\n");
+
+		isNotEmptyEmpty = isEmpty(&notEmpty);
+
+		if (isNotEmptyEmpty == 0)
+		{
+			printf("isEmpty() Success: determined that populated stack is not empty.\n");
+		}
+		else
+		{
+			printf("isEmpty() Failure: did not determine that populated stack is not empty.\n");
+		}
+
+		isEmptyEmpty = isEmpty(&empty);
+
+		if (isEmptyEmpty == 1)
+		{
+			printf("isEmpty() Success: determined that empty stack is empty.\n");
+		}
+		else
+		{
+			printf("isEmpty() Failure: did not determine that empty stack is empty.\n");
+		}
 	}
 	else
 	{
-		printf("isEmpty() Failure: did not determine that populated stack is not empty.\n");
+		printf("Failed to push test node to non-empty test stack.\n");
 	}
-
-	isEmptyEmpty = isEmpty(&empty);
-
-	if (isEmptyEmpty == 1)
-	{
-		printf("isEmpty() Success: determined that empty stack is empty.\n");
-	}
-	else
-	{
-		printf("isEmpty() Failure: did not determine that empty stack is empty.\n");
-	}
-	putchar('\n');
+	//putchar('\n');
+	puts("Test Complete.\n");
 }
 
-void testPop()
+void testPeek()
 {
+	printf("********** peek() test **********\n");
+
 	Stack s = { NULL };
 	double testValue = 0;
 	push(&s, 10);
 
-	testValue = peek(&s);
-
-	if (testValue == 10)
+	if (s.pTop->number == 10)
 	{
-		printf("pop() Success: read test value from stack.\n");
+		printf("Pushed test node to test stack.\n");
+		testValue = peek(&s);
+
+		if (testValue == 10)
+		{
+			printf("peek() Success: returned test value from stack.\n");
+		}
+		else
+		{
+			printf("peek() Failure: failed to read test value from stack.\n");
+		}
 	}
 	else
 	{
-		printf("pop() Failure: failed to read test value from stack.\n");
+		printf("Failed to push test node to test stack.\n");
 	}
-	putchar('\n');
+	//putchar('\n');
+	puts("Test Complete.\n");
+}
+
+void testPop()
+{
+	printf("********** pop() test **********\n");
+	
+	Stack s = { NULL };
+	stackNode* temp = s.pTop;
+	push(&s, 10);
+
+	if (s.pTop->number == 10)
+	{
+		printf("Test node pushed to test stack.\n");
+		pop(&s);
+		if (temp == NULL)
+		{
+			printf("pop() Success: test node freed.\n");
+		}
+		else
+		{
+			printf("pop() Failure: failed to free test node.\n");
+		}
+	}
+	else
+	{
+		printf("Failed to push test node to test stack.\n");
+	}
+	puts("Test Complete.\n");
 }

@@ -53,3 +53,10 @@ void pop(Stack* pStack)
 
 	free(pTemp);
 }
+
+void hanoi()
+{
+	Stack tower1 = { NULL }, tower2 = { NULL }, tower3 = { NULL };
+
+
+}

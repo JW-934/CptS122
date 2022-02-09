@@ -12,6 +12,7 @@
 
 void testPush();
 void testIsEmpty();
+void testPeek();
 void testPop();
 
 #endif

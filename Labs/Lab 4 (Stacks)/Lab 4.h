@@ -35,4 +35,6 @@ double peek(Stack* pStack);
 stackNode* makeNode(double number);
 
 void pop(Stack* pStack);
+
+void hanoi();
 #endif
