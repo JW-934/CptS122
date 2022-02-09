@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: January 31, 2022, February 2, 2022, February 7, 2022
+* Date: January 31, 2022, February 2, 2022, February 7, 2022, February 9, 2022
 * Description: Stack Example
 */
 
@@ -11,10 +11,12 @@
 
 int main(void)
 {
-	char str[10] = "cat";	// char* str = "cat"; would be immutable
+	//char str[10] = "cat";	// char* str = "cat"; would be immutable
 
-	puts(str);
-	puts(reverseString(str));
+	//puts(str);
+	//puts(reverseString(str));
+
+	testPushOnEmptyStack();
 
 	return 0;
 }
