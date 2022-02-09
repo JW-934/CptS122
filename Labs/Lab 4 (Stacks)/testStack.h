@@ -6,13 +6,12 @@
 * Description:
 */
 
-#ifndef HEADER_H
+#ifndef TEST_STACK_H
 
-#define HEADER_H
-#define _CRT_SECURE_NO_WARNINGS
+#define TEST_STACK_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+void testPush();
+void testIsEmpty();
+void testPop();
 
 #endif

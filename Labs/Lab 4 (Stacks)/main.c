@@ -6,11 +6,14 @@
 * Description: 
 */
 
-#include "header.h"
+#include "Lab 4.h"
+#include "testStack.h"
 
 int main(void)
 {
-
+	testPush();
+	testIsEmpty();
+	testPop();
 
 	return 0;
 }
