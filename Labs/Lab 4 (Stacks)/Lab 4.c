@@ -58,5 +58,58 @@ void hanoi()
 {
 	Stack tower1 = { NULL }, tower2 = { NULL }, tower3 = { NULL };
 
+	// Populate first tower
+	for (int i = 5; i > 0; --i)
+	{
+		push(&tower1, i);
+		push(&tower2, 0);
+		push(&tower3, 0);
+	}
+	
+	printf("Tower 1: ");
+	printStack(&tower1);
 
+	printf("Tower 2: ");
+	printStack(&tower2);
+
+	printf("Tower 3: ");
+	printStack(&tower3);
+
+	system("cls");
+
+	moveTopNode(&tower3, &tower1);
+
+	printf("Tower 1: ");
+	printStack(&tower1);
+
+	printf("Tower 2: ");
+	printStack(&tower2);
+
+	printf("Tower 3: ");
+	printStack(&tower3);
+}
+
+void printStack(Stack* stack)
+{
+	stackNode* pCur = stack->pTop;
+
+	if (pCur != NULL) // list is not empty
+	{
+		while (pCur != NULL)
+		{
+			printf("<---%.0lf", pCur->number);
+			pCur = pCur->pNext;
+		}
+	}
+	puts("\n\n");
+}
+
+void moveTopNode(Stack* destStk, Stack* srcStk)
+{
+	double nodeValue = peek(srcStk);
+
+	//pop(destStk);
+	push(destStk, nodeValue);
+	pop(srcStk);
+	push(srcStk, 0);
 }

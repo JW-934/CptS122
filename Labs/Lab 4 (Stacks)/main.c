@@ -16,5 +16,7 @@ int main(void)
 	testPeek();
 	testPop();*/
 
+	hanoi();
+
 	return 0;
 }

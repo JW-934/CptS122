@@ -27,7 +27,6 @@ typedef struct stack
 }Stack;
 
 int push(Stack* pStack, double newNumber);
-
 int isEmpty(Stack* pStack);
 
 double peek(Stack* pStack);
@@ -35,6 +34,8 @@ double peek(Stack* pStack);
 stackNode* makeNode(double number);
 
 void pop(Stack* pStack);
-
 void hanoi();
+void printStack(Stack* stack);
+void moveTopNode(Stack* destStk, Stack* srcStk);
+
 #endif
