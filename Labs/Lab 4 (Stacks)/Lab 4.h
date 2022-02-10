@@ -3,7 +3,7 @@
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: Lab 4
 * Date: February 9, 2022
-* Description:
+* Description: Stack operations and Towers of Hanoi
 */
 
 #ifndef LAB4_H
@@ -37,5 +37,6 @@ void pop(Stack* pStack);
 void hanoi();
 void printStack(Stack* stack);
 void moveTopNode(Stack* destStk, Stack* srcStk);
+void promptForTowers(Stack* destStk, Stack* srcStk, Stack* stk1, Stack* stk2, Stack* stk3);
 
 #endif

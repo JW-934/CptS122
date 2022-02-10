@@ -3,7 +3,7 @@
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: Lab 4
 * Date: February 9, 2022
-* Description:
+* Description: Stack operations and Towers of Hanoi
 */
 
 #include "Lab 4.h"
@@ -56,7 +56,8 @@ void pop(Stack* pStack)
 
 void hanoi()
 {
-	Stack tower1 = { NULL }, tower2 = { NULL }, tower3 = { NULL };
+	Stack tower1 = { NULL }, tower2 = { NULL }, tower3 = { NULL }, *srcStk = { NULL }, *destStk = { NULL };
+	int gameFinished = 0;
 
 	// Populate first tower
 	for (int i = 5; i > 0; --i)
@@ -75,18 +76,25 @@ void hanoi()
 	printf("Tower 3: ");
 	printStack(&tower3);
 
-	system("cls");
+	do
+	{
+		promptForTowers(&destStk, &srcStk, &tower1, &tower2, &tower3);
 
-	moveTopNode(&tower3, &tower1);
+		moveTopNode(&destStk, &srcStk);
 
-	printf("Tower 1: ");
-	printStack(&tower1);
+		//moveTopNode(&tower2, &tower1);
 
-	printf("Tower 2: ");
-	printStack(&tower2);
+		system("cls");
 
-	printf("Tower 3: ");
-	printStack(&tower3);
+		printf("Tower 1: ");
+		printStack(&tower1);
+
+		printf("Tower 2: ");
+		printStack(&tower2);
+
+		printf("Tower 3: ");
+		printStack(&tower3);
+	} while (gameFinished == 0);
 }
 
 void printStack(Stack* stack)
@@ -112,4 +120,46 @@ void moveTopNode(Stack* destStk, Stack* srcStk)
 	push(destStk, nodeValue);
 	pop(srcStk);
 	push(srcStk, 0);
+}
+
+void promptForTowers(Stack* destStk, Stack* srcStk, Stack* stk1, Stack* stk2, Stack* stk3)
+{
+	int source = 0, dest = 0;
+
+	do
+	{
+		printf("Which tower's top ring do you want to move (1, 2, 3)?\n> ");
+		scanf("%d", &source);
+	} while (source < 1 || source > 3);
+	do
+	{
+		printf("\nWhich tower do you want to move said ring to (1, 2, 3)?\n> ");
+		scanf("%d", &dest);
+	} while (dest < 1 || source > 3);
+
+	if (source == 1)
+	{
+		srcStk = stk1;
+	}
+	else if (source == 2)
+	{
+		srcStk = stk2;
+	}
+	else if (source == 3)
+	{
+		srcStk = stk3;
+	}
+
+	if (dest == 1)
+	{
+		destStk = stk1;
+	}
+	else if (dest == 2)
+	{
+		destStk = stk2;
+	}
+	else if (dest == 3)
+	{
+		destStk = stk3;
+	}
 }
