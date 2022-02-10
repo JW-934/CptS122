@@ -77,6 +77,57 @@ int promptForOption()
 	return option;
 }
 
+int promptForOption1or2()
+{
+	int option = -1;
+
+	do
+	{
+		printf("Make your selection > ");
+		scanf(" %d", &option);
+	} while (option < 1 || option > 2 || option == 0); // reprompt until valid option value entered
+
+	return option;
+}
+
+// Prompts for artist name and verifies that at least one corresponding node exists
+char* promptForArtist(Node* pHead)
+{
+	int exists = 0;
+	char search[50] = "", curStr[50] = "";
+	Node* pCur = pHead;
+	if (pCur != NULL)
+	{
+		do
+		{
+			printf("\nEnter an artist > ");
+			
+			getchar();
+			fgets(search, 50, stdin);
+
+			while (pCur != NULL && exists == 0)
+			{
+				strcpy(curStr, pCur->record->artist);
+				strcat(curStr, "\n"); // have to add newline to match the one that comes from the fgets
+				if (strcmp(curStr, search) == 0)
+				{
+					exists = 1;
+				}
+				pCur = pCur->pNext;
+				curStr[0] = '\0';
+			}
+			if (pCur = NULL && exists == 0)
+			{
+				printf("\nArtist not found!\n");
+			}
+		} while (exists == 0);
+		if (exists == 1)
+		{
+			return search;
+		}
+	}
+}
+
 // create a new Node
 Node* makeNode(char* artist, char* albumTitle, char* songTitle, char* genre, int minutes, int seconds, int timesPlayed, int rating)
 {
@@ -107,6 +158,23 @@ Node* makeNode(char* artist, char* albumTitle, char* songTitle, char* genre, int
 		newNode->pNext = NULL;
 	}
 	return newNode;
+}
+
+void printNodesByArtist(Node* pList, char* searchName)
+{
+	Node* pCur = pList, *targetNode = NULL;
+
+	if (pCur != NULL)
+	{
+		while (pCur != NULL)
+		{
+			if (strcmp(pCur->record->artist, searchName) == 0)
+			{
+				printf("--> %s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+			}
+			pCur = pCur->pNext;
+		} 
+	}
 }
 
 void scanSongFile(FILE* infile, char* line, char* artist, char* albumTitle, char* songTitle, char* genre, int* minutes, int* seconds, int* timesPlayed, int* rating)
@@ -168,14 +236,14 @@ void scanSongFile(FILE* infile, char* line, char* artist, char* albumTitle, char
 
 void printListRec(Node* pHead)
 {
-	if (pHead != NULL) // there is a movie to print, recursive step
+	if (pHead != NULL) 
 	{
-		printf("--> %s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating); // arrow before to keep aesthetically clean
+		printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating); // arrow before to keep aesthetically clean
 		printListRec(pHead->pNext); // pNext is address of next node
 	}
 	else // base case
 	{
-		printf(" -->\n");
+		printf("\n");
 	}
 }
 
@@ -208,4 +276,41 @@ void printMenu()
 	printf("*            11. Exit              *\n");
 	printf("*                                  *\n");
 	printf("************************************\n");
+}
+
+void printToFile(Node* pHead, FILE* outfile)
+{
+	Node* pCur = pHead;
+	if (pHead != NULL)
+	{
+		while (pCur != NULL)
+		{
+			fprintf(outfile, "%s,%s,%s,%s,%d:%d,%d,%d\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+			pCur = pCur->pNext;
+		}
+		printf("Playlist stored to file!");
+	}
+	else 
+	{
+		printf("Could not open playlist file!");
+	}
+}
+
+// Precondition: artist confirmed to have at least one song in the list
+void printAllFromArtist(Node* pList, char* artist)
+{
+	Node* pCur = pList;
+	char curStr[50] = "";
+
+	while (pCur != NULL)
+	{
+		strcpy(curStr, pCur->record->artist);
+		strcat(curStr, "\n");
+		if (strcmp(curStr, artist) == 0)
+		{
+			printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+		}
+		pCur = pCur->pNext;
+	}
+	putchar('\n');
 }

@@ -10,13 +10,13 @@
 
 int main(void)
 {
-	FILE* infile = NULL;
+	FILE* infile = NULL, *outfile = NULL;
 	
 	Node* pHead = NULL;
 
-	int option = 0, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0;
+	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1;
 
-	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "";
+	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", search[50] = "";
 
 	do
 	{
@@ -44,17 +44,42 @@ int main(void)
 			}
 			else
 			{
-				printf("Could not open file!\n\n");
+				printf("Could not open playlist file!\n\n");
 			}
 			break;
 		case 2: // store
-			printf("Feature coming soon! Release date: 2-9-2022\n");
-			break;
-
-		case 3: // display
+			outfile = fopen(OUTPUTFILE, "w");
+			
 			system("cls");
+			
+			if (outfile != NULL)
+			{
+				printToFile(pHead, outfile);
+			}
+			else
+			{
+				printf("Could not open playlist file!\n\n");
+			}
+			fclose(outfile);
+			break;
+		case 3: // display
+			
+			printf("\n1. Display all songs\n2. Display all songs by a particular artist\n\n");
 
-			printListRec(pHead);
+			displayOption = promptForOption1or2();
+			
+			if (displayOption == 1)
+			{
+				system("cls");
+
+				printListRec(pHead);
+			}
+			else
+			{
+				strcpy(search, promptForArtist(pHead));
+				
+				printAllFromArtist(pHead, search);
+			}
 			break;
 		case 4: // insert
 			printf("Feature coming soon! Release date: 2-9-2022\n");

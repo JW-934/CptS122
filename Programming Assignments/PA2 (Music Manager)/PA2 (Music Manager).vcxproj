@@ -24,6 +24,7 @@
     <ProjectGuid>{d0991cc0-d43f-460b-8647-899a9350964d}</ProjectGuid>
     <RootNamespace>PA2MusicManager</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PA2 and PA3 (Music Manager)</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="musicPlayList.csv" />
+    <None Include="testPlaylistOutput.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
