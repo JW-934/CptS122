@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: February 7, 2022, February 9, 2022
+* Date: February 7, 2022, February 9, 2022, February 11, 2022
 * Description: Introduction to C++
 */
 
@@ -11,9 +11,12 @@
 
 int main(void)
 {
-	Rectangle r1; // instantiated a Rectangle
+	Rectangle r1, r2(1, 3), r3(5); // instantiated a Rectangle, variables initialized because constructor exists
+								   // for r3, 5 will be length and width will be 0, goes left to right
+	r1.setLength(-1);
+	r2.setLength(5);
 
-	r1.
+	std::cout << "Length: " << r2.getLength() << " " << "Width: " << r2.getWidth() << std::endl;
 
 	int n = 10;
 

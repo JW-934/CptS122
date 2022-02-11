@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: February 7, 2022, February 9, 2022
+* Date: February 7, 2022, February 9, 2022, February 11, 2022
 * Description: Introduction to C++
 */
 
@@ -22,8 +22,25 @@ std::string add(std::string n1, std::string n2);
 
 class Rectangle // make custom classes uppercase
 {
+public:
+	// constructor - member function - methods
+	// special member function
+	//Rectangle(); // default constructor
+	//Rectangle(double newLength, double newWidth);
+	Rectangle(double newLength = 0.0, double newWidth = 0.0); // can have default arguments (only in declaration); if no parameters, uses zero
 
-private:
-	double mLength; // the m is for member
+	// destructor
+	~Rectangle(); // destroy the object - clean up resources like memory, streams, etc.
+
+	// getters/accessors
+	double getLength() const;
+	double getWidth() const;
+
+	// setters/mutators
+	void setLength(const double newLength);
+	void setWidth(const double newWidth);
+private:					// private by default, only members of class can see
+							// data members or attributes
+	double mLength;			// the m is for member
 	double mWidth;
 };
