@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA2 and PA3
-* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022
+* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022
 * Description: a basic digital music manager
 */
 
@@ -14,17 +14,18 @@ int main(void)
 	
 	Node* pHead = NULL;
 
-	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1;
+	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0;
 
-	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", search[50] = "";
+	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "";
 
 	do
 	{
-		option = promptForOption();
+		printMenu();
+		option = promptForOption(1, 11);
 		
 		switch (option)
 		{
-		case 1: // load
+		case 1: // load /////////////////////////////////////////////////////////////////////////////////////////////////////
 			infile = fopen(INPUTFILE, "r");
 
 			system("cls");
@@ -47,7 +48,7 @@ int main(void)
 				printf("Could not open playlist file!\n\n");
 			}
 			break;
-		case 2: // store
+		case 2: // store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 			outfile = fopen(OUTPUTFILE, "w");
 			
 			system("cls");
@@ -62,11 +63,11 @@ int main(void)
 			}
 			fclose(outfile);
 			break;
-		case 3: // display
+		case 3: // display /////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			printf("\n1. Display all songs\n2. Display all songs by a particular artist\n\n");
 
-			displayOption = promptForOption1or2();
+			displayOption = promptForOption(1, 2);
 			
 			if (displayOption == 1)
 			{
@@ -76,33 +77,38 @@ int main(void)
 			}
 			else
 			{
-				strcpy(search, promptForArtist(pHead));
+				strcpy(displaySearch, promptForArtist(pHead));
+
+				putchar('\n');
 				
-				printAllFromArtist(pHead, search);
+				printAllFromArtist(pHead, displaySearch);
 			}
 			break;
-		case 4: // insert
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 4: // insert /////////////////////////////////////////////////////////////////////////////////////////////////////
+			insertSuccess = insertSong(pHead);
 			break;
-		case 5: // delete
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 5: // delete /////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			break;
-		case 6: // edit
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 6: // edit /////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			break;
-		case 7: // sort
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 7: // sort /////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			break;
-		case 8: // rate
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 8: // rate /////////////////////////////////////////////////////////////////////////////////////////////////////
+			strcpy(rateArtist, promptForArtist(pHead));
+			strcpy(rateSong, promptForSong(pHead));
+
+			editRating(pHead, rateSong, rateArtist);
 			break;
-		case 9: // play
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 9: // play /////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			break;
-		case 10: // shuffle
-			printf("Feature coming soon! Release date: 2-9-2022\n");
+		case 10: // shuffle /////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			break;
-		case 11: // exit
+		case 11: // exit /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			break;
 		}

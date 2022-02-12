@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA2 and PA3
-* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022
+* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022
 * Description: a basic digital music manager
 */
 
@@ -63,16 +63,15 @@ int deleteItem(Node** pList, char* songTitleSrch) //** pList is to change pList,
 	return success;
 }
 
-int promptForOption()
+int promptForOption(int lowerBound, int upperBound)
 {
 	int option = -1;
 	
-	printMenu();
 	do
 	{
 		printf("Make your selection > ");
 		scanf(" %d", &option);
-	} while (option < 1 || option > 11 || option == 0); // reprompt until valid option value entered
+	} while (option < lowerBound || option > upperBound || option == 0); // reprompt until valid option value entered
 
 	return option;
 }
@@ -88,6 +87,61 @@ int promptForOption1or2()
 	} while (option < 1 || option > 2 || option == 0); // reprompt until valid option value entered
 
 	return option;
+}
+
+int insertSong(Node** pList)
+{
+	int insertMinutes = -1, insertSeconds = -1, insertTimes = 0, insertRating = -1;
+	char insertArtist[50] = "", insertSong[20] = "", insertGenre[20] = "", insertAlbum[20] = "";
+	
+	// Prompts for artist
+	printf("Enter the name of the artist > ");
+	getchar();
+	fgets(insertArtist, 50, stdin);
+	
+	// Prompts for album
+	printf("Enter the name of the album > ");
+	getchar();
+	fgets(insertAlbum, 50, stdin);
+	
+	// Prompts for song
+	printf("Enter the name of the song > ");
+	getchar();
+	fgets(insertSong, 50, stdin);
+	
+	// Prompts for genre
+	printf("Enter the genre of the song > ");
+	getchar();
+	fgets(insertGenre, 50, stdin);
+
+	// Prompts for length
+	do
+	{
+		printf("Enter the song length (M:S) > ");
+		scanf("%d:%d", &insertMinutes, &insertSeconds);
+	} while (insertMinutes < 0 || insertSeconds < 0);
+	
+	// turns seconds > 60 into minutes
+	if (insertSeconds > 60)
+	{
+		while (insertSeconds > 60)
+		{
+			++insertMinutes;
+			insertSeconds -= 60;
+		}
+	}
+	
+	// Prompts for rating
+	do
+	{
+		printf("Enter the song rating (1-5) > ");
+		scanf("%d", &insertRating);
+	} while (insertRating < 1 || insertRating > 5);
+
+	return insertFront(&pList, insertArtist, insertAlbum, insertSong, insertGenre, insertMinutes, insertSeconds, insertTimes, insertRating);
+	
+	/*insertArtist[0] = '\0', insertAlbum[0] = '\0', insertSong[0] = '\0', insertGenre[0] = '\0';
+	insertMinutes = 0, insertSeconds = 0, insertTimes = 0, insertRating = 0;*/
 }
 
 // Prompts for artist name and verifies that at least one corresponding node exists
@@ -119,6 +173,44 @@ char* promptForArtist(Node* pHead)
 			if (pCur = NULL && exists == 0)
 			{
 				printf("\nArtist not found!\n");
+			}
+		} while (exists == 0);
+		if (exists == 1)
+		{
+			return search;
+		}
+	}
+}
+
+// Prompts for song name and verifies that at least one corresponding node exists
+char* promptForSong(Node* pHead)
+{
+	int exists = 0;
+	char search[50] = "", curStr[50] = "";
+	Node* pCur = pHead;
+	if (pCur != NULL)
+	{
+		do
+		{
+			printf("\nEnter a song > ");
+
+			//getchar();
+			fgets(search, 50, stdin);
+
+			while (pCur != NULL && exists == 0)
+			{
+				strcpy(curStr, pCur->record->song);
+				strcat(curStr, "\n"); // have to add newline to match the one that comes from the fgets
+				if (strcmp(curStr, search) == 0)
+				{
+					exists = 1;
+				}
+				pCur = pCur->pNext;
+				curStr[0] = '\0';
+			}
+			if (pCur = NULL && exists == 0)
+			{
+				printf("\nSong not found!\n");
 			}
 		} while (exists == 0);
 		if (exists == 1)
@@ -309,6 +401,32 @@ void printAllFromArtist(Node* pList, char* artist)
 		if (strcmp(curStr, artist) == 0)
 		{
 			printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+		}
+		pCur = pCur->pNext;
+	}
+	putchar('\n');
+}
+
+// Precondition: artist confirmed to have at least one song in the list, song confirmed to exist in the list
+void editRating(Node* pList, char* song, char* artist)
+{
+	Node* pCur = pList;
+	char curArtist[50] = "", curSong[50];
+	int newRating = 0;
+
+	while (pCur != NULL)
+	{
+		strcpy(curArtist, pCur->record->artist);
+		strcat(curArtist, "\n");
+		strcpy(curSong, pCur->record->song);
+		strcat(curSong, "\n");
+
+		if (strcmp(curArtist, artist) == 0 && strcmp(curSong, song) == 0) // Target song found
+		{
+			printf("Songs can be rated 1 to 5 stars.\n");
+			newRating = promptForOption(1, 5);
+
+			pCur->record->rating = newRating;
 		}
 		pCur = pCur->pNext;
 	}
