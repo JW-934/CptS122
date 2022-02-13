@@ -19,10 +19,16 @@ int insertFront(Node** pList, char* artist, char* albumTitle, char* songTitle, c
 		if (*pList != NULL)
 		{
 			// not empty
-			(*pList)->pPrev = newNode; // doubly link
+			(*pList)->pPrev = newNode; // doubly link 
 			newNode->pNext = *pList;
 			//*pList = pMem;
 		}
+		//else
+		//{
+		//	// empty
+		//	(*pList)->pPrev = NULL; // doubly link
+		//	newNode->pNext = NULL;
+		//}
 		*pList = newNode;
 		success = 1;
 	}
@@ -76,18 +82,18 @@ int promptForOption(int lowerBound, int upperBound)
 	return option;
 }
 
-int promptForOption1or2()
-{
-	int option = -1;
-
-	do
-	{
-		printf("Make your selection > ");
-		scanf(" %d", &option);
-	} while (option < 1 || option > 2 || option == 0); // reprompt until valid option value entered
-
-	return option;
-}
+//int promptForOption1or2()
+//{
+//	int option = -1;
+//
+//	do
+//	{
+//		printf("Make your selection > ");
+//		scanf(" %d", &option);
+//	} while (option < 1 || option > 2 || option == 0); // reprompt until valid option value entered
+//
+//	return option;
+//}
 
 int insertSong(Node** pList)
 {
@@ -98,21 +104,25 @@ int insertSong(Node** pList)
 	printf("Enter the name of the artist > ");
 	getchar();
 	fgets(insertArtist, 50, stdin);
+	insertArtist[strlen(insertArtist) - 1] = '\0'; // These are to eliminate the \n at the end of the strings from the fgets
 	
 	// Prompts for album
 	printf("Enter the name of the album > ");
-	getchar();
+	//getchar();
 	fgets(insertAlbum, 50, stdin);
+	insertAlbum[strlen(insertAlbum) - 1] = '\0';
 	
 	// Prompts for song
 	printf("Enter the name of the song > ");
-	getchar();
+	//getchar();
 	fgets(insertSong, 50, stdin);
+	insertSong[strlen(insertSong) - 1] = '\0';
 	
 	// Prompts for genre
 	printf("Enter the genre of the song > ");
-	getchar();
+	//getchar();
 	fgets(insertGenre, 50, stdin);
+	insertGenre[strlen(insertGenre) - 1] = '\0';
 
 	// Prompts for length
 	do
@@ -121,10 +131,10 @@ int insertSong(Node** pList)
 		scanf("%d:%d", &insertMinutes, &insertSeconds);
 	} while (insertMinutes < 0 || insertSeconds < 0);
 	
-	// turns seconds > 60 into minutes
-	if (insertSeconds > 60)
+	// turns seconds >= 60 into minutes
+	if (insertSeconds >= 60)
 	{
-		while (insertSeconds > 60)
+		while (insertSeconds >= 60)
 		{
 			++insertMinutes;
 			insertSeconds -= 60;
@@ -138,14 +148,14 @@ int insertSong(Node** pList)
 		scanf("%d", &insertRating);
 	} while (insertRating < 1 || insertRating > 5);
 
-	return insertFront(&pList, insertArtist, insertAlbum, insertSong, insertGenre, insertMinutes, insertSeconds, insertTimes, insertRating);
+	return insertFront(pList, insertArtist, insertAlbum, insertSong, insertGenre, insertMinutes, insertSeconds, insertTimes, insertRating);
 	
 	/*insertArtist[0] = '\0', insertAlbum[0] = '\0', insertSong[0] = '\0', insertGenre[0] = '\0';
 	insertMinutes = 0, insertSeconds = 0, insertTimes = 0, insertRating = 0;*/
 }
 
-// Prompts for artist name and verifies that at least one corresponding node exists
-char* promptForArtist(Node* pHead)
+// Prompts for artist name, verifies that at least one corresponding node exists, sets value of how many of their songs are in the list
+char* promptForArtist(Node* pHead, int* numSongs)
 {
 	int exists = 0;
 	char search[50] = "", curStr[50] = "";
@@ -159,13 +169,14 @@ char* promptForArtist(Node* pHead)
 			getchar();
 			fgets(search, 50, stdin);
 
-			while (pCur != NULL && exists == 0)
+			while (pCur != NULL) // finds first song by target artist ; && exists == 0
 			{
 				strcpy(curStr, pCur->record->artist);
 				strcat(curStr, "\n"); // have to add newline to match the one that comes from the fgets
 				if (strcmp(curStr, search) == 0)
 				{
 					exists = 1;
+					++*numSongs;
 				}
 				pCur = pCur->pNext;
 				curStr[0] = '\0';
@@ -175,6 +186,15 @@ char* promptForArtist(Node* pHead)
 				printf("\nArtist not found!\n");
 			}
 		} while (exists == 0);
+		//while (pCur != NULL && exists == 1) // counts rest of the artist's songs
+		//{
+		//	strcpy(curStr, pCur->record->artist);
+		//	strcat(curStr, "\n"); // have to add newline to match the one that comes from the fgets
+		//	if (strcmp(curStr, search) == 0)
+		//	{
+		//		++*numSongs;
+		//	}
+		//}
 		if (exists == 1)
 		{
 			return search;
@@ -330,7 +350,14 @@ void printListRec(Node* pHead)
 {
 	if (pHead != NULL) 
 	{
-		printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating); // arrow before to keep aesthetically clean
+		if (pHead->record->length->seconds < 10)
+		{
+			printf("%s, %s, %s, %s, %d:0%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating);
+		}
+		else
+		{
+			printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pHead->record->artist, pHead->record->album, pHead->record->song, pHead->record->genre, pHead->record->length->minutes, pHead->record->length->seconds, pHead->record->timesPlayed, pHead->record->rating);
+		}
 		printListRec(pHead->pNext); // pNext is address of next node
 	}
 	else // base case
@@ -400,7 +427,14 @@ void printAllFromArtist(Node* pList, char* artist)
 		strcat(curStr, "\n");
 		if (strcmp(curStr, artist) == 0)
 		{
-			printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+			if (pCur->record->length->seconds < 10)
+			{
+				printf("%s, %s, %s, %s, %d:0%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+			}
+			else
+			{
+				printf("%s, %s, %s, %s, %d:%d, %d Plays, %d Star Rating\n", pCur->record->artist, pCur->record->album, pCur->record->song, pCur->record->genre, pCur->record->length->minutes, pCur->record->length->seconds, pCur->record->timesPlayed, pCur->record->rating);
+			}
 		}
 		pCur = pCur->pNext;
 	}
@@ -430,5 +464,121 @@ void editRating(Node* pList, char* song, char* artist)
 		}
 		pCur = pCur->pNext;
 	}
+	putchar('\n');
+}
+
+void editSong(Node* pList)
+{
+	int numSongs = 0, songFound = 0, artistFound = 0;
+	char editArtist[20] = "", editSong[20] = "";
+	Node* pCur = pList;
+
+	// Variables from insertSong()
+	int insertMinutes = -1, insertSeconds = -1, insertTimes = -1, insertRating = -1;
+	char insertArtist[50] = "", insertSong[20] = "", insertGenre[20] = "", insertAlbum[20] = "";
+	
+	strcpy(editArtist, promptForArtist(pList, &numSongs));
+	editArtist[strlen(editArtist) - 1] = '\0'; // getting rid of \n from fgets
+	
+	if (numSongs > 1) // multiple songs by artist
+	{
+		strcpy(editSong, promptForSong(pList));
+		editSong[strlen(editSong) - 1] = '\0'; // getting rid of \n from fgets
+
+		while (songFound == 0) // sets pCur to target song
+		{
+			if (strcmp(editSong, pCur->record->song) == 0)
+			{
+				songFound = 1;
+			}
+			else
+			{
+				pCur = pCur->pNext;
+			}
+		}
+	}
+	else // only one song by artist
+	{
+		while (artistFound == 0) // sets pCur to target song
+		{
+			if (strcmp(editArtist, pCur->record->artist) == 0)
+			{
+				artistFound = 1;
+			}
+			else
+			{
+				pCur = pCur->pNext;
+			}
+		}
+	}
+	// pCur now set to target node
+	
+	// Below is altered insertSong()
+
+	// Prompts for artist
+	printf("\nEnter the new artist name > ");
+	//getchar();
+	fgets(insertArtist, 50, stdin);
+	insertArtist[strlen(insertArtist) - 1] = '\0'; // These are to eliminate the \n at the end of the strings from the fgets
+
+	// Prompts for album
+	printf("\nEnter the new album name > ");
+	//getchar();
+	fgets(insertAlbum, 50, stdin);
+	insertAlbum[strlen(insertAlbum) - 1] = '\0';
+
+	// Prompts for song
+	printf("\nEnter the new song name > ");
+	//getchar();
+	fgets(insertSong, 50, stdin);
+	insertSong[strlen(insertSong) - 1] = '\0';
+
+	// Prompts for genre
+	printf("\nEnter the new genre > ");
+	//getchar();
+	fgets(insertGenre, 50, stdin);
+	insertGenre[strlen(insertGenre) - 1] = '\0';
+
+	// Prompts for length
+	do
+	{
+		printf("\nEnter the new song length (M:S) > ");
+		scanf("%d:%d", &insertMinutes, &insertSeconds);
+	} while (insertMinutes < 0 || insertSeconds < 0);
+
+	// turns seconds >= 60 into minutes
+	if (insertSeconds >= 60)
+	{
+		while (insertSeconds >= 60)
+		{
+			++insertMinutes;
+			insertSeconds -= 60;
+		}
+	}
+	
+	// Prompts for times played
+	do
+	{
+		printf("\nEnter the new amount of times the song has been played > ");
+		scanf("%d", &insertTimes);
+	} while (insertTimes < 0);
+
+	// Prompts for rating
+	do
+	{
+		printf("\nEnter the new song rating (1-5) > ");
+		scanf("%d", &insertRating);
+	} while (insertRating < 1 || insertRating > 5);
+
+	// Inserts new values into the target node
+	strcpy(pCur->record->artist, insertArtist);
+	strcpy(pCur->record->album, insertAlbum);
+	strcpy(pCur->record->song, insertSong);
+	strcpy(pCur->record->genre, insertGenre);
+	pCur->record->length->minutes = insertMinutes;
+	pCur->record->length->seconds = insertSeconds;
+	pCur->record->timesPlayed = insertTimes;
+	pCur->record->rating = insertRating;
+
 	putchar('\n');
 }

@@ -10,11 +10,11 @@
 
 int main(void)
 {
-	FILE* infile = NULL, *outfile = NULL;
-	
+	FILE* infile = NULL, * outfile = NULL;
+
 	Node* pHead = NULL;
 
-	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0;
+	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0, *discarded = 0;
 
 	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "";
 
@@ -77,7 +77,7 @@ int main(void)
 			}
 			else
 			{
-				strcpy(displaySearch, promptForArtist(pHead));
+				strcpy(displaySearch, promptForArtist(pHead, discarded));
 
 				putchar('\n');
 				
@@ -85,19 +85,26 @@ int main(void)
 			}
 			break;
 		case 4: // insert /////////////////////////////////////////////////////////////////////////////////////////////////////
-			insertSuccess = insertSong(pHead);
+			insertSuccess = insertSong(&pHead);
 			break;
 		case 5: // delete /////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			break;
 		case 6: // edit /////////////////////////////////////////////////////////////////////////////////////////////////////
+			system("cls");
+
+			printListRec(pHead);
 			
+			editSong(pHead);
+
+			printf("Edits have been made!\n");
+
 			break;
 		case 7: // sort /////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			break;
 		case 8: // rate /////////////////////////////////////////////////////////////////////////////////////////////////////
-			strcpy(rateArtist, promptForArtist(pHead));
+			strcpy(rateArtist, promptForArtist(pHead, discarded));
 			strcpy(rateSong, promptForSong(pHead));
 
 			editRating(pHead, rateSong, rateArtist);
@@ -109,7 +116,6 @@ int main(void)
 			
 			break;
 		case 11: // exit /////////////////////////////////////////////////////////////////////////////////////////////////////
-
 			break;
 		}
 	} while (option != 11);

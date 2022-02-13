@@ -47,8 +47,8 @@ int promptForOption(int lowerBound, int upperBound);
 //int promptForOption1or2(); // I just added parameters to the promptForOption() to eliminate this redundant one
 int insertSong(Node** pList);
 
-// Prompts for artist name and verifies that at least one corresponding node exists
-char* promptForArtist(Node* pHead);
+// Prompts for artist name, verifies that at least one corresponding node exists, sets value of how many of their songs are in the list
+char* promptForArtist(Node* pHead, int* numSongs);
 // Prompts for song name and verifies that at least one corresponding node exists
 char* promptForSong(Node* pHead);
 
@@ -60,6 +60,7 @@ void printListRec(Node* pHead);
 void setVarsToDefault(char* artist, char* album, char* song, char* genre, int* minutes, int* seconds, int* timesPlayed, int* rating);
 void printMenu();
 void printToFile(Node* pList, FILE* outfile);
+void editSong(Node* pList);
 
 // Precondition: artist confirmed to have at least one song in the list
 void printAllFromArtist(Node* pList, char* artist);
