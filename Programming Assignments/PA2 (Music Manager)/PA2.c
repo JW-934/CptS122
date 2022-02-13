@@ -582,3 +582,8 @@ void editSong(Node* pList)
 
 	putchar('\n');
 }
+
+void deleteSong(Node** pHead)
+{
+
+}

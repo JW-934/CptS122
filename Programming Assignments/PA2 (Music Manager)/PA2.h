@@ -67,4 +67,5 @@ void printAllFromArtist(Node* pList, char* artist);
 
 // Precondition: artist confirmed to have at least one song in the list, song confirmed to exist in the list
 void editRating(Node* pList, char* song, char* artist);
+void deleteSong(Node** pHead);
 #endif
