@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA2 and PA3
-* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022
+* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022, February 14, 2022
 * Description: a basic digital music manager
 */
 
@@ -14,9 +14,9 @@ int main(void)
 
 	Node* pHead = NULL;
 
-	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0, *discarded = 0;
+	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0, discarded = 0, playOption = -1, deleteSuccess = 0, deleteNumSongs = 0;
 
-	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "";
+	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "", deleteArtist[20] = "empty", deleteSong[20] = "";
 
 	do
 	{
@@ -77,7 +77,7 @@ int main(void)
 			}
 			else
 			{
-				strcpy(displaySearch, promptForArtist(pHead, discarded));
+				strcpy(displaySearch, promptForArtist(pHead, &discarded));
 
 				putchar('\n');
 				
@@ -87,8 +87,25 @@ int main(void)
 		case 4: // insert /////////////////////////////////////////////////////////////////////////////////////////////////////
 			insertSuccess = insertSong(&pHead);
 			break;
-		case 5: // delete /////////////////////////////////////////////////////////////////////////////////////////////////////
-			deleteSong(&pHead);
+		case 5: // delete ///////////////////////////////////////////////////////////////////////////////////////////////////// I wanted to have it only prompt for artist if there were more than one song with the same name but I'm out of time
+			system("cls");
+
+			printListRec(pHead);
+			
+			strcpy(deleteSong, promptForSong(pHead, &deleteNumSongs));
+			strcpy(deleteArtist, promptForArtist(pHead, &discarded));
+			
+
+			deleteSuccess = deleteItem(&pHead, deleteSong, deleteArtist);
+
+			if (deleteSuccess == 1)
+			{
+				printf("\nSong has been deleted!\n\n");
+			}
+			else
+			{
+				printf("\nSong could not be deleted!\n\n");
+			}
 			break;
 		case 6: // edit /////////////////////////////////////////////////////////////////////////////////////////////////////
 			system("cls");
@@ -104,13 +121,26 @@ int main(void)
 			
 			break;
 		case 8: // rate /////////////////////////////////////////////////////////////////////////////////////////////////////
-			strcpy(rateArtist, promptForArtist(pHead, discarded));
-			strcpy(rateSong, promptForSong(pHead));
+			strcpy(rateArtist, promptForArtist(pHead, &discarded));
+			strcpy(rateSong, promptForSong(pHead, &discarded));
 
 			editRating(pHead, rateSong, rateArtist);
+			printf("Rating has been updated!\n");
 			break;
-		case 9: // play /////////////////////////////////////////////////////////////////////////////////////////////////////
-			
+		case 9: // play ///////////////////////////////////////////////////////////////////////////////////////////////////// I wanted to have it only prompt for artist if there were more than one song with the same name but I'm out of time
+			printf("\n1. Play all songs\n2. Play starting at a certain song\n\n");
+
+			playOption = promptForOption(1, 2);
+			if (playOption == 1)
+			{
+				playRestOfList(pHead, "", "");
+
+				printf("\nEnd of playlist.\n");
+			}
+			else
+			{
+				
+			}
 			break;
 		case 10: // shuffle /////////////////////////////////////////////////////////////////////////////////////////////////////
 			

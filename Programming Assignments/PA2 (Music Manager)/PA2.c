@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA2 and PA3
-* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022
+* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022, February 14, 2022
 * Description: a basic digital music manager
 */
 
@@ -35,37 +35,70 @@ int insertFront(Node** pList, char* artist, char* albumTitle, char* songTitle, c
 	return success;
 }
 
-int deleteItem(Node** pList, char* songTitleSrch) //** pList is to change pList, not the list's contents (that's *pList)
+int deleteItem(Node** pList, char* songTitleSrch, char* deleteArtist) //** pList is to change pList, not the list's contents (that's *pList)
 {
 	Node* pCur = *pList, * pPrev = NULL;
 	int success = 0;
 
-	while (pCur != NULL && strcmp(pCur->record->song, songTitleSrch) != 0)
-	{
-		// move the pointers to correct position in list
-		pPrev = pCur;
-		pCur = pCur->pNext;
-	}
-	// guarantees we've positioned pointers correctly
-	if (pCur != NULL)
-	{
-		// we found movie string in a Node
-		success = 1;
+	songTitleSrch[strlen(songTitleSrch) - 1] = '\0'; // getting rid of \n from fgets
+	deleteArtist[strlen(deleteArtist) - 1] = '\0'; // getting rid of \n from fgets
 
-		if (pPrev == NULL)
+	//if (strcmp(artistSrch, "empty") == 0) // only one song in list with the target name
+	//{
+		while (pCur != NULL && (strcmp(pCur->record->song, songTitleSrch) != 0 || strcmp(pCur->record->artist, deleteArtist) != 0))
 		{
-			// removing the first node
-			// *pList = pCur
-			*pList = pCur->pNext; // (* pList)->pNext;
+			// move the pointers to correct position in list
+			pPrev = pCur;
+			pCur = pCur->pNext;
 		}
-		else
+		// guarantees we've positioned pointers correctly
+		if (pCur != NULL)
 		{
-			// removing a node after the first one -- end/last node/middle
-			// pPrev not null
-			pPrev->pNext = pCur->pNext;
+			success = 1;
+
+			if (pPrev == NULL)
+			{
+				// removing the first node
+				// *pList = pCur
+				*pList = pCur->pNext; // (* pList)->pNext;
+			}
+			else
+			{
+				// removing a node after the first one -- end/last node/middle
+				// pPrev not null
+				pPrev->pNext = pCur->pNext;
+			}
+			free(pCur);
 		}
-		free(pCur);
-	}
+	//}
+	//else
+	//{
+	//	while (pCur != NULL && strcmp(pCur->record->song, songTitleSrch) != 0 && strcmp(pCur->record->artist, artistSrch) != 0)
+	//	{
+	//		// move the pointers to correct position in list
+	//		pPrev = pCur;
+	//		pCur = pCur->pNext;
+	//	}
+	//	// guarantees we've positioned pointers correctly
+	//	if (pCur != NULL)
+	//	{
+	//		success = 1;
+
+	//		if (pPrev == NULL)
+	//		{
+	//			// removing the first node
+	//			// *pList = pCur
+	//			*pList = pCur->pNext; // (* pList)->pNext;
+	//		}
+	//		else
+	//		{
+	//			// removing a node after the first one -- end/last node/middle
+	//			// pPrev not null
+	//			pPrev->pNext = pCur->pNext;
+	//		}
+	//		free(pCur);
+	//	}
+	//}
 	return success;
 }
 
@@ -166,7 +199,7 @@ char* promptForArtist(Node* pHead, int* numSongs)
 		{
 			printf("\nEnter an artist > ");
 			
-			getchar();
+			//getchar();
 			fgets(search, 50, stdin);
 
 			while (pCur != NULL) // finds first song by target artist ; && exists == 0
@@ -202,8 +235,8 @@ char* promptForArtist(Node* pHead, int* numSongs)
 	}
 }
 
-// Prompts for song name and verifies that at least one corresponding node exists
-char* promptForSong(Node* pHead)
+// Prompts for song name and verifies that at least one corresponding node exists, sets value of how many of their songs there are with the same name
+char* promptForSong(Node* pHead, int* numSongs)
 {
 	int exists = 0;
 	char search[50] = "", curStr[50] = "";
@@ -214,16 +247,17 @@ char* promptForSong(Node* pHead)
 		{
 			printf("\nEnter a song > ");
 
-			//getchar();
+			getchar();
 			fgets(search, 50, stdin);
 
-			while (pCur != NULL && exists == 0)
+			while (pCur != NULL)
 			{
 				strcpy(curStr, pCur->record->song);
 				strcat(curStr, "\n"); // have to add newline to match the one that comes from the fgets
 				if (strcmp(curStr, search) == 0)
 				{
 					exists = 1;
+					++*numSongs;
 				}
 				pCur = pCur->pNext;
 				curStr[0] = '\0';
@@ -469,7 +503,7 @@ void editRating(Node* pList, char* song, char* artist)
 
 void editSong(Node* pList)
 {
-	int numSongs = 0, songFound = 0, artistFound = 0;
+	int numSongs = 0, songFound = 0, artistFound = 0, discard = 0;
 	char editArtist[20] = "", editSong[20] = "";
 	Node* pCur = pList;
 
@@ -482,7 +516,7 @@ void editSong(Node* pList)
 	
 	if (numSongs > 1) // multiple songs by artist
 	{
-		strcpy(editSong, promptForSong(pList));
+		strcpy(editSong, promptForSong(pList, &discard));
 		editSong[strlen(editSong) - 1] = '\0'; // getting rid of \n from fgets
 
 		while (songFound == 0) // sets pCur to target song
@@ -580,10 +614,41 @@ void editSong(Node* pList)
 	pCur->record->timesPlayed = insertTimes;
 	pCur->record->rating = insertRating;
 
-	putchar('\n');
+	putchar('\n'); 
 }
 
-void deleteSong(Node** pHead)
+void playRestOfList(Node* pList, char* startSongName, char* startArtistName)
 {
+	Node* pCur = pList, * pPrev = NULL;
+	int success = 0;
 
+	if (strcmp(startSongName, "") == 0) // starting from top of list
+	{
+		while (pCur->pNext != NULL)
+		{
+			system("cls");
+			printf("Playing %s by %s.", pCur->record->song, pCur->record->artist);
+			Sleep(500);
+			pCur = pCur->pNext;
+		}
+	}
+	else // starting from particular song
+	{
+		startSongName[strlen(startSongName) - 1] = '\0'; // getting rid of \n from fgets
+		startArtistName[strlen(startArtistName) - 1] = '\0'; // getting rid of \n from fgets
+
+		while (pCur != NULL && (strcmp(pCur->record->song, startSongName) != 0 || strcmp(pCur->record->artist, startArtistName) != 0))
+		{
+			// move the pointers to correct position in list
+			pPrev = pCur;
+			pCur = pCur->pNext;
+		}
+		while (pCur->pNext != NULL)
+		{
+			system("cls");
+			printf("Playing %s by %s.", pCur->record->song, pCur->record->artist);
+			Sleep(500);
+			pCur = pCur->pNext;
+		}
+	}
 }

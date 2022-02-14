@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA2 and PA3
-* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022
+* Date: January 27, 2022, January 28, 2022, February 1, 2022, February 9, 2022, February 12, 2022, February 13, 2022, February 14, 2022
 * Description: a basic digital music manager
 */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <windows.h>
 
 typedef struct duration
 {
@@ -42,15 +43,15 @@ typedef struct node
 }Node;
 
 int insertFront(Node** pList, char* artist, char* albumTitle, char* songTitle, char* genre, int minutes, int seconds, int timesPlayed, int rating);
-int deleteItem(Node** pList, char* songTitleSrch);
+int deleteItem(Node** pList, char* songTitleSrch, char* deleteArtist);
 int promptForOption(int lowerBound, int upperBound);
 //int promptForOption1or2(); // I just added parameters to the promptForOption() to eliminate this redundant one
 int insertSong(Node** pList);
 
 // Prompts for artist name, verifies that at least one corresponding node exists, sets value of how many of their songs are in the list
 char* promptForArtist(Node* pHead, int* numSongs);
-// Prompts for song name and verifies that at least one corresponding node exists
-char* promptForSong(Node* pHead);
+// Prompts for song name and verifies that at least one corresponding node exists, sets value of how many of their songs there are with the same name
+char* promptForSong(Node* pHead, int* numSongs);
 
 Node* makeNode(char* artist, char* albumTitle, char* songTitle, char* genre, int minutes, int seconds, int timesPlayed, int rating);
 
@@ -60,12 +61,12 @@ void printListRec(Node* pHead);
 void setVarsToDefault(char* artist, char* album, char* song, char* genre, int* minutes, int* seconds, int* timesPlayed, int* rating);
 void printMenu();
 void printToFile(Node* pList, FILE* outfile);
-void editSong(Node* pList);
 
 // Precondition: artist confirmed to have at least one song in the list
 void printAllFromArtist(Node* pList, char* artist);
 
 // Precondition: artist confirmed to have at least one song in the list, song confirmed to exist in the list
 void editRating(Node* pList, char* song, char* artist);
-void deleteSong(Node** pHead);
+void editSong(Node* pList);
+void playRestOfList(Node* pList, char* startSongName, char* startArtistName);
 #endif
