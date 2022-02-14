@@ -643,7 +643,7 @@ void playRestOfList(Node* pList, char* startSongName, char* startArtistName)
 			pPrev = pCur;
 			pCur = pCur->pNext;
 		}
-		while (pCur->pNext != NULL)
+		while (pCur != NULL)
 		{
 			system("cls");
 			printf("Playing %s by %s.", pCur->record->song, pCur->record->artist);

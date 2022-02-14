@@ -16,7 +16,7 @@ int main(void)
 
 	int option = -1, numSongs = 0, minutes, seconds, timesPlayed, rating, success = 0, displayOption = -1, newRating = 0, insertSuccess = 0, discarded = 0, playOption = -1, deleteSuccess = 0, deleteNumSongs = 0;
 
-	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "", deleteArtist[20] = "empty", deleteSong[20] = "";
+	char line[100] = "", artist[20] = "", song[20] = "", genre[20] = "", album[20] = "", displaySearch[50] = "", rateArtist[50] = "", rateSong[50] = "", deleteArtist[20] = "empty", deleteSong[20] = "", playArtist[20] = "", playSong[20] = "";
 
 	do
 	{
@@ -139,7 +139,16 @@ int main(void)
 			}
 			else
 			{
-				
+				system("cls");
+
+				printListRec(pHead);
+
+				strcpy(playSong, promptForSong(pHead, &deleteNumSongs));
+				strcpy(playArtist, promptForArtist(pHead, &discarded));
+
+				playRestOfList(pHead, playSong, playArtist);
+
+				printf("\nEnd of playlist.\n");
 			}
 			break;
 		case 10: // shuffle /////////////////////////////////////////////////////////////////////////////////////////////////////
