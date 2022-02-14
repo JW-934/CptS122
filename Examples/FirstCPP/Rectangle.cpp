@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: February 7, 2022, February 9, 2022, February 11, 2022
+* Date: February 7, 2022, February 9, 2022, February 11, 2022, February 14, 2022
 * Description: Introduction to C++
 */
 
@@ -20,6 +20,11 @@ double add(double n1, double n2)
 std::string add(std::string n1, std::string n2)
 {
 	return n1 + n2; // + can concatenate in C++
+}
+
+void setInteger(int& newInt)
+{
+	newInt = 42; // no indirection required like c pointers
 }
 
 //// constructor - member function - methods
@@ -59,6 +64,14 @@ Rectangle::Rectangle(double newLength, double newWidth)
 	{
 		mWidth = 0.0;
 	}
+}
+
+// copy constructor
+Rectangle::Rectangle(const Rectangle& copy) // passed by reference
+{
+	// specify how to copy a Rectangle
+	mLength = copy.mLength; // could use setter; setLength(copy.mLength) would include error checking
+	mWidth = copy.mWidth;
 }
 
 // destructor
@@ -101,4 +114,14 @@ void Rectangle::setWidth(const double newWidth)
 	{
 		mWidth = 0.0;
 	}
+}
+
+double Rectangle::computeArea()
+{
+	return mLength * mWidth;
+}
+
+Rectangle f(Rectangle r1) // passing by value
+{
+	return r1; // makes another copy when returning (calls copy constructor twice)
 }
