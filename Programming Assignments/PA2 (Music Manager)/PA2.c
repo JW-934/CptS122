@@ -197,7 +197,7 @@ char* promptForArtist(Node* pHead, int* numSongs)
 	{
 		do
 		{
-			printf("\nEnter an artist > ");
+			printf("\nEnter the artist > ");
 			
 			//getchar();
 			fgets(search, 50, stdin);
@@ -245,7 +245,7 @@ char* promptForSong(Node* pHead, int* numSongs)
 	{
 		do
 		{
-			printf("\nEnter a song > ");
+			printf("\nEnter the song > ");
 
 			getchar();
 			fgets(search, 50, stdin);
@@ -624,7 +624,7 @@ void playRestOfList(Node* pList, char* startSongName, char* startArtistName)
 
 	if (strcmp(startSongName, "") == 0) // starting from top of list
 	{
-		while (pCur->pNext != NULL)
+		while (pCur != NULL)
 		{
 			system("cls");
 			printf("Playing %s by %s.", pCur->record->song, pCur->record->artist);
@@ -651,4 +651,135 @@ void playRestOfList(Node* pList, char* startSongName, char* startArtistName)
 			pCur = pCur->pNext;
 		}
 	}
+}
+
+void artistBubbleSort(Node* pList) // I'd like to make this more robust but I have little time left, I think 20 passes is fair for this use
+{
+	int changes = 0, done = 0;
+	Node* pNext = pList->pNext, *pCur = pList;
+	Record* temp;
+
+	//while (done == 0)
+	for (int i = 0; i < 20; ++i)
+	{
+		while (pNext != NULL)
+		{
+			if (strcmp(pCur->record->artist, pNext->record->artist) > 0) // if artist in pCur is greater than the one in pNext
+			{
+				temp = pNext->record;
+				pNext->record = pCur->record;	// swaps record of pCur and pNext
+				pCur->record = temp;
+				++changes;
+			}
+			pCur = pNext;
+			pNext = pCur->pNext;	// moves to next song in list
+			printListRec(pList);
+		}
+		/*if (changes == 0)
+		{
+			done = 1;
+		}*/
+		pCur = pList;
+		pNext = pList->pNext;
+	}
+}
+
+void albumBubbleSort(Node* pList)
+{
+	int changes = 0, done = 0;
+	Node* pNext = pList->pNext, * pCur = pList;
+	Record* temp;
+
+	//while (done == 0)
+	for (int i = 0; i < 20; ++i)
+	{
+		while (pNext != NULL)
+		{
+			if (strcmp(pCur->record->album, pNext->record->album) > 0) // if artist in pCur is greater than the one in pNext
+			{
+				temp = pNext->record;
+				pNext->record = pCur->record;	// swaps record of pCur and pNext
+				pCur->record = temp;
+				++changes;
+			}
+			pCur = pNext;
+			pNext = pCur->pNext;	// moves to next song in list
+			printListRec(pList);
+		}
+		/*if (changes == 0)
+		{
+			done = 1;
+		}*/
+		pCur = pList;
+		pNext = pList->pNext;
+	}
+}
+
+void ratingBubbleSort(Node* pList)
+{
+	int changes = 0, done = 0;
+	Node* pNext = pList->pNext, * pCur = pList;
+	Record* temp;
+
+	//while (done == 0)
+	for (int i = 0; i < 20; ++i)
+	{
+		while (pNext != NULL)
+		{
+			if (pCur->record->rating > pNext->record->rating) // if artist in pCur is greater than the one in pNext
+			{
+				temp = pNext->record;
+				pNext->record = pCur->record;	// swaps record of pCur and pNext
+				pCur->record = temp;
+				++changes;
+			}
+			pCur = pNext;
+			pNext = pCur->pNext;	// moves to next song in list
+			printListRec(pList);
+		}
+		/*if (changes == 0)
+		{
+			done = 1;
+		}*/
+		pCur = pList;
+		pNext = pList->pNext;
+	}
+}
+
+void timesBubbleSort(Node* pList)
+{
+	int changes = 0, done = 0;
+	Node* pNext = pList->pNext, * pCur = pList;
+	Record* temp;
+
+	//while (done == 0)
+	for (int i = 0; i < 20; ++i)
+	{
+		while (pNext != NULL)
+		{
+			if (pCur->record->timesPlayed < pNext->record->timesPlayed) // if artist in pCur is greater than the one in pNext
+			{
+				temp = pNext->record;
+				pNext->record = pCur->record;	// swaps record of pCur and pNext
+				pCur->record = temp;
+				++changes;
+			}
+			pCur = pNext;
+			pNext = pCur->pNext;	// moves to next song in list
+			printListRec(pList);
+		}
+		/*if (changes == 0)
+		{
+			done = 1;
+		}*/
+		pCur = pList;
+		pNext = pList->pNext;
+	}
+}
+
+void playOneSong(Node* song)
+{
+	system("cls");
+	printf("Playing %s by %s.", song->record->song, song->record->artist);
+	Sleep(500);
 }

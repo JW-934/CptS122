@@ -142,9 +142,11 @@
   <ItemGroup>
     <ClCompile Include="PA2.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Tests.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PA2.h" />
+    <ClInclude Include="Tests.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="musicPlayList.csv" />

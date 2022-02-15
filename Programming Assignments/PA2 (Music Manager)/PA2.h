@@ -10,13 +10,14 @@
 
 #define PA2_H
 #define _CRT_SECURE_NO_WARNINGS
-#define INPUTFILE "testPlaylistOutput.csv"//"musicPlaylist.csv"
+#define INPUTFILE "testPlaylistOutput.csv" //"musicPlaylist.csv"
 #define OUTPUTFILE "testPlaylistOutput.csv"
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <time.h>
 
 typedef struct duration
 {
@@ -69,4 +70,9 @@ void printAllFromArtist(Node* pList, char* artist);
 void editRating(Node* pList, char* song, char* artist);
 void editSong(Node* pList);
 void playRestOfList(Node* pList, char* startSongName, char* startArtistName);
+void artistBubbleSort(Node* pList);
+void albumBubbleSort(Node* pList);
+void ratingBubbleSort(Node* pList);
+void timesBubbleSort(Node* pList);
+void playOneSong(Node* song);
 #endif
