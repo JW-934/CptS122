@@ -9,6 +9,8 @@
 #include "PA2.h"
 #include "Tests.h"
 
+// Everything is working for the most part, shuffle generates a random order but sometimes passes in a NULL pointer, I am out of time to debug it.
+
 int main(void)
 {
 	srand(time(0));

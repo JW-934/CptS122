@@ -10,8 +10,8 @@
 
 #define PA2_H
 #define _CRT_SECURE_NO_WARNINGS
-#define INPUTFILE "testPlaylistOutput.csv" //"musicPlaylist.csv"
-#define OUTPUTFILE "testPlaylistOutput.csv"
+#define INPUTFILE "musicPlaylist.csv"
+#define OUTPUTFILE "musicPlaylist.csv"
 
 #include <stdio.h>
 #include <string.h>
