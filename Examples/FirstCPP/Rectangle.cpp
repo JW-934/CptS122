@@ -1,7 +1,7 @@
 /*
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
-* Date: February 7, 2022, February 9, 2022, February 11, 2022, February 14, 2022
+* Date: February 7, 2022, February 9, 2022, February 11, 2022, February 14, 2022, February 16, 2022
 * Description: Introduction to C++
 */
 
