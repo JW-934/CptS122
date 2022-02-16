@@ -11,6 +11,8 @@ using std::cout; // we can now use cout without explicitly writing std::cout
 using std::cin;
 using std::endl;
 using std::fstream;
+using std::ostream;
+using std::ifstream;
 
 // Blueprint for a rational number
 class Rational
@@ -50,3 +52,10 @@ private:
 	int mNumerator;
 	int mDenominator;
 };
+
+// cout - ostream
+// cin - istream
+// cout << r1 << r2 << endl;
+ostream& operator<< (ostream& lhs, const Rational& rhs); // only need to modify stream
+
+Rational operator+ (const Rational& lhs, const Rational& rhs); // don't actually need to modify Rationals
