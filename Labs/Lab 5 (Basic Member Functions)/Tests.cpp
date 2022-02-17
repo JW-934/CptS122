@@ -31,7 +31,7 @@ void testSubtract()
     c3 = c1 - c2;       // overloaded + operator
 }
 
-void testStreamExtractionAndRead()
+void testStreamExtraction()
 {
     Complex c1(3.5, 2), c2(5.5, 7), c3;
     
@@ -43,4 +43,15 @@ void testStreamExtractionAndRead()
 
     cout << "Enter two complex numbers in the form a + bi(each separated by whitespace) : ";
     cin >> c1 >> c2;
+}
+
+void testStreamInsertion()
+{
+    Complex c1(3.5, 2), c2(5.5, 7), c3;
+
+    c1.print();
+    c2.print();
+    c3.print();
+
+    cout << c1 << " " << c2 << " " << c3 << endl;
 }

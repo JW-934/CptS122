@@ -12,4 +12,5 @@
 
 void testAdd();
 void testSubtract();
-void testStreamExtractionAndRead();
+void testStreamExtraction();
+void testStreamInsertion();

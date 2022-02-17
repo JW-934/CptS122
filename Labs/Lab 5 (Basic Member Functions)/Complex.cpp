@@ -97,7 +97,7 @@ Complex operator-(const Complex& lhs, const Complex& rhs)
 	return result;
 }
 
-std::istream& operator>> (std::istream& lhs, Complex& rhs)
+istream& operator>> (std::istream& lhs, Complex& rhs)
 {
 	char plus, i;
 	double newReal, newImaginary;
@@ -105,6 +105,13 @@ std::istream& operator>> (std::istream& lhs, Complex& rhs)
 	lhs >> newReal >> plus >> newImaginary >> i;
 	rhs.setReal(newReal);
 	rhs.setImaginary(newImaginary);
+
+	return lhs;
+}
+
+ostream& operator<< (ostream& lhs, const Complex& rhs)
+{
+	lhs << rhs.getReal() << " + " << rhs.getImaginary() << "i";
 
 	return lhs;
 }

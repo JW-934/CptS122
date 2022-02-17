@@ -11,19 +11,31 @@
 
 int main()
 {
-	Complex c1, c2, c3;
+	// Task 1 (Complex) Testing ///////////////////////////////////////////////////////////////////////////
+	//Complex c1, c2, c3;
 
 	//testAdd();
 
 	//testSubtract();
 
-	promptForComplex();
-	c1.read();
+	//promptForComplex();
+	//c1.read();
+	//cin >> c1;
 
 	//cout << c1.getReal() << " " << c1.getImaginary();
-	c1.print();
+	//c1.print();
+	//cout << c1 << endl;
 
-	//testStreamExtractionAndRead();
+	//testStreamExtraction();
+
+	//testStreamInsertion();
+
+	// Task 2 (Credit Report) Testing //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 	return 0;
 }

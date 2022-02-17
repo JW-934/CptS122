@@ -10,7 +10,10 @@
 
 #include "Complex.h"
 #include "Tests.h"
+#include "CreditReport.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
+using std::istream;
+using std::ostream;

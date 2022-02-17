@@ -13,6 +13,8 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::istream;
+using std::ostream;
 
 class Complex
 {
@@ -47,6 +49,7 @@ Complex add(const Complex& lhs, const Complex& rhs);
 // Operators
 Complex operator+(const Complex& lhs, const Complex& rhs);
 Complex operator-(const Complex& lhs, const Complex& rhs);
-std::istream& operator>> (std::istream& lhs, Complex& rhs);
+istream& operator>> (std::istream& lhs, Complex& rhs);
+ostream& operator<< (ostream& lhs, const Complex& rhs);
 
 void promptForComplex();
