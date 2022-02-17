@@ -9,6 +9,8 @@
 #include "Lab 5.h"
 #include <iostream>
 
+// NOTE: I have forgone error checking in these classes to get more done instead of having the most robust functions.
+
 int main()
 {
 	// Task 1 (Complex) Testing ///////////////////////////////////////////////////////////////////////////

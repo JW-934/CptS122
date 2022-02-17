@@ -19,34 +19,34 @@ using std::ostream;
 class Complex
 {
 public:
-	// constructors
+	// constructors /////////////////////////////////////////////////////////////////////////
 	Complex(double newReal = 0.0, double newImaginary = 0.0);
 
-	// destructor 
+	// destructor /////////////////////////////////////////////////////////////////////////
 	~Complex();
 
-	// getters
+	// getters /////////////////////////////////////////////////////////////////////////
 	double getReal() const;
 	double getImaginary() const;
 
-	// setters
+	// setters /////////////////////////////////////////////////////////////////////////
 	void setReal(const double newReal);
 	void setImaginary(const double newImaginary);
 
-	// operations
+	// operations /////////////////////////////////////////////////////////////////////////
 	Complex add(const Complex &rhs);
 	void read();
 	void print();
 
 private:
-	// data members
+	// data members /////////////////////////////////////////////////////////////////////////
 	double realPart;
 	double imaginaryPart;
 };
 
 Complex add(const Complex& lhs, const Complex& rhs);
 
-// Operators
+// Operators /////////////////////////////////////////////////////////////////////////
 Complex operator+(const Complex& lhs, const Complex& rhs);
 Complex operator-(const Complex& lhs, const Complex& rhs);
 istream& operator>> (std::istream& lhs, Complex& rhs);

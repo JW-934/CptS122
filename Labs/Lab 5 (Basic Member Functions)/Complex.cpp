@@ -8,20 +8,20 @@
 
 #include "Complex.h"
 
-// constructors
+// constructors /////////////////////////////////////////////////////////////////////////
 Complex::Complex(double newReal, double newImaginary)
 {
 	realPart = newReal;
 	imaginaryPart = newImaginary;
 }
 
-// destructor
+// destructor /////////////////////////////////////////////////////////////////////////
 Complex::~Complex()
 {
 
 }
 
-// getters
+// getters /////////////////////////////////////////////////////////////////////////
 double Complex::getReal() const
 {
 	return realPart;
@@ -32,7 +32,7 @@ double Complex::getImaginary() const
 	return imaginaryPart;
 }
 
-// setters
+// setters /////////////////////////////////////////////////////////////////////////
 void Complex::setReal(const double newReal)
 {
 	realPart = newReal;
@@ -43,7 +43,7 @@ void Complex::setImaginary(const double newImaginary)
 	imaginaryPart = newImaginary;
 }
 
-// operations
+// operations /////////////////////////////////////////////////////////////////////////
 Complex Complex::add(const Complex& rhs)
 {
 	Complex result;
@@ -76,7 +76,7 @@ Complex add(const Complex& lhs, const Complex& rhs)
 	return result;
 }
 
-// Operators
+// Operators /////////////////////////////////////////////////////////////////////////
 Complex operator+(const Complex& lhs, const Complex& rhs)
 {
 	Complex result;
