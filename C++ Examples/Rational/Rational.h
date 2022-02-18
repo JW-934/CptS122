@@ -57,5 +57,22 @@ private:
 // cin - istream
 // cout << r1 << r2 << endl;
 ostream& operator<< (ostream& lhs, const Rational& rhs); // only need to modify stream
-
 Rational operator+ (const Rational& lhs, const Rational& rhs); // don't actually need to modify Rationals
+ifstream& operator>> (ifstream& lhs, Rational& rhs);
+
+template <typename T> // or <class T>
+T operator- (const T& lhs, const T& rhs);
+
+template <typename T> // or <class T>
+T operator- (const T& lhs, const T& rhs)
+{
+	T result;
+
+	result.setDenominator(rhs.getDenominator() *
+		lhs.getDenominator());
+	result.setNumerator(rhs.getNumerator() * lhs.getDenominator() -
+		lhs.getNumerator() * rhs.getDenominator());
+	//return lhs - rhs;
+
+	return result;
+}

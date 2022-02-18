@@ -112,3 +112,17 @@ Rational operator+ (const Rational& lhs, const Rational& rhs) // don't actually 
 
 	return result; // calls constructor to make copy of rational
 }
+
+ifstream& operator>> (ifstream& lhs, Rational& rhs)
+{
+	int num = 0, den = 0;
+	char slash;
+
+	lhs >> num;
+	rhs.setNumerator(num);
+	lhs >> slash;
+	lhs >> den;
+	rhs.setDenominator(den);
+
+	return lhs;
+}
