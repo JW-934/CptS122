@@ -139,9 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DietPlan.cpp" />
+    <ClCompile Include="ExercisePlan.cpp" />
+    <ClCompile Include="FitnessAppWrapper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DietPlan.h" />
+    <ClInclude Include="ExercisePlan.h" />
+    <ClInclude Include="FitnessAppWrapper.h" />
     <ClInclude Include="PA4.h" />
   </ItemGroup>
   <ItemGroup>

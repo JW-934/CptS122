@@ -9,9 +9,9 @@
 
 #pragma once
 
-#include "DietPlan.h"
-#include "ExercisePlan.h"
-#include "FitnessAppWrapper.h"
-
 #include <iostream>
-#include <fstream>
+
+class FitnessAppWrapper
+{
+};
+

@@ -18,9 +18,27 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DietPlan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExercisePlan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FitnessAppWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PA4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DietPlan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExercisePlan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FitnessAppWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
