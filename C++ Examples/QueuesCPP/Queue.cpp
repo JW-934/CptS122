@@ -37,5 +37,16 @@ bool Queue::isEmpty()
 // precondition: queue must not be empty
 std::string Queue::dequeue()
 {
-	
+	Node* pTemp = this->mpHead;
+
+	if (this->mpHead == this->mpTail)
+	{
+		// one node in queue
+		this->mpHead = this->mpTail = nullptr;
+	}
+	else
+	{
+		// more than one node
+		this->mpHead = 
+	}
 }
