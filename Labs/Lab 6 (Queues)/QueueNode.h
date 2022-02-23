@@ -13,8 +13,15 @@
 class QueueNode
 {
 public:
+	QueueNode(std::string newData);
 
+	std::string getData();
+
+	void setData(std::string newData);
+
+	QueueNode* getNextPtr();
 private:
-	std::string data;
+	std::string mdata;
+	QueueNode* mpNext;
 };
 

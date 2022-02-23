@@ -14,10 +14,23 @@
 class Queue
 {
 public:
+	bool isEmpty();
+	
+	Queue(QueueNode* newpHead = nullptr, QueueNode* newpTail = nullptr);
 
+	bool enqueue(std::string newData);
 
+	// precondition: queue is not empty
+	std::string dequeue();
+
+	QueueNode* getPHead();
+	QueueNode* getPTail();
+
+	void setPHead(QueueNode* newPHead);
+	void setPTail(QueueNode* newPTail);
+
+	void printQueueRecursive(QueueNode* pHead);
 private:
 	QueueNode* mpHead;
 	QueueNode* mpTail;
 };
-

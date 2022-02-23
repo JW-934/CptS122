@@ -6,13 +6,10 @@
 * Description: Queues
 */
 
-#include "QueueNode.h"
+#pragma once
+
+#include <iostream>
 #include "Queue.h"
-#include "testQueue.h"
+#include "QueueNode.h"
 
-int main()
-{
-	testEnqueue();
-
-	return 0;
-}
+void testEnqueue();

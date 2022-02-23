@@ -7,3 +7,24 @@
 */
 
 #include "QueueNode.h"
+
+QueueNode::QueueNode(std::string newData)
+{
+	mdata = newData;
+	mpNext = nullptr;
+}
+
+std::string QueueNode::getData()
+{
+	return mdata;
+}
+
+void QueueNode::setData(std::string newData)
+{
+	mdata = newData;
+}
+
+QueueNode* QueueNode::getNextPtr()
+{
+	return mpNext;
+}
