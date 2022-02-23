@@ -9,8 +9,12 @@ using std::endl;
 
 class Node
 {
+public:
+	Node(std::string newPrintJob);
+
+	void setNextPtr(Node* newNextPtr);
+
 private:
 	std::string mPJ;
 	Node* mpNext;
-
 };
