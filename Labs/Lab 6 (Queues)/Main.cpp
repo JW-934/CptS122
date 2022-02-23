@@ -13,6 +13,8 @@
 int main()
 {
 	testEnqueue();
+	testIsEmpty();
+	testDequeue();
 
 	return 0;
 }

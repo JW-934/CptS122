@@ -18,8 +18,10 @@ public:
 	std::string getData();
 
 	void setData(std::string newData);
+	void setNextPtr(QueueNode* newNextPtr);
 
 	QueueNode* getNextPtr();
+
 private:
 	std::string mdata;
 	QueueNode* mpNext;

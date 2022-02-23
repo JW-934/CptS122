@@ -24,6 +24,11 @@ void QueueNode::setData(std::string newData)
 	mdata = newData;
 }
 
+void QueueNode::setNextPtr(QueueNode* newNextPtr)
+{
+	mpNext = newNextPtr;
+}
+
 QueueNode* QueueNode::getNextPtr()
 {
 	return mpNext;

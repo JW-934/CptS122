@@ -13,3 +13,5 @@
 #include "QueueNode.h"
 
 void testEnqueue();
+void testIsEmpty();
+void testDequeue();

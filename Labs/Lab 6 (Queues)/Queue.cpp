@@ -35,7 +35,10 @@ bool Queue::enqueue(std::string newData)
 	else
 	{
 		// non empty queue
+		mpTail->setNextPtr(pMem);
+		
 		this->mpTail = pMem;
+		
 		success = true;
 	}
 	return success;
@@ -45,6 +48,7 @@ bool Queue::enqueue(std::string newData)
 std::string Queue::dequeue()
 {
 	QueueNode* pTemp = this->mpHead;
+	std::string data = mpHead->getData();
 
 	if (mpHead == mpTail)
 	{
@@ -57,9 +61,9 @@ std::string Queue::dequeue()
 		mpHead = mpHead->getNextPtr();
 	}
 
-	delete mpHead;
+	delete pTemp;
 
-	return pTemp->getData();
+	return data;
 }
 
 void Queue::printQueueRecursive(QueueNode* pHead)
