@@ -1,27 +1,27 @@
-Exercise Plan 1
-9000
+Diet Plan 1
+2000
 11/15/2022
 
-Exercise Plan 2
-11000
+Diet Plan 2
+1900
 02/22/2023
 
 Diet Plan 3
-9000
+2000
 11/15/2022
 
 Diet Plan 4
-11000
+1900
 02/22/2023
 
 Diet Plan 5
-9000
+2000
 11/15/2022
 
 Diet Plan 6
-11000
+1900
 02/22/2023
 
 Diet Plan 7
-9000
-02/22/2023
+2000
+11/15/2022

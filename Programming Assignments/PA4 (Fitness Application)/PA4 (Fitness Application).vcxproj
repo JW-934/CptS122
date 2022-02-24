@@ -151,6 +151,7 @@
     <ClInclude Include="PA4.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="dietPlans.txt" />
     <Text Include="exercisePlans.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit “diet” and
 *			   “exercise” plans
 */
@@ -78,7 +78,27 @@ void DietPlan::setDate(const std::string newDate)
 // operations
 void DietPlan::editGoal()
 {
+	std::string newName, newDate;
+	int newCals = -1;
 
+	std::cout << "Enter a new plan name > ";
+	std::cin >> newName;
+	putchar('\n');
+
+	do
+	{
+		std::cout << "Enter a new calorie goal > ";
+		std::cin >> newCals;
+		putchar('\n');
+	} while (newCals < 0);
+
+	std::cout << "Enter a new date (mm/dd/yyyy) > ";
+	std::cin >> newDate;
+	putchar('\n');
+
+	mplanName = newName;
+	mgoalCalories = newCals;
+	mdate = newDate;
 }
 
 // non member functions
