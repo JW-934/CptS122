@@ -29,8 +29,10 @@ public:
 	void setPHead(QueueNode* newPHead);
 	void setPTail(QueueNode* newPTail);
 
-	void printQueueRecursive(QueueNode* pHead);
+	
 private:
 	QueueNode* mpHead;
 	QueueNode* mpTail;
 };
+
+void printQueueRecursive(QueueNode* pHead);

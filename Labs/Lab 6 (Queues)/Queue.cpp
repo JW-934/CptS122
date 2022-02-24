@@ -66,7 +66,7 @@ std::string Queue::dequeue()
 	return data;
 }
 
-void Queue::printQueueRecursive(QueueNode* pHead)
+void printQueueRecursive(QueueNode* pHead)
 {
 	if (pHead == nullptr)
 	{
