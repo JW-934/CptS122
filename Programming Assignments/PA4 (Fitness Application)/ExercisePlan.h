@@ -42,3 +42,4 @@ private:
 };
 
 std::ostream& operator<< (std::ostream& lhs, const ExercisePlan& rhs);
+std::ostream& operator>> (std::istream& lhs, ExercisePlan& rhs);

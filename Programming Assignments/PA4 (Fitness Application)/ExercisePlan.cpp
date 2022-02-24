@@ -108,3 +108,8 @@ std::ostream& operator<< (std::ostream& lhs, const ExercisePlan& rhs)
 
 	return lhs;
 }
+
+std::ostream& operator>> (std::istream& lhs, ExercisePlan& rhs)
+{
+
+}
