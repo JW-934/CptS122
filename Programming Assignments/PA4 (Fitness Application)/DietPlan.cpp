@@ -2,14 +2,15 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022
-* Description: a basic fitness application that allows the user of the application to manually edit “diet” and
-*			   “exercise” plans
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022
+* Description: a basic fitness application that allows the user of the application to manually edit diet and
+*			   exercise plans
 */
 
 #include "DietPlan.h"
 
-// constructor with default arguments - in general, replaces the need for other constructors, exclusing copy constructors
+// constructor with default arguments - in general, replaces the need for other constructors, excluding copy constructors
+
 DietPlan::DietPlan(const int goalCalories = 0, const std::string planName = "", std::string date = "")
 {
 	// Validates the calorie value
@@ -23,6 +24,13 @@ DietPlan::DietPlan(const int goalCalories = 0, const std::string planName = "", 
 	}
 	mplanName = planName;
 	mdate = date;
+}
+
+DietPlan::DietPlan()
+{
+	mplanName = "";
+	mgoalCalories = 0;
+	mdate = "";
 }
 
 // copy constructor - pass-by-value
@@ -101,10 +109,38 @@ void DietPlan::editGoal()
 	mdate = newDate;
 }
 
+void DietPlan::print()
+{
+	std::cout << mplanName << " " << mgoalCalories << " Calories" << mdate << std::endl;
+}
+
+void DietPlan::clear()
+{
+	mplanName = "";
+	mgoalCalories = 0;
+	mdate = "";
+}
+
 // non member functions
 std::ostream& operator<< (std::ostream& lhs, const DietPlan& rhs)
 {
-	lhs << "Name: " << rhs.getName() << "Calories: " << rhs.getCalories() << "Date: " << rhs.getDate();
+	lhs << rhs.getName() << " " << rhs.getCalories() << " " << rhs.getDate();
+
+	return lhs;
+}
+
+std::istream& operator>> (std::istream& lhs, DietPlan& rhs)
+{
+	std::string line;
+
+	std::getline(lhs, line);
+	rhs.setName(line);
+	std::getline(lhs, line);
+	rhs.setCalories(atoi(line.c_str()));
+	std::getline(lhs, line);
+	rhs.setDate(line);
+
+	std::getline(lhs, line);
 
 	return lhs;
 }

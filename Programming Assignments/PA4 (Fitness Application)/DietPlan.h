@@ -2,20 +2,23 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022
-* Description: a basic fitness application that allows the user of the application to manually edit “diet” and
-*			   “exercise” plans
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022
+* Description: a basic fitness application that allows the user of the application to manually edit diet and
+*			   exercise plans
 */
 
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <string>
 
 class DietPlan
 {
 public:
 	// constructor with default arguments - in general, replaces the need for other constructors, exclusing copy constructors
-	DietPlan(const int goalCalories = 0, const std::string planName = "", std::string date = "");
+	DietPlan(const int goalCalories, const std::string planName, std::string date);
+	DietPlan();
 
 	// copy constructor - pass-by-value
 	DietPlan(const DietPlan& copy);
@@ -35,6 +38,9 @@ public:
 
 	// operations
 	void editGoal();
+	void print();
+	void clear();
+	
 private:
 	int mgoalCalories;
 	std::string mplanName;
@@ -42,3 +48,4 @@ private:
 };
 
 std::ostream& operator<< (std::ostream& lhs, const DietPlan& rhs);
+std::istream& operator>> (std::istream& lhs, DietPlan& rhs);

@@ -2,9 +2,9 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022
-* Description: a basic fitness application that allows the user of the application to manually edit “diet” and
-*			   “exercise” plans
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022
+* Description: a basic fitness application that allows the user of the application to manually edit diet and
+*			   exercise plans
 */
 
 #include "ExercisePlan.h"
@@ -23,6 +23,13 @@ ExercisePlan::ExercisePlan(const int goalSteps = 0, const std::string planName =
 	}
 	mplanName = planName;
 	mdate = date;
+}
+
+ExercisePlan::ExercisePlan()
+{
+	mplanName = "";
+	mgoalSteps = 0;
+	mdate = "";
 }
 
 // copy constructor - pass-by-value
@@ -101,15 +108,38 @@ void ExercisePlan::editGoal()
 	mdate = newDate;
 }
 
+void ExercisePlan::print()
+{
+	std::cout << mplanName << " " << mgoalSteps << " Steps" << mdate << std::endl;
+}
+
+void ExercisePlan::clear()
+{
+	mplanName = "";
+	mgoalSteps = 0;
+	mdate = "";
+}
+
 // non member functions
 std::ostream& operator<< (std::ostream& lhs, const ExercisePlan& rhs)
 {
-	lhs << "Name: " << rhs.getName() << "Steps: " << rhs.getSteps() << "Date: " << rhs.getDate();
+	lhs << rhs.getName() << " " << rhs.getSteps() << " " << rhs.getDate();
 
 	return lhs;
 }
 
-std::ostream& operator>> (std::istream& lhs, ExercisePlan& rhs)
+std::istream& operator>> (std::istream& lhs, ExercisePlan& rhs)
 {
+	std::string line;
 
+	std::getline(lhs, line);
+	rhs.setName(line);
+	std::getline(lhs, line);
+	rhs.setSteps(atoi(line.c_str()));
+	std::getline(lhs, line);
+	rhs.setDate(line);
+
+	std::getline(lhs, line);
+
+	return lhs;
 }
