@@ -6,7 +6,18 @@ Queue::Queue(Node* newpHead = nullptr, Node* newpTail = nullptr)
 	this->mpTail = newpTail;
 }
 
-bool Queue::enqueue(std::string newPrintJob)
+Queue::Queue()
+{
+	mpHead = nullptr;
+	mpTail = nullptr;
+}
+
+Queue::~Queue()
+{
+	destroyQueue();
+}
+
+bool Queue::enqueue(const std::string& newPrintJob)
 {
 	Node* pMem = new Node(newPrintJob); // calls Node constructor; replaces makeNode() from C
 	bool success = false;
@@ -47,6 +58,22 @@ std::string Queue::dequeue()
 	else
 	{
 		// more than one node
-		this->mpHead = 
+		this->mpHead = this->mpHead->getNextPtr();
+	}
+	std::string data = pTemp->getData();
+
+	delete pTemp; // by default the destructor for a Node is invoked (destructor for indirect type)
+
+	return data;
+}
+
+// Private member function
+void Queue::destroyQueue()
+{
+	//delete this;
+	while (!isEmpty())
+	{
+		dequeue();
+		//delete this->mpHead;
 	}
 }
