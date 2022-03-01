@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit diet and
 *			   exercise plans
 */
@@ -25,8 +25,8 @@ FitnessAppWrapper::FitnessAppWrapper()
 // destructor
 FitnessAppWrapper::~FitnessAppWrapper()
 {
-	delete mweekDiet;
-	delete mweekExercise;
+	delete [] mweekDiet;
+	delete [] mweekExercise;
 	mdietFile.close();
 	mexerciseFile.close();
 }
@@ -49,6 +49,8 @@ void FitnessAppWrapper::displayMenu()
 void FitnessAppWrapper::runApp()
 {
 	int option = 0;
+	DietPlan* targetDiet = nullptr;
+	ExercisePlan* targetExercise = nullptr;
 
 	do
 	{
@@ -84,8 +86,18 @@ void FitnessAppWrapper::runApp()
 			putchar('\n');
 			break;
 		case 7: // Edit daily diet plan
+			promptForPlan(targetDiet);
+
+			targetDiet->editGoal();
+
+			std::cout << std::endl;
 			break;
 		case 8: // Edit daily exercise plan
+			promptForPlan(targetExercise);
+
+			targetExercise->editGoal();
+
+			std::cout << std::endl;
 			break;
 		case 9: // Exit and write to files
 			break;
@@ -158,6 +170,138 @@ void FitnessAppWrapper::displayWeeklyPlan(ExercisePlan weeklyPlan[])
 	}
 }
 
+// plan editing
+void FitnessAppWrapper::promptForPlan(DietPlan* targetPlan)
+{
+	int i = 0;
+	bool valid = false;
+	std::string optionDate;
+
+	displayWeeklyPlan(mweekDiet);
+
+	do
+	{
+		std::cout << std::endl << "Enter the date of the plan to be edited (mm/dd/yyyy) > ";
+		std::cin >> optionDate;
+		std::cout << std::endl;
+
+		// Searches for matching plan and sets i to one after it's position in the array
+		while (i < 7 && valid == false)
+		{
+			if (optionDate == mweekDiet[i].getDate())
+			{
+				valid = true;
+			}
+			++i;
+		}
+		if (valid == false)
+		{
+			std::cout << "Date not found! Try again." << std::endl;
+			i = 0;
+		}
+	} while (valid == false);
+
+	targetPlan = &mweekDiet[i - 1];
+}
+
+void FitnessAppWrapper::promptForPlan(ExercisePlan* targetPlan)
+{
+	int i = 0;
+	bool valid = false;
+	std::string optionDate;
+		
+	displayWeeklyPlan(mweekExercise);
+	
+	do
+	{
+		std::cout << std::endl << "Enter the date of the plan to be edited (mm/dd/yyyy) > ";
+		std::cin >> optionDate;
+		std::cout << std::endl;
+	
+		// Searches for matching plan and sets i to one after it's position in the array
+		while (i < 7 && valid == false)
+		{
+			if (optionDate == mweekExercise[i].getDate())
+			{
+				valid = true;
+			}
+			++i;
+		}
+		if (valid == false)
+		{
+			std::cout << "Date not found! Try again." << std::endl;
+			i = 0;
+		}
+	} while (valid == false);
+
+	targetPlan = &mweekExercise[i - 1];
+}
+
+
+
+// Decided to use overloading instead
+//DietPlan* FitnessAppWrapper::promptForDietPlan()
+//{
+//	int i = 0;
+//	bool valid = false;
+//	std::string optionDate;
+//	
+//	displayWeeklyPlan(mweekDiet);
+//
+//	do
+//	{
+//		std::cout << "Enter the date of the plan to be edited (mm/dd/yyyy) > ";
+//		std::cin >> optionDate;
+//		std::cout << std::endl;
+//
+//		// Searches for matching plan and sets i to it's position in the array
+//		for (; i < 7; ++i)
+//		{
+//			if (optionDate == mweekDiet[i].getDate())
+//			{
+//				valid = true;
+//			}
+//		}
+//		if (valid == false)
+//		{
+//			std::cout << "Date not found! Try again." << std::endl;
+//			i = 0;
+//		}
+//	} while (valid == false);
+//	return &mweekDiet[i];
+//}
+//
+//ExercisePlan* FitnessAppWrapper::promptForExercisePlan()
+//{
+//	int i = 0;
+//	bool valid = false;
+//	std::string optionDate;
+//
+//	displayWeeklyPlan(mweekExercise);
+//
+//	do
+//	{
+//		std::cout << "Enter the date of the plan to be edited (mm/dd/yyyy) > ";
+//		std::cin >> optionDate;
+//		std::cout << std::endl;
+//
+//		// Searches for matching plan and sets i to it's position in the array
+//		for (; i < 7; ++i)
+//		{
+//			if (optionDate == mweekExercise[i].getDate())
+//			{
+//				valid = true;
+//			}
+//		}
+//		if (valid == false)
+//		{
+//			std::cout << "Date not found! Try again." << std::endl;
+//			i = 0;
+//		}
+//	} while (valid == false);
+//	return &mweekExercise[i];
+//}
+
 // Non member functions
 int promptForOption(int lowerBound, int upperBound)
 {
@@ -171,3 +315,4 @@ int promptForOption(int lowerBound, int upperBound)
 
 	return option;
 }
+
