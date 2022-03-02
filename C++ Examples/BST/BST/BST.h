@@ -15,3 +15,11 @@ using std::ofstream;
 using std::fstream;
 
 using std::string;
+
+template <class T>
+class BST
+{
+	BST(Node<T> *newProot = nullptr);
+private:
+	Node<T>* mpRoot;
+};

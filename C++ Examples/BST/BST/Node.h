@@ -13,3 +13,12 @@ using std::ofstream;
 using std::fstream;
 
 using std::string;
+
+template <class T>
+class Node
+{
+private:
+	T mData;
+	Node<T>* mpLeft;
+	Node<T>* mpRight;
+};
