@@ -12,6 +12,28 @@ List::List()
 List::List(const List& copyList)
 {
 	// fill in your code here!
+	if (copyList.mpHead == nullptr)
+	{
+		return;
+	}
+
+	ListNode *pCur = copyList.mpHead;
+	ListNode *pMem = new ListNode;
+	ListNode* pNew = new ListNode;
+	
+	this->mpHead = pMem;
+
+	// pCur = pCur->getNextPtr();
+
+	while (pCur != nullptr)
+	{
+		pMem->setData(pCur->getData());
+		pMem->setNextPtr(pNew);
+
+		pNew = new ListNode;
+		pCur = pCur->getNextPtr();
+		pMem = pNew;
+	}
 }
 
 List::~List()                   // destructor - implicitly invoked when a List object leaves scope
@@ -27,6 +49,23 @@ List& List::operator= (const List& rhs) // overloaded assignment operator - must
 	// How to use new operator? ListNode *pMem = new ListNode; new is similar to the results of using malloc ()
 
 	// fill in your code here!
+	ListNode* pCur = rhs.mpHead;
+	ListNode* pMem = new ListNode;
+	ListNode* pNew = new ListNode;
+
+	this->mpHead = pMem;
+
+	// pCur = pCur->getNextPtr();
+
+	while (pCur != nullptr)
+	{
+		pMem->setData(pCur->getData());
+		pMem->setNextPtr(pNew);
+
+		pNew = new ListNode;
+		pCur = pCur->getNextPtr();
+		pMem = pNew;
+	}
 
 	return (*this);
 }
@@ -63,9 +102,49 @@ bool List::insertAtFront(const int newData)     // inserts newData at the beginn
 // insert newData in ascending order
 bool List::insertInOrder(const int newData)
 {
-	bool success = false;
+	bool success = false, inPosition = false;
 
 	// fill in your code here!
+	ListNode *pCur = this->mpHead;
+	ListNode *pMem = new ListNode(newData);
+
+	// Moves pCur to position that pMem should be inserted in (to get index value)
+	int index = 0;
+	while (inPosition == false)
+	{
+		if (pMem->getData() > pCur->getData())
+		{
+			pCur = pCur->getNextPtr();
+			++index;
+		}
+		else
+		{
+			inPosition = true;
+		}
+	}
+	// Moves pCur to position 1 before the insertion point
+	pCur = this->mpHead;
+	for (int i = 0; i < index - 1; ++i)
+	{
+		pCur = pCur->getNextPtr();
+	}
+	// Saves next node's address (next link)
+	ListNode* temp = pCur->getNextPtr();
+
+	// Inserts pMem
+	pCur->setNextPtr(pMem);
+
+	// Reconnects next link
+	pMem->setNextPtr(temp);
+
+	// Sets pCur to inserted node
+	pCur = pCur->getNextPtr();
+
+	// Checks if the inserted data matches the passed in data
+	if (pCur->getData() == newData)
+	{
+		success = true;
+	}
 
 	return success;
 }
@@ -76,6 +155,32 @@ bool List::insertAtEnd(const int newData)
 	bool success = false;
 
 	// fill in your code here!
+	ListNode* pCur = this->mpHead;
+	
+	// Sets pCur to last node in list
+	while (pCur->getNextPtr() != nullptr)
+	{
+		pCur = pCur->getNextPtr();
+	}
+
+	ListNode* pMem = new ListNode(newData);
+
+	// Inserts pMem at end, it's next ptr is already null
+	pCur->setNextPtr(pMem);
+
+	// Sets pCur back to beginning of list
+	pCur = this->mpHead;
+
+	// Sets pCur to end of list
+	while (pCur->getNextPtr() != nullptr)
+	{
+		pCur = pCur->getNextPtr();
+	}
+	// Checks if last node is the node that was supposed to be inserted
+	if (pCur->getData() == newData)
+	{
+		success = true;
+	}
 
 	return success;
 }
