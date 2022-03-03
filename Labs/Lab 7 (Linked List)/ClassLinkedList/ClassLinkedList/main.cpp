@@ -42,9 +42,51 @@ int main(void)
 
 	// Question 11: how does the List destructor free up the nodes? You will need to visit "List.cpp" to answer this question!
 
+	// Testing insertAtFront() ///////////////////////////////////////////////////////////////////
+	/*l1.insertAtFront(5);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+
+	l1.insertAtFront(6);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+
+	l1.insertAtFront(7);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;*/
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Testing insertInOrder() ////////////////////////////////////////////////////////////////////
+	/*l1.insertAtFront(8);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+
+	l1.insertAtFront(7);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+
+	l1.insertAtFront(5);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+
+	l1.insertInOrder(6);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+	std::cout << l1.getHeadPtr()->getNextPtr()->getData() << std::endl;
+	std::cout << l1.getHeadPtr()->getNextPtr()->getNextPtr()->getData() << std::endl;
+	std::cout << l1.getHeadPtr()->getNextPtr()->getNextPtr()->getNextPtr()->getData() << std::endl;*/
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// Testing insertAtEnd() ///////////////////////////////////////////////////////////////////////
+
+	// insertAtEnd() currently only works if there is at least one node in the list already, I'll have to make it more robust
+	l1.insertAtFront(5);
+	std::cout << l1.getHeadPtr()->getData() << std::endl;
+	
+	l1.insertAtEnd(8);
+	std::cout << l1.getHeadPtr()->getNextPtr()->getData() << std::endl;
+
+	l1.insertAtEnd(7);
+	std::cout << l1.getHeadPtr()->getNextPtr()->getNextPtr()->getData() << std::endl;
+
+	l1.insertAtEnd(6);
+	std::cout << l1.getHeadPtr()->getNextPtr()->getNextPtr()->getNextPtr()->getData() << std::endl;
+	/////////////////////////////////////////////////////////////////////////////////////////////////
 	ListApp app;
 
-	app.runApp();
+	//app.runApp();
 
 	return 0;
 }

@@ -150,6 +150,8 @@ bool List::insertInOrder(const int newData)
 }
 
 // inserts newData at the end of the list
+
+// insertAtEnd() currently only works if there is at least one node in the list already, I'll have to make it more robust
 bool List::insertAtEnd(const int newData)
 {
 	bool success = false;
@@ -199,6 +201,12 @@ int List::deleteAtFront()
 	int data = 0;
 
 	// fill in your code here! use the delete operator!
+	data = this->mpHead->getData();
+
+	ListNode* temp = this->mpHead;
+	this->mpHead = this->mpHead->getNextPtr();
+
+	delete temp;
 
 	return data;
 }
@@ -211,6 +219,52 @@ bool List::deleteNode(const int searchValue)
 	bool success = false;
 
 	// fill in your code here! use the delete operator!
+	ListNode* pCur = this->mpHead;
+	int index = 0;
+
+	// Moves pCur to target node
+	while (pCur->getData() != searchValue)
+	{
+		pCur = pCur->getNextPtr();
+		++index;
+	}
+
+	pCur = this->mpHead;
+	// Target at end of list
+	if (pCur->getNextPtr() == nullptr)
+	{
+		// Moves pCur to one before last (target) node
+		for (int i = 0; i < index - 1; ++i)
+		{
+			pCur = pCur->getNextPtr();
+		}
+		ListNode* temp = pCur->getNextPtr();
+		pCur->setNextPtr(nullptr);
+
+		delete temp;
+	}
+	else if (pCur->getData() == searchValue && pCur->getNextPtr() == nullptr) // target node is only node
+	{
+		mpHead = nullptr;
+		delete pCur;
+	}
+	else if (pCur->getData() == searchValue) // target node is first node
+	{
+		this->mpHead = pCur->getNextPtr();
+		delete pCur;
+	}
+	else // Target in middle of the list
+	{
+		// Moves pCur to one before last (target) node
+		for (int i = 0; i < index - 1; ++i)
+		{
+			pCur = pCur->getNextPtr();
+		}
+		ListNode* temp = pCur->getNextPtr();
+		pCur->setNextPtr(temp->getNextPtr());
+
+		delete temp;
+	}
 
 	return success;
 }
@@ -222,6 +276,14 @@ int List::deleteAtEnd()
 	int data = 0;
 
 	// fill in your code here! use the delete operator!
+	ListNode* pCur = mpHead;
+
+	// sets pCur to last node
+	while (pCur->getNextPtr() != nullptr)
+	{
+		pCur = pCur->getNextPtr();
+	}
+	data = pCur->getData();
 
 	return data;
 }
