@@ -12,7 +12,10 @@
 
 int main()
 {
-
+	testEnqueue();
+	testIsEmpty();
+	testDequeue();
+	testPrintQueueRec();
 
 	return 0;
 }

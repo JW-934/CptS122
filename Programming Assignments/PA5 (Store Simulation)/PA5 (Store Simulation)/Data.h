@@ -23,6 +23,9 @@ public:
 	void setServTime(int newTime);
 	void setTotalTime(int newTime);
 
+	// Operations
+	void clear();
+
 private:
 	int customerNumber;
 	int serviceTime;

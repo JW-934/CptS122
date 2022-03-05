@@ -47,3 +47,11 @@ void Data::setTotalTime(int newTime)
 {
 	totalTime = newTime;
 }
+
+// Operations
+void Data::clear()
+{
+	customerNumber = 0;
+	serviceTime = 0;
+	totalTime = 0;
+}

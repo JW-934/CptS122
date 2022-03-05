@@ -106,3 +106,18 @@ void Queue::destroyQueue()
 		//delete this->mpHead;
 	}
 }
+
+// Non member functions
+void printQueueRecursive(QueueNode* pHead)
+{
+	if (pHead == nullptr)
+	{
+		std::cout << std::endl;
+		return;
+	}
+	else
+	{
+		std::cout << "Customer: " << pHead->getData().getNumber() << " Service Time: " << pHead->getData().getServTime() << " Total Time: " << pHead->getData().getTotalTime() << std::endl;
+		printQueueRecursive(pHead->getNextPtr());
+	}
+}

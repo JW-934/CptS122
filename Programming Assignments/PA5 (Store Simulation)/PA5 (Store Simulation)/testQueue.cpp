@@ -14,10 +14,10 @@ void testEnqueue()
 	
 	std::cout << "******************** enqueue() Test ********************" << std::endl;
 
-	testQueue.enqueue("Enqueue Test String");
+	testQueue.enqueue(1, 10, 15);
 	std::cout << "TEST:" << std::endl;
 
-	if (testQueue.getPTail()->getData() == "Enqueue Test String")
+	if (testQueue.getPTail()->getData().getNumber() == 1)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to empty Queue." << std::endl;
 	}
@@ -27,10 +27,10 @@ void testEnqueue()
 	}
 
 	putchar('\n');
-	testQueue.enqueue("Test String 2");
+	testQueue.enqueue(2, 20, 25);
 
 	std::cout << "TEST:" << std::endl;
-	if (testQueue.getPTail()->getData() == "Test String 2")
+	if (testQueue.getPTail()->getData().getNumber() == 2)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to non-empty Queue." << std::endl;
 	}
@@ -60,11 +60,11 @@ void testIsEmpty()
 
 	putchar('\n');
 	// Prepares non-empty test queue
-	testQueue.enqueue("Enqueue Test String");
+	testQueue.enqueue(1, 10, 15);
 
 	std::cout << "PREPARATION:" << std::endl;
 
-	if (testQueue.getPTail()->getData() == "Enqueue Test String")
+	if (testQueue.getPTail()->getData().getNumber() == 1)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to isEmpty() test Queue." << std::endl;
 	}
@@ -90,7 +90,7 @@ void testIsEmpty()
 void testDequeue()
 {
 	Queue testQueue;
-	std::string data;
+	Data data;
 
 	std::cout << "******************** dequeue() Test ********************" << std::endl;
 
@@ -98,9 +98,9 @@ void testDequeue()
 
 	std::cout << "PREPARATION:" << std::endl;
 
-	testQueue.enqueue("Dequeue Test String");
+	testQueue.enqueue(1, 10, 15);
 
-	if (testQueue.getPTail()->getData() == "Dequeue Test String")
+	if (testQueue.getPTail()->getData().getNumber() == 1)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to dequeue() test Queue." << std::endl;
 	}
@@ -123,7 +123,7 @@ void testDequeue()
 		std::cout << "dequeue() Failure: failed to remove QueueNode from test Queue containing one QueueNode." << std::endl;
 	}
 
-	if (data == "Dequeue Test String")
+	if (data.getNumber() == 1)
 	{
 		std::cout << "dequeue() Success: returned data from removed QueueNode." << std::endl;
 	}
@@ -139,9 +139,9 @@ void testDequeue()
 
 	std::cout << "PREPARATION:" << std::endl;
 
-	testQueue.enqueue("Dequeue Test String 2");
+	testQueue.enqueue(2, 20, 25);
 
-	if (testQueue.getPTail()->getData() == "Dequeue Test String 2")
+	if (testQueue.getPTail()->getData().getNumber() == 2)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to dequeue() test Queue." << std::endl;
 	}
@@ -150,9 +150,9 @@ void testDequeue()
 		std::cout << "enqueue() Failure: failed to add new QueueNode to dequeue() test Queue." << std::endl;
 	}
 
-	testQueue.enqueue("Dequeue Test String 3");
+	testQueue.enqueue(3, 30, 25);
 
-	if (testQueue.getPTail()->getData() == "Dequeue Test String 3")
+	if (testQueue.getPTail()->getData().getNumber() == 3)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to dequeue() test Queue." << std::endl;
 	}
@@ -167,7 +167,7 @@ void testDequeue()
 	// Checks if node get removed
 
 	std::cout << "TEST:" << std::endl;
-	if (testQueue.getPHead()->getData() == "Dequeue Test String 3")
+	if (testQueue.getPHead()->getData().getNumber() == 3)
 	{
 		std::cout << "dequeue() Success: removed QueueNode from test Queue containing two QueueNodes." << std::endl;
 	}
@@ -177,7 +177,7 @@ void testDequeue()
 	}
 
 
-	if (data == "Dequeue Test String 2")
+	if (data.getNumber() == 2)
 	{
 		std::cout << "dequeue() Success: returned data from removed QueueNode." << std::endl;
 	}
@@ -200,9 +200,9 @@ void testPrintQueueRec()
 
 	std::cout << "PREPARATION:" << std::endl;
 
-	testQueue.enqueue("Test String 1");
+	testQueue.enqueue(1, 10, 15);
 
-	if (testQueue.getPTail()->getData() == "Test String 1")
+	if (testQueue.getPTail()->getData().getNumber() == 1)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to printQueueRecursive() test Queue." << std::endl;
 	}
@@ -221,9 +221,9 @@ void testPrintQueueRec()
 
 	std::cout << "PREPARATION:" << std::endl;
 
-	testQueue.enqueue("Test String 2");
+	testQueue.enqueue(2, 20, 25);
 
-	if (testQueue.getPTail()->getData() == "Test String 2")
+	if (testQueue.getPTail()->getData().getNumber() == 2)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to printQueueRecursive() test Queue." << std::endl;
 	}
@@ -232,9 +232,9 @@ void testPrintQueueRec()
 		std::cout << "enqueue() Failure: failed to add new QueueNode to printQueueRecursive() test Queue." << std::endl;
 	}
 
-	testQueue.enqueue("Test String 3");
+	testQueue.enqueue(3, 30, 35);
 
-	if (testQueue.getPTail()->getData() == "Test String 3")
+	if (testQueue.getPTail()->getData().getNumber() == 3)
 	{
 		std::cout << "enqueue() Success: added new QueueNode to printQueueRecursive() test Queue." << std::endl;
 	}

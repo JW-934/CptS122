@@ -42,3 +42,4 @@ private:
 	void destroyQueue();
 };
 
+void printQueueRecursive(QueueNode* pHead);
