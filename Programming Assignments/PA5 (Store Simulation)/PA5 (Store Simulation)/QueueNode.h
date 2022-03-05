@@ -8,12 +8,21 @@
 
 #pragma once
 
+#include <iostream>
+
 #include "Data.h"
 
 class QueueNode
 {
 public:
+	QueueNode(const int newNumber = 0, const int newServiceTime = 0, const int newTotalTime = 0);
 
+	~QueueNode();
+
+	void setNextPtr(QueueNode* newNextPtr);
+	QueueNode* getNextPtr() const;
+
+	Data getData() const;
 private:
 	Data* pData;
 	QueueNode* pNext;

@@ -7,3 +7,43 @@
 */
 
 #include "Data.h"
+
+// Constructor
+Data::Data(const int newNumber, const int newServTime, const int newTotalTime)
+{
+	customerNumber = newNumber;
+	serviceTime = newServTime;
+	totalTime = newTotalTime;
+}
+
+// Getters
+int Data::getNumber()
+{
+	return customerNumber;
+}
+
+int Data::getServTime()
+{
+	return serviceTime;
+}
+
+int Data::getTotalTime()
+{
+	return totalTime;
+}
+
+// Setters
+void Data::setNumber(int newNumber) 
+{
+	customerNumber = newNumber;
+}
+
+void Data::setServTime(int newTime)
+{
+	serviceTime = newTime;
+}
+
+void Data::setTotalTime(int newTime)
+{
+	totalTime = newTime;
+}

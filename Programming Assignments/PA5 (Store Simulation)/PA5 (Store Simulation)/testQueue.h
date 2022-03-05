@@ -6,13 +6,13 @@
 * Description: A grocery store simulation utilizing queues.
 */
 
+#pragma once
+
 #include <iostream>
 #include "Queue.h"
-#include "testQueue.h"
+#include "QueueNode.h"
 
-int main()
-{
-
-
-	return 0;
-}
+void testEnqueue();
+void testIsEmpty();
+void testDequeue();
+void testPrintQueueRec();

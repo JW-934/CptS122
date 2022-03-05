@@ -7,3 +7,34 @@
 */
 
 #include "QueueNode.h"
+#include "Data.h"
+
+QueueNode::QueueNode(const int newNumber, const int newServiceTime, const int newTotalTime)
+{
+	this->pData = new Data;
+	this->pData->setNumber(newNumber);
+	this->pData->setServTime(newServiceTime);
+	this->pData->setTotalTime(newTotalTime);
+
+	this->pNext = nullptr;
+}
+
+QueueNode::~QueueNode()
+{
+	std::cout << "In Node Destructor" << std::endl;
+}
+
+void QueueNode::setNextPtr(QueueNode* newNextPtr)
+{
+	this->pNext = newNextPtr;
+}
+
+QueueNode* QueueNode::getNextPtr() const
+{
+	return pNext;
+}
+
+Data QueueNode::getData() const
+{
+	return *this->pData;
+}

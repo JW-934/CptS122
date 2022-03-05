@@ -11,6 +11,17 @@
 class Data
 {
 public:
+	Data(const int newNumber = 0, const int newServTime = 0, const int newTotalTime = 0);
+
+	// Getters
+	int getNumber();
+	int getServTime();
+	int getTotalTime();
+
+	// Setters
+	void setNumber(int newNumber);
+	void setServTime(int newTime);
+	void setTotalTime(int newTime);
 
 private:
 	int customerNumber;
