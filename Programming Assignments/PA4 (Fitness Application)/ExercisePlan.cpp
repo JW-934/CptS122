@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022, March 4, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit diet and
 *			   exercise plans
 */
@@ -85,30 +85,30 @@ void ExercisePlan::setDate(const std::string newDate)
 // operations
 void ExercisePlan::editGoal()
 {
-	std::string newName, newDate, discard;
+	std::string newName, newDate;
 	int newSteps = -1;
 
 	std::cout << "Enter a new plan name > ";
 	std::cin >> newName;
-	std::cin >> discard;
+	//std::cin >> discard;
 	putchar('\n');
 
 	do
 	{
-		std::cout << "Enter a new step goal > ";
+		std::cout << "Enter a new calorie goal > ";
 		std::cin >> newSteps;
-		std::cin >> discard;
+		//std::cin >> discard;
 		putchar('\n');
 	} while (newSteps < 0);
 
 	std::cout << "Enter a new date (mm/dd/yyyy) > ";
 	std::cin >> newDate;
-	std::cin >> discard;
+	//std::cin >> discard;
 	putchar('\n');
 
-	mplanName = newName;
-	mgoalSteps = newSteps;
-	mdate = newDate;
+	this->mplanName = newName;
+	this->mgoalSteps = newSteps;
+	this->mdate = newDate;
 }
 
 void ExercisePlan::print()
@@ -127,6 +127,13 @@ void ExercisePlan::clear()
 std::ostream& operator<< (std::ostream& lhs, const ExercisePlan& rhs)
 {
 	lhs << rhs.getName() << " " << rhs.getSteps() << " " << rhs.getDate();
+
+	return lhs;
+}
+
+std::ofstream& operator<< (std::ofstream& lhs, const ExercisePlan& rhs)
+{
+	lhs << rhs.getName() << std::endl << rhs.getSteps() << std::endl << rhs.getDate() << std::endl;
 
 	return lhs;
 }

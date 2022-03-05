@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022, March 4, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit diet and
 *			   exercise plans
 */
@@ -49,8 +49,10 @@ void FitnessAppWrapper::displayMenu()
 void FitnessAppWrapper::runApp()
 {
 	int option = 0;
+	bool dietsLoaded = false, exercisesLoaded = false;
 	DietPlan* targetDiet = nullptr;
 	ExercisePlan* targetExercise = nullptr;
+	std::ofstream dietOut, exerciseOut;
 
 	do
 	{
@@ -64,42 +66,98 @@ void FitnessAppWrapper::runApp()
 		case 1: // Load weekly diet plan
 			loadWeeklyPlan(mweekDiet);
 
-			putchar('\n');
+			dietsLoaded = true;
+
+			std::cout << std::endl;
 			break;
 		case 2: // Load weekly exercise plan
 			loadWeeklyPlan(mweekExercise);
 
-			putchar('\n');
+			exercisesLoaded = true;
+
+			std::cout << std::endl;
 			break;
 		case 3: // Store weekly diet plan
+			// closes file data member
+			mdietFile.close();
+
+			dietOut.open(DIET_INPUT, std::ios::out);
+
+			storePlans(dietOut, mweekDiet);
+
+			// reopens file data member
+			dietOut.close();
+
+			std::cout << std::endl << "Diet plans saved!" << std::endl << std::endl;
 			break;
 		case 4: // Store weekly exercise plan
+			// closes file data member
+			mexerciseFile.close();
+			
+			exerciseOut.open(EXERCISE_INPUT, std::ios::out);
+
+			storePlans(exerciseOut, mweekExercise);
+
+			// reopens file data member
+			exerciseOut.close();
+
+			mexerciseFile.open(EXERCISE_INPUT, std::ios::in);
+
+			std::cout << std::endl << "Exercise plans saved!" << std::endl << std::endl;
 			break;
 		case 5: // Display weekly diet plan
 			displayWeeklyPlan(mweekDiet);
 
-			putchar('\n');
+			std::cout << std::endl;
 			break;
 		case 6: // Display weekly exercise plan
 			displayWeeklyPlan(mweekExercise);
 
-			putchar('\n');
+			std::cout << std::endl;
 			break;
 		case 7: // Edit daily diet plan
-			promptForPlan(targetDiet);
+			promptForPlan(&targetDiet);
 
 			targetDiet->editGoal();
 
 			std::cout << std::endl;
 			break;
 		case 8: // Edit daily exercise plan
-			promptForPlan(targetExercise);
+			promptForPlan(&targetExercise);
 
 			targetExercise->editGoal();
 
 			std::cout << std::endl;
 			break;
 		case 9: // Exit and write to files
+			
+			//// Saves Diet Plans ////
+			
+			if (dietsLoaded == true)
+			{
+				// closes file data member
+				mdietFile.close();
+
+				dietOut.open(DIET_INPUT, std::ios::out);
+
+				storePlans(dietOut, mweekDiet);
+
+				std::cout << std::endl << "Diet plans saved!" << std::endl;
+			}
+
+			//// Saves Exercise Plans ////
+			
+			if (exercisesLoaded == true)
+			{
+				// closes file data member
+				mexerciseFile.close();
+
+				exerciseOut.open(EXERCISE_INPUT, std::ios::out);
+
+				storePlans(exerciseOut, mweekExercise);
+
+				std::cout << std::endl << "Exercise plans saved!" << std::endl;
+			}
 			break;
 		}
 	} while (option != 9);
@@ -171,12 +229,13 @@ void FitnessAppWrapper::displayWeeklyPlan(ExercisePlan weeklyPlan[])
 }
 
 // plan editing
-void FitnessAppWrapper::promptForPlan(DietPlan* targetPlan)
+void FitnessAppWrapper::promptForPlan(DietPlan** targetPlan)
 {
 	int i = 0;
 	bool valid = false;
 	std::string optionDate;
 
+	std::cout << std::endl;
 	displayWeeklyPlan(mweekDiet);
 
 	do
@@ -201,10 +260,10 @@ void FitnessAppWrapper::promptForPlan(DietPlan* targetPlan)
 		}
 	} while (valid == false);
 
-	targetPlan = &mweekDiet[i - 1];
+	*targetPlan = &mweekDiet[i - 1];
 }
 
-void FitnessAppWrapper::promptForPlan(ExercisePlan* targetPlan)
+void FitnessAppWrapper::promptForPlan(ExercisePlan** targetPlan)
 {
 	int i = 0;
 	bool valid = false;
@@ -234,10 +293,25 @@ void FitnessAppWrapper::promptForPlan(ExercisePlan* targetPlan)
 		}
 	} while (valid == false);
 
-	targetPlan = &mweekExercise[i - 1];
+	*targetPlan = &mweekExercise[i - 1];
 }
 
+// plan storing
+void FitnessAppWrapper::storePlans(std::ofstream& dietFile, DietPlan weekPlan[])
+{
+	for (int i = 0; i < 7; ++i)
+	{
+		dietFile << weekPlan[i] << std::endl;
+	}
+}
 
+void FitnessAppWrapper::storePlans(std::ofstream& exerciseFile, ExercisePlan weekPlan[])
+{
+	for (int i = 0; i < 7; ++i)
+	{
+		exerciseFile << weekPlan[i] << std::endl;
+	}
+}
 
 // Decided to use overloading instead
 //DietPlan* FitnessAppWrapper::promptForDietPlan()

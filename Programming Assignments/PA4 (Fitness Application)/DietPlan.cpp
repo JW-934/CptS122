@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022, March 4, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit diet and
 *			   exercise plans
 */
@@ -86,30 +86,30 @@ void DietPlan::setDate(const std::string newDate)
 // operations
 void DietPlan::editGoal()
 {
-	std::string newName, newDate, discard;
+	std::string newName, newDate;
 	int newCals = -1;
 
 	std::cout << "Enter a new plan name > ";
 	std::cin >> newName;
-	std::cin >> discard;
+	//std::cin >> discard;
 	putchar('\n');
 
 	do
 	{
 		std::cout << "Enter a new calorie goal > ";
 		std::cin >> newCals;
-		std::cin >> discard;
+		//std::cin >> discard;
 		putchar('\n');
 	} while (newCals < 0);
 
 	std::cout << "Enter a new date (mm/dd/yyyy) > ";
 	std::cin >> newDate;
-	std::cin >> discard;
+	//std::cin >> discard;
 	putchar('\n');
 
-	mplanName = newName;
-	mgoalCalories = newCals;
-	mdate = newDate;
+	this->mplanName = newName;
+	this->mgoalCalories = newCals;
+	this->mdate = newDate;
 }
 
 void DietPlan::print()
@@ -128,6 +128,13 @@ void DietPlan::clear()
 std::ostream& operator<< (std::ostream& lhs, const DietPlan& rhs)
 {
 	lhs << rhs.getName() << " " << rhs.getCalories() << " " << rhs.getDate();
+
+	return lhs;
+}
+
+std::ofstream& operator<< (std::ofstream& lhs, const DietPlan& rhs)
+{
+	lhs << rhs.getName() << std::endl << rhs.getCalories() << std::endl << rhs.getDate() << std::endl;
 
 	return lhs;
 }

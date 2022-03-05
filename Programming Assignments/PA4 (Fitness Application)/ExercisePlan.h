@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA4
-* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022
+* Date: February 16, 2022, February 20, 2022, February 23, 2022, February 24, 2022, March 1, 2022, March 4, 2022
 * Description: a basic fitness application that allows the user of the application to manually edit diet and
 *			   exercise plans
 */
@@ -48,3 +48,4 @@ private:
 
 std::ostream& operator<< (std::ostream& lhs, const ExercisePlan& rhs);
 std::istream& operator>> (std::istream& lhs, ExercisePlan& rhs);
+std::ofstream& operator<< (std::ofstream& lhs, const ExercisePlan& rhs);

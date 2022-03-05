@@ -6,22 +6,23 @@ Exercise Plan 2
 11000
 11/14/2022
 
-Diet Plan 3
+Exercise Plan 3
 9000
 11/15/2022
 
-Diet Plan 4
+Exercise Plan 4
 11000
 11/16/2022
 
-Diet Plan 5
+Exercise Plan 5
 9000
 11/17/2022
 
-Diet Plan 6
+Exercise Plan 6
 11000
 11/18/2022
 
-Diet Plan 7
+Exercise Plan 7
 9000
 11/19/2022
+
