@@ -12,10 +12,13 @@
 
 int main()
 {
-	testEnqueue();
+	int overallTime = 0;
+
+	// Test cases // NOTE: I have combined some of the tests
+	/*testEnqueue();
 	testIsEmpty();
 	testDequeue();
-	testPrintQueueRec();
+	testPrintQueueRec();*/
 
 	return 0;
 }
