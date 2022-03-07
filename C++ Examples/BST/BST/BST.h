@@ -20,16 +20,15 @@ template <class T>
 class BST
 {
 public:
-	BST(Node<T> *newProot = nullptr);
+	BST(Node<T>* newProot = nullptr);
 
-	void insert(const T &newData);
+	void insert(const T& newData);
 	void inorderTraversal();
-
 
 private:
 	Node<T>* mpRoot;
 
-	void insert(Node<T> *pTree, const T& newData); // This will be called recursively
+	void insert(Node<T> *pTree, const T& newData);
 	void inorderTraversal(Node<T>* pTree);
 };
 
@@ -40,67 +39,72 @@ BST<T>::BST(Node<T>* newProot)
 }
 
 template <class T>
-void BST<T>::insert(const T& newData)	// Public one
+void BST<T>::insert(const T& newData)
 {
 	insert(this->mpRoot, newData);
 }
 
 template <class T>
-void BST<T>::insert(Node<T> *pTree, const T& newData)	// Private one, recursive
+void BST<T>::insert(Node<T>* pTree, const T& newData)
 {
 	if (pTree == nullptr) // base case - empty tree
 	{
-		//pTree = new
-		this->mpRoot = new Node<T>(newData);		// invokes constructor, needs <T>
+//pTree = new
+		this->mpRoot = new Node<T>(newData); // we'll implement a Node constructor Monday, 3/7
 	}
 	else
 	{
-		if (newData > pTree->mData) // going down right side; need overloaded inequality operators for type T
+		if (newData > pTree->getData ())
 		{
-			if (pTree->mpRight == nullptr)
+			if (pTree->getRightPtr () == nullptr)
 			{
-				// now need to insert the node
-				pTree->mpRight = new Node<T>(newData);
+				// we now need to insert the node
+				//	pTree->mpRight = new Node<T>(newData);
+				pTree->setRightPtr(new Node<T>(newData));
 			}
-			else // have to continue to progress down the tree
+			else // we have to continue to progress down the right subtree
 			{
 				// recursive step
-				insert(pTree->mpRight, newData);
+				insert(pTree->getRightPtr(), newData);
 			}
 		}
-		else if (newData < pTree->mData) // going down left side
+		else if (newData < pTree->getData ())
 		{
-			if (pTree->mpLeft == nullptr)
+			// left side of tree
+			if (pTree->getLeftPtr() == nullptr)
 			{
-				pTree->mpLeft = new Node<T>(newData);
+				//	pTree->mpLeft = new Node<T>(newData);
+				pTree->setLeftPtr(new Node<T>(newData));
 			}
-			else // recursive step
+			else
 			{
-				insert(pTree->mpLeft, newData);
+				// recursive step down the left subtree
+				insert(pTree->getLeftPtr(), newData);
 			}
 		}
-		else // duplicates
+		else
 		{
-			cout << "duplicate: " << newData << endl; // uses stream insertion operator for type T data
+			// duplicates
+			cout << "duplicate: " << newData << endl;
 		}
 	}
 }
 
-template <class T>
+template<class T>
 void BST<T>::inorderTraversal()
 {
 	inorderTraversal(this->mpRoot);
 }
 
-template <class T>
+template<class T>
 void BST<T>::inorderTraversal(Node<T>* pTree)
 {
-	// order: go left, process/print data, go right, process/print data
+	// left, process data, right
 
-	if (pTree != nullptr) // more nodes left to visit
+	if (pTree != nullptr)
 	{
-		inorderTraversal(pTree->mpLeft);
-		cout << pTree->mData << endl;
-		inorderTraversal(pTree->mpRight);
+		inorderTraversal(pTree->getLeftPtr());
+		cout << pTree->getData() << endl;
+		inorderTraversal(pTree->getRightPtr());
 	}
 }
