@@ -54,32 +54,32 @@ void BST<T>::insert(Node<T>* pTree, const T& newData)
 	}
 	else
 	{
-		if (newData > pTree->getData ())
+		if (pTree->mData < newData)
 		{
-			if (pTree->getRightPtr () == nullptr)
+			if (pTree->mpRight == nullptr)
 			{
 				// we now need to insert the node
-				//	pTree->mpRight = new Node<T>(newData);
-				pTree->setRightPtr(new Node<T>(newData));
+				pTree->mpRight = new Node<T>(newData);
+				//pTree->setRightPtr(new Node<T>(newData));
 			}
 			else // we have to continue to progress down the right subtree
 			{
 				// recursive step
-				insert(pTree->getRightPtr(), newData);
+				insert(pTree->mpRight, newData);
 			}
 		}
-		else if (newData < pTree->getData ())
+		else if (newData < pTree->mData)
 		{
 			// left side of tree
-			if (pTree->getLeftPtr() == nullptr)
+			if (pTree->mpLeft == nullptr)
 			{
-				//	pTree->mpLeft = new Node<T>(newData);
-				pTree->setLeftPtr(new Node<T>(newData));
+				pTree->mpLeft = new Node<T>(newData);
+				//pTree->setLeftPtr(new Node<T>(newData));
 			}
 			else
 			{
 				// recursive step down the left subtree
-				insert(pTree->getLeftPtr(), newData);
+				insert(pTree->mpLeft, newData);
 			}
 		}
 		else

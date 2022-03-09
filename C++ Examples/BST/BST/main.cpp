@@ -17,6 +17,7 @@
 int main(void)
 {
 	BST<int> t1;
+	BST<Rational> t2;
 
 	t1.insert(10);
 	t1.insert(15);
@@ -25,6 +26,13 @@ int main(void)
 	t1.insert(10);
 
 	t1.inorderTraversal();
+
+	Rational r1(5, 2), r2(7, 3);
+
+	t2.insert(r1);
+	t2.insert(r2);
+
+	t2.inorderTraversal();
 
 	return 0;
 }

@@ -144,11 +144,13 @@
   <ItemGroup>
     <ClInclude Include="BST.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Rational.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Rational.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />

@@ -4,6 +4,8 @@
 #include <fstream>
 #include <string>
 
+#include "Rational.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -18,6 +20,9 @@ template <class T>
 class Node
 {
 public:
+	template <class T> 
+	friend class BST;
+
 	Node(const T& newData);
 
 	Node<T>* getRightPtr() const;
