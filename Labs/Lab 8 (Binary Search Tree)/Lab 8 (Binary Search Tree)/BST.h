@@ -7,6 +7,8 @@
 */
 
 #pragma once
+
+#include <vector>
 #include "BSTNode.h"
 
 class BST
@@ -25,6 +27,7 @@ public:
 	BSTNode* getRoot();
 
 	// Operations
+	void insertNode(std::string& newData);
 	void insertNode(BSTNode* pTree, std::string& newData);
 
 	void inOrderTraversal(); // This one will actually be called
@@ -35,6 +38,9 @@ public:
 
 	void postOrderTraversal(); // This one will actually be called
 	void postOrderTraversal(BSTNode* pTree);
+
+	void inOrderTraversal(std::vector<std::string>& names); // This one will actually be called
+	void inOrderTraversal(BSTNode* pTree, std::vector<std::string>& names);	// For sorting the strings in the vector
 
 	bool isEmpty();
 private:

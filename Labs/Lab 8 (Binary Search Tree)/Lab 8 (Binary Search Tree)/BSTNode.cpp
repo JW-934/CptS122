@@ -56,7 +56,7 @@ BSTNode* BSTNode::getpRight() const
 }
 
 // Non member functions
-ostream& operator<<(ostream& lhs, const BSTNode& rhs);
+std::ostream& operator<<(std::ostream& lhs, const BSTNode& rhs)
 {
 	lhs << rhs.getData();
 

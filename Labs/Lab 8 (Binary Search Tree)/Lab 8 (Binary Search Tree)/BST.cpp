@@ -25,6 +25,11 @@ BSTNode* BST::getRoot()
 }
 
 // Operations
+void BST::insertNode(std::string& newData)
+{
+	insertNode(mroot, newData);
+}
+
 void BST::insertNode(BSTNode* pTree, std::string& newData)
 {
 	if (pTree == nullptr)
@@ -68,6 +73,7 @@ void BST::insertNode(BSTNode* pTree, std::string& newData)
 void BST::inOrderTraversal()
 {
 	inOrderTraversal(mroot);
+	std::cout << std::endl;
 }
 
 void BST::inOrderTraversal(BSTNode* pTree)
@@ -75,7 +81,7 @@ void BST::inOrderTraversal(BSTNode* pTree)
 	if (pTree != nullptr) 
 	{
 		inOrderTraversal(pTree->getpLeft());
-		std::cout << pTree->getData() << std::endl;
+		std::cout << pTree->getData() << " ";
 		inOrderTraversal(pTree->getpRight());
 	}
 }
@@ -83,21 +89,23 @@ void BST::inOrderTraversal(BSTNode* pTree)
 void BST::preOrderTraversal()
 {
 	preOrderTraversal(mroot);
+	std::cout << std::endl;
 }
 
 void BST::preOrderTraversal(BSTNode* pTree)
 {
 	if (pTree != nullptr)
 	{
-		std::cout << pTree->getData() << std::endl;
-		inOrderTraversal(pTree->getpLeft());
-		inOrderTraversal(pTree->getpRight());
+		std::cout << pTree->getData() << " ";
+		preOrderTraversal(pTree->getpLeft());
+		preOrderTraversal(pTree->getpRight());
 	}
 }
 
 void BST::postOrderTraversal()
 {
 	postOrderTraversal(mroot);
+	std::cout << std::endl;
 }
 
 void BST::postOrderTraversal(BSTNode* pTree)
@@ -106,7 +114,7 @@ void BST::postOrderTraversal(BSTNode* pTree)
 	{
 		postOrderTraversal(pTree->getpLeft());
 		postOrderTraversal(pTree->getpRight());
-		std::cout << pTree->getData() << std::endl;
+		std::cout << pTree->getData() << " ";
 	}
 }
 
@@ -115,14 +123,30 @@ bool BST::isEmpty()
 	return mroot == nullptr;
 }
 
+void BST::inOrderTraversal(std::vector<std::string>& names)
+{
+	inOrderTraversal(mroot, names);
+}
+
+void BST::inOrderTraversal(BSTNode* pTree, std::vector<std::string>& names)
+{
+	if (pTree != nullptr)
+	{
+		inOrderTraversal(pTree->getpLeft(), names);
+		names.push_back(pTree->mdata);
+		inOrderTraversal(pTree->getpRight(), names);
+	}
+}
+
 // Private functions
 void BST::destroyTree(BSTNode* pTree)
 {
 	if (pTree != nullptr)
 	{
-		postOrderTraversal(pTree->getpLeft());
-		postOrderTraversal(pTree->getpRight());
+		destroyTree(pTree->getpLeft());
+		destroyTree(pTree->getpRight());
 		std::cout << "Node containing: " << pTree->getData() << " has been deleted." << std::endl;
 		delete pTree;
 	}
 }
+
