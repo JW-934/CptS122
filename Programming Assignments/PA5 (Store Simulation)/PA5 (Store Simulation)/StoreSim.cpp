@@ -40,6 +40,7 @@ void StoreSim::runSim(int simTime)
 	int expArriveTime = rand() % (5 + 1 - 1) + 1;
 	int normArriveIndex = normArriveTime, expArriveIndex = expArriveTime, normLeaveIndex = 0, expLeaveIndex = 0;;
 	int currCustNum = 1, currNormTimeSum = 0, currExpTimeSum = 0, newServiceTime;
+	Data currCust;
 
 	do
 	{
@@ -78,8 +79,12 @@ void StoreSim::runSim(int simTime)
 			{
 				std::cout << "Customer " << normalLane.getPHead()->getData().getNumber() << " has left the normal lane." << std::endl;
 
-				normalLane.dequeue();
+				currCust = normalLane.dequeue();
 
+				if (normalLane.getPHead() != nullptr)
+				{
+					normalLane.getPHead()->getData().setTotalTime(normalLane.getPHead()->getData().getTotalTime() - currCust.getServTime());
+				}
 				normLeaveIndex = 0;
 			}
 		}
@@ -90,8 +95,12 @@ void StoreSim::runSim(int simTime)
 			{
 				std::cout << "Customer " << expressLane.getPHead()->getData().getNumber() << " has left the express lane." << std::endl;
 
-				expressLane.dequeue();
+				currCust = expressLane.dequeue();
 
+				if (expressLane.getPHead() != nullptr)
+				{
+					expressLane.getPHead()->getData().setTotalTime(expressLane.getPHead()->getData().getTotalTime() - currCust.getServTime());
+				}
 				expLeaveIndex = 0;
 			}
 		}
