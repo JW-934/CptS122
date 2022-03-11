@@ -2,11 +2,11 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA5
-* Date: March 5, 2022
+* Date: March 5, 2022, March 10, 2022
 * Description: A grocery store simulation utilizing queues.
 */
 
-#include "testQueue.h"
+#include "tests.h"
 
 void testEnqueue()
 {
@@ -248,4 +248,11 @@ void testPrintQueueRec()
 	std::cout << "printQueueRecursive() Output:" << std::endl << std::endl;
 	printQueueRecursive(testQueue.getPHead());
 	putchar('\n');
+}
+
+void testSim(int minutes)
+{
+	StoreSim sim;
+
+	sim.runSim(minutes);
 }
