@@ -16,14 +16,17 @@ using std::fstream;
 
 using std::string;
 
+
+
 template <class T>
 class Node
 {
 public:
-	template <class T> 
+	template <class T>
 	friend class BST;
 
 	Node(const T& newData);
+	~Node();
 
 	Node<T>* getRightPtr() const;
 	Node<T>* getLeftPtr() const;
@@ -45,6 +48,22 @@ Node<T>::Node(const T& newData)
 {
 	this->mpLeft = this->mpRight = nullptr;
 	this->mData = newData; // assignment operator for type T
+}
+
+template <class T>
+Node<T>::~Node()
+{
+	cout << "Deleting: " << this->mData << endl;
+	//delete this;
+
+	if (this->mpLeft != nullptr)
+	{
+		delete this->mpLeft;
+	}
+	if (this->mpRight != nullptr)
+	{
+		delete this->mpRight;
+	}
 }
 
 template <class T>

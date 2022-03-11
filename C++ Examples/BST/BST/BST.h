@@ -22,14 +22,19 @@ class BST
 public:
 	BST(Node<T>* newProot = nullptr);
 
+	~BST();
+
 	void insert(const T& newData);
 	void inorderTraversal();
+
+
 
 private:
 	Node<T>* mpRoot;
 
 	void insert(Node<T> *pTree, const T& newData);
 	void inorderTraversal(Node<T>* pTree);
+	void destroyTree(Node<T>* pTree);
 };
 
 template <class T>
@@ -106,5 +111,28 @@ void BST<T>::inorderTraversal(Node<T>* pTree)
 		inorderTraversal(pTree->getLeftPtr());
 		cout << pTree->getData() << endl;
 		inorderTraversal(pTree->getRightPtr());
+	}
+}
+
+template <class T>
+BST<T>::~BST ()
+{
+	this->destroyTree(this->mpRoot);
+}
+
+template <class T>
+void BST<T>::destroyTree(Node<T>* pTree)
+{
+	// postorder traversal through tree to delete each node
+	// l, r, process
+	/*if (pTree != nullptr)
+	{
+		destroyTree(pTree->mpLeft);
+		destroyTree(pTree->mpRight);
+		delete pTree;
+	}*/
+	if (this->mpRoot != nullptr)
+	{
+		delete this->mpRoot;
 	}
 }

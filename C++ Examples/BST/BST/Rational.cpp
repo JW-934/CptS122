@@ -129,5 +129,6 @@ ifstream& operator>> (ifstream& lhs, Rational& rhs)
 
 bool operator< (const Rational& lhs, const Rational& rhs)
 {
-	return lhs.getNumerator() * rhs.getDenominator() < rhs.getNumerator() * lhs.getDenominator();
+	return lhs.getNumerator() * rhs.getDenominator() <
+		rhs.getNumerator() * lhs.getDenominator();
 }
