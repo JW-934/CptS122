@@ -27,24 +27,24 @@ int main()
 
 	//testPrintQueueRec();
 
-	testSim(25);
+	//testSim(1440); // 24 hour test
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Store Simulation ////////////////////////////////////////////////////////////////////////////////////
 	
-	//int minutes = -1;
-	//StoreSim sim1;
+	int minutes = -1;
+	StoreSim sim1;
 
-	//// Prompts for number of minutes
-	//do
-	//{
-	//	std::cout << "Enter the number of minutes the simulation will run: ";
-	//	std::cin >> minutes;
-	//	std::cout << std::endl;
-	//} while (minutes < 0);
+	// Prompts for number of minutes
+	do
+	{
+		std::cout << "Enter the number of minutes the simulation will run: ";
+		std::cin >> minutes;
+		std::cout << std::endl;
+	} while (minutes < 0);
 
-	//sim1.runSim(minutes);
+	sim1.runSim(minutes);
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 
