@@ -37,6 +37,27 @@ namespace BigO
 	};
 }
 
+template <class T>
+bool BigO::SortsAndSearches<T>::sequential_search(const T* pList, const int size, const T& target, int* pPos)
+{
+	bool found = false;
+
+	// worst-case scenario - item not found
+	for (int index = 0 /* 1 op */; !found /* 1 op * (size + 1) */ && index < size /* 1 op * (size + 1) *  */; ++index /* 1 op * size */)
+	{
+		if (target == pList[index]) // assumes pointer to contiguous space // 1 op * size
+		{
+			found = true; // 1 op max // worst-case gets skipped
+			*pPos = index; // 1 op max
+		}
+	}
+	return found; // 1 op
+}
+
+
+
+
+
 
 //// precondition: list must be in ascending order
 //template <class T>
