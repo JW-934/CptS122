@@ -27,8 +27,8 @@ public:
 	BSTNode* getRoot();
 
 	// Operations
-	void insertNode(std::string& newData);
-	void insertNode(BSTNode* pTree, std::string& newData);
+	void insertNode(char newChar, std::string& newData);
+	void insertNode(BSTNode* pTree, char newChar, std::string& newData);
 
 	void inOrderTraversal(); // This one will actually be called
 	void inOrderTraversal(BSTNode* pTree);

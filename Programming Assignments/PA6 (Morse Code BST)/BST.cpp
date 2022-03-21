@@ -33,16 +33,16 @@ BSTNode* BST::getRoot()
 }
 
 // Operations
-void BST::insertNode(std::string& newData)
+void BST::insertNode(char newChar, std::string& newData)
 {
-	insertNode(mroot, newData);
+	insertNode(mroot, newChar, newData);
 }
 
-void BST::insertNode(BSTNode* pTree, std::string& newData)
+void BST::insertNode(BSTNode* pTree, char newChar, std::string& newData)
 {
 	if (pTree == nullptr)
 	{
-		mroot = new BSTNode(newData);
+		mroot = new BSTNode(newChar, newData);
 	}
 	else
 	{
@@ -50,11 +50,11 @@ void BST::insertNode(BSTNode* pTree, std::string& newData)
 		{
 			if (pTree->mpRight == nullptr) // need to insert
 			{
-				pTree->mpRight = new BSTNode(newData);
+				pTree->mpRight = new BSTNode(newChar, newData);
 			}
 			else // continuing down right tree
 			{
-				insertNode(pTree->mpRight, newData);
+				insertNode(pTree->mpRight, newChar, newData);
 			}
 		}
 		else if (newData < pTree->mdata)
@@ -62,12 +62,12 @@ void BST::insertNode(BSTNode* pTree, std::string& newData)
 			// left side of tree
 			if (pTree->mpLeft == nullptr)
 			{
-				pTree->mpLeft = new BSTNode(newData);
+				pTree->mpLeft = new BSTNode(newChar, newData);
 			}
 			else
 			{
 
-				insertNode(pTree->mpLeft, newData);
+				insertNode(pTree->mpLeft, newChar, newData);
 			}
 		}
 		else

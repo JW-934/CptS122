@@ -18,23 +18,26 @@ public:
 	friend class BST;
 
 	// Constructors
-	BSTNode(std::string newData = "");
+	BSTNode(char newChar = '\0', std::string newData = "");
 
 	// Destructor
 	~BSTNode();
 
 	// Setters
+	void setChar(const char newChar);
 	void setData(const std::string& newData);
 	void setpLeft(BSTNode* const newLeft);
 	void setpRight(BSTNode* const newRight);
 
 	// Getters
+	char getChar() const;
 	std::string getData() const;
 	BSTNode* getpLeft() const;
 	BSTNode* getpRight() const;
 
 private:
 	std::string mdata;
+	char mchar;
 
 	BSTNode* mpLeft;
 	BSTNode* mpRight;

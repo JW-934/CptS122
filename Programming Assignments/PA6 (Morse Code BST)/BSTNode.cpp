@@ -9,9 +9,10 @@
 #include "BSTNode.h"
 
 // Constructors
-BSTNode::BSTNode(std::string newData)
+BSTNode::BSTNode(char newChar, std::string newData)
 {
 	mdata = newData;
+	mchar = newChar;
 
 	mpLeft = nullptr;
 	mpRight = nullptr;
@@ -24,6 +25,11 @@ BSTNode::~BSTNode()
 }
 
 // Setters
+void BSTNode::setChar(const char newChar)
+{
+	mchar = newChar;
+}
+
 void BSTNode::setData(const std::string& newData)
 {
 	mdata = newData;
@@ -40,6 +46,11 @@ void BSTNode::setpRight(BSTNode* const newRight)
 }
 
 // Getters
+char BSTNode::getChar() const
+{
+	return mchar;
+}
+
 std::string BSTNode::getData() const
 {
 	return mdata;
@@ -58,6 +69,7 @@ BSTNode* BSTNode::getpRight() const
 // Non member functions
 std::ostream& operator<<(std::ostream& lhs, const BSTNode& rhs)
 {
+	lhs << rhs.getChar() << " ";
 	lhs << rhs.getData();
 
 	return lhs;
