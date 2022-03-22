@@ -16,10 +16,10 @@ int main()
 {
 	std::string inputStr;
 	
-	std::ifstream infile();
-	infile().open("Convert.txt", std::ios::in);
+	std::ifstream infile;
+	infile.open("Convert.txt", std::ios::in);
 
-	if (infile().is_open()) // infile opened
+	if (infile.is_open()) // infile opened
 	{
 		std::getline(infile, inputStr); // in progress
 
