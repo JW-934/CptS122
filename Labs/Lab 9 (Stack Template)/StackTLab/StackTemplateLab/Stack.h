@@ -48,7 +48,36 @@ Stack<T>::~Stack()
 template <class T>
 bool Stack<T>::push(T &newItem)
 {
-	return false;
+	if (isEmpty())
+	{
+		mTop[0] = newItem;
+		mSize = 1;
+
+		if (mTop[0] == newItem)
+		{
+			return true;
+		}
+		else 
+		{ 
+			--mSize;
+			return false;
+		}
+	}
+	else
+	{
+		mTop[mSize] = newItem; // not mSize + 1 because mSize will be one more than the current array index
+		++mSize;
+
+		if (mTop[mSize - 1] == newItem)
+		{
+			return true;
+		}
+		else 
+		{ 
+			--mSize;
+			return false; 
+		}
+	}
 }
 
 // In this implementation you will apply defensive design. You must check to 
@@ -58,7 +87,18 @@ bool Stack<T>::push(T &newItem)
 template <class T>
 bool Stack<T>::pop(T &poppedItem)
 {
-	return false;
+	if (!isEmpty())
+	{
+		poppedItem = mTop[mSize - 1];
+		mTop[mSize - 1] = -1;
+		--mSize;
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 // In this implementation you will apply defensive design. You must check to 
@@ -68,12 +108,21 @@ bool Stack<T>::pop(T &poppedItem)
 template <class T>
 bool Stack<T>::peek(T &item)
 {
-	return false;
+	if (!isEmpty())
+	{
+		item = mTop[mSize - 1];
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 // Returns true if the stack is empty; false otherwise
 template <class T>
 bool Stack<T>::isEmpty()
 {
-	return false;
+	return mSize == 0;
 }
