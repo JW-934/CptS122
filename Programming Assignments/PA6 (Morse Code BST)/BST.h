@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA6
-* Date: March 21, 2022
+* Date: March 21, 2022, March 23, 2022
 * Description: A binary search tree based English to morse code converter.
 */
 
@@ -15,7 +15,8 @@ class BST
 {
 public:
 	// Constructors
-	BST(BSTNode* newRoot = nullptr);
+	//BST(BSTNode* newRoot = nullptr);
+	BST();
 
 	// Destructor
 	~BST();
@@ -43,6 +44,9 @@ public:
 	void inOrderTraversal(BSTNode* pTree, std::vector<std::string>& names);	// For sorting the strings in the vector
 
 	bool isEmpty();
+
+	std::string morseSearch(char search); // Call this one
+	std::string morseSearch(char search, BSTNode* pTree);
 private:
 	BSTNode* mroot;
 

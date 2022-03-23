@@ -2,16 +2,40 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA6
-* Date: March 21, 2022
+* Date: March 21, 2022, March 23, 2022
 * Description: A binary search tree based English to morse code converter.
 */
 
 #include "BST.h"
 
 // Constructors
-BST::BST(BSTNode* newRoot)
+//BST::BST(BSTNode* newRoot)
+//{
+//	mroot = newRoot;
+//}
+
+BST::BST()
 {
-	mroot = newRoot;
+	std::ifstream tableFile;
+	char newChar, space;
+	std::string newMorse;
+
+	tableFile.open("MorseTable.txt", std::ios::in);
+
+	//std::getline(infile, inputStr);
+	
+	// Get first character and morse code and set as root
+	tableFile >> newChar >> space >> newMorse;
+	
+	mroot = new BSTNode(newChar, newMorse);
+	
+	while (!tableFile.eof())
+	{
+		//tableFile >> newChar >> space >> newMorse;
+		tableFile >> newChar >> newMorse;
+
+		insertNode(newChar, newMorse);
+	}
 }
 
 // Destructor
@@ -46,7 +70,7 @@ void BST::insertNode(BSTNode* pTree, char newChar, std::string& newData)
 	}
 	else
 	{
-		if (pTree->mdata < newData)
+		if (pTree->mchar < newChar)
 		{
 			if (pTree->mpRight == nullptr) // need to insert
 			{
@@ -57,7 +81,7 @@ void BST::insertNode(BSTNode* pTree, char newChar, std::string& newData)
 				insertNode(pTree->mpRight, newChar, newData);
 			}
 		}
-		else if (newData < pTree->mdata)
+		else if (newChar < pTree->mchar)
 		{
 			// left side of tree
 			if (pTree->mpLeft == nullptr)
@@ -89,7 +113,7 @@ void BST::inOrderTraversal(BSTNode* pTree)
 	if (pTree != nullptr)
 	{
 		inOrderTraversal(pTree->getpLeft());
-		std::cout << pTree->getData() << " ";
+		std::cout << pTree->getChar() << " " << pTree->getData() << " ";
 		inOrderTraversal(pTree->getpRight());
 	}
 }
@@ -104,7 +128,7 @@ void BST::preOrderTraversal(BSTNode* pTree)
 {
 	if (pTree != nullptr)
 	{
-		std::cout << pTree->getData() << " ";
+		std::cout << pTree->getChar() << " " << pTree->getData() << " ";
 		preOrderTraversal(pTree->getpLeft());
 		preOrderTraversal(pTree->getpRight());
 	}
@@ -122,7 +146,7 @@ void BST::postOrderTraversal(BSTNode* pTree)
 	{
 		postOrderTraversal(pTree->getpLeft());
 		postOrderTraversal(pTree->getpRight());
-		std::cout << pTree->getData() << " ";
+		std::cout << pTree->getChar() << " " << pTree->getData() << " ";
 	}
 }
 
@@ -146,6 +170,34 @@ void BST::inOrderTraversal(BSTNode* pTree, std::vector<std::string>& names)
 	}
 }
 
+std::string BST::morseSearch(char search)
+{
+	return morseSearch(search, mroot);
+}
+
+std::string BST::morseSearch(char search, BSTNode* pTree)
+{
+	if (pTree != nullptr)
+	{
+		if (pTree->getChar() == search)
+		{
+			return pTree->getData();
+		}
+		else if (pTree->getChar() < search)
+		{
+			morseSearch(search, pTree->getpRight());
+		}
+		else if (pTree->getChar() > search)
+		{
+			morseSearch(search, pTree->getpLeft());
+		}
+
+		//morseSearch(search, pTree->getpLeft());
+		//morseSearch(search, pTree->getpRight());
+		//std::cout << pTree->getChar() << " " << pTree->getData() << " ";
+	}
+}
+
 // Private functions
 void BST::destroyTree(BSTNode* pTree)
 {
@@ -153,7 +205,7 @@ void BST::destroyTree(BSTNode* pTree)
 	{
 		destroyTree(pTree->getpLeft());
 		destroyTree(pTree->getpRight());
-		std::cout << "Node containing: " << pTree->getData() << " has been deleted." << std::endl;
+		std::cout << "Node containing: " << pTree->getChar() << " " << pTree->getData() << " has been deleted." << std::endl;
 		delete pTree;
 	}
 }

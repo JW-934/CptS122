@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA6
-* Date: March 21, 2022
+* Date: March 21, 2022, March 23, 2022
 * Description: A binary search tree based English to morse code converter.
 */
 
@@ -14,20 +14,14 @@
 
 int main()
 {
-	std::string inputStr;
+	std::ifstream convertFile, tableFile;
+	//convertFile.open("Convert.txt", std::ios::in);
 	
-	std::ifstream infile;
-	infile.open("Convert.txt", std::ios::in);
+	BST table;
 
-	if (infile.is_open()) // infile opened
-	{
-		std::getline(infile, inputStr); // in progress
+	table.inOrderTraversal();
 
-
-	}
-	else // infile not opened
-	{
-		std::cout << "Input file could not be opened!" << std::endl;
-	}
+	std::cout << table.morseSearch('D');
+	
 	return 0;
 }
