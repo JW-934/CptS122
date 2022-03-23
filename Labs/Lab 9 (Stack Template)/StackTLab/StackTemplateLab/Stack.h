@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <ctype.h>
 
 using std::cout;
 using std::cin;
@@ -23,6 +24,8 @@ public:
 	bool peek(T &item);
 
 	bool isEmpty();
+
+	int postFixEval(std::string postFix);
 
 private:
 	int mSize; // represents the current number of items in the stack
@@ -125,4 +128,99 @@ template <class T>
 bool Stack<T>::isEmpty()
 {
 	return mSize == 0;
+}
+
+template <class T>
+int Stack<T>::postFixEval(string postFix)
+{
+	if (postFix.empty())
+	{
+		cout << "Empty input string." << endl;
+
+		return -69;
+	}
+	else
+	{
+		int index = 0, s1, s2;
+		bool empty = false;
+		char c, e, o, v, pop1, pop2;
+
+		while (!empty)
+		{
+			// Moves over whitespace and gets character of string
+			do
+			{
+				c = postFix.at(index);
+				++index;
+			} while (c == ' ');
+			
+			// Checks if at end of string
+			if (postFix[index] == '\0')
+			{
+				empty = true;
+			}
+
+			if (c == '=')
+			{
+				if (isEmpty())
+				{
+					cout << "Postfix expression malformed." << endl;
+					return -69;
+				}
+				else if (mSize > 1)
+				{
+					cout << "Postfix expression malformed." << endl;
+					return -69;
+				}
+				else if (mSize == 1)
+				{
+					e = mTop[0];
+					return e;
+				}
+			}
+
+			if (isdigit(c))
+			{
+				push(c);
+			}
+
+			if (c == '+' || c == '-' || c == '/' || c == '*')
+			{
+				o = c;
+
+				if (mSize < 2)
+				{
+					cout << "Postfix expression malformed." << endl;
+					return -69;
+				}
+				else
+				{
+					pop(pop2);
+					pop(pop1);
+
+					s1 = atoi(pop1);
+					s2 = atoi(pop2);
+
+					if (o == '+')
+					{
+						v = s1 + s2;
+					}
+					else if (o == '-')
+					{
+						v = s1 - s2;
+					}
+					else if (o == '/')
+					{
+						v = s1 / s2;
+					}
+					else
+					{
+						v = s1 * s2;
+					}
+					push(&v);
+				}
+			}
+
+		}
+	}
 }
