@@ -48,10 +48,10 @@ int main(void)
 	tester.Test(item1, item2);
 
 	// postfix eval is incomplete
-	//Stack<char> S;
-	//string postFix = "6 2 + 5 * 8 4 / -";
+	Stack<char> S;
+	string postFix = "6 2 + 5 * 8 4 / -";
 
-	//S.postFixEval(postFix);
+	S.postFixEval(postFix);
 
 	return 0;
 }

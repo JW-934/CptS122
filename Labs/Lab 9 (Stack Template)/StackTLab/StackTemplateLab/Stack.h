@@ -141,7 +141,7 @@ int Stack<T>::postFixEval(string postFix)
 	}
 	else
 	{
-		int index = 0, s1, s2;
+		int index = 0, s1, s2, intV;
 		bool empty = false;
 		char c, e, o, v, pop1, pop2;
 
@@ -198,29 +198,32 @@ int Stack<T>::postFixEval(string postFix)
 					pop(pop2);
 					pop(pop1);
 
-					s1 = atoi(pop1);
-					s2 = atoi(pop2);
+					s1 = atoi(&pop1);
+					s2 = atoi(&pop2);
 
 					if (o == '+')
 					{
-						v = s1 + s2;
+						intV = s1 + s2;
 					}
 					else if (o == '-')
 					{
-						v = s1 - s2;
+						intV = s1 - s2;
 					}
 					else if (o == '/')
 					{
-						v = s1 / s2;
+						intV = s1 / s2;
 					}
 					else
 					{
-						v = s1 * s2;
+						intV = s1 * s2;
 					}
-					push(&v);
+
+					// Converts from integer to char to push
+					v = intV - '0';
+
+					push(v);
 				}
 			}
-
 		}
 	}
 }
