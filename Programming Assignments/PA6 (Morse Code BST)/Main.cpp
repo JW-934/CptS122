@@ -15,13 +15,15 @@
 int main()
 {
 	std::ifstream convertFile, tableFile;
-	//convertFile.open("Convert.txt", std::ios::in);
 	
 	BST table;
+	char d = 'D';
 
-	table.inOrderTraversal();
+	//table.inOrderTraversal();
 
-	std::cout << table.morseSearch('D');
+	//std::cout << table.morseSearch(d);
+
+	std::cout << table.strToMorse(getInput()) << std::endl;
 	
 	return 0;
 }

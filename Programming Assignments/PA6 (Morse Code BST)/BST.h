@@ -10,6 +10,9 @@
 
 #include <vector>
 #include "BSTNode.h"
+#include <string>
+#include <fstream>
+#include <ctype.h>
 
 class BST
 {
@@ -45,11 +48,14 @@ public:
 
 	bool isEmpty();
 
-	std::string morseSearch(char search); // Call this one
-	std::string morseSearch(char search, BSTNode* pTree);
+	std::string morseSearch(char& search); // Call this one
+	std::string morseSearch(char& search, BSTNode* pTree);
+
+	std::string strToMorse(const std::string& input);
 private:
 	BSTNode* mroot;
 
 	void destroyTree(BSTNode* pTree);
 };
 
+std::string getInput();

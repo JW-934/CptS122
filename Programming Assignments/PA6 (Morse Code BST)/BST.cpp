@@ -170,12 +170,12 @@ void BST::inOrderTraversal(BSTNode* pTree, std::vector<std::string>& names)
 	}
 }
 
-std::string BST::morseSearch(char search)
+std::string BST::morseSearch(char& search)
 {
 	return morseSearch(search, mroot);
 }
 
-std::string BST::morseSearch(char search, BSTNode* pTree)
+std::string BST::morseSearch(char& search, BSTNode* pTree)
 {
 	if (pTree != nullptr)
 	{
@@ -185,17 +185,39 @@ std::string BST::morseSearch(char search, BSTNode* pTree)
 		}
 		else if (pTree->getChar() < search)
 		{
-			morseSearch(search, pTree->getpRight());
+			return morseSearch(search, pTree->getpRight());
 		}
 		else if (pTree->getChar() > search)
 		{
-			morseSearch(search, pTree->getpLeft());
+			return morseSearch(search, pTree->getpLeft());
 		}
-
 		//morseSearch(search, pTree->getpLeft());
 		//morseSearch(search, pTree->getpRight());
 		//std::cout << pTree->getChar() << " " << pTree->getData() << " ";
 	}
+}
+
+std::string BST::strToMorse(const std::string& input)
+{
+	char current;
+	std::string output;
+	for (int i = 0; input[i] != '@'; ++i)
+	{
+		current = input[i];
+
+		current = toupper(current);
+
+		if (current == ' ')
+		{
+			output += ' ';
+		}
+		else
+		{
+			output += morseSearch(current);
+		}
+		output += ' ';
+	}
+	return output;
 }
 
 // Private functions
@@ -205,7 +227,34 @@ void BST::destroyTree(BSTNode* pTree)
 	{
 		destroyTree(pTree->getpLeft());
 		destroyTree(pTree->getpRight());
-		std::cout << "Node containing: " << pTree->getChar() << " " << pTree->getData() << " has been deleted." << std::endl;
+		//std::cout << "Node containing: " << pTree->getChar() << " " << pTree->getData() << " has been deleted." << std::endl;
 		delete pTree;
 	}
 }
+
+// Non member functions
+std::string getInput()
+{
+	std::ifstream convertFile;
+	std::string input, temp;
+	
+	convertFile.open("Convert.txt", std::ios::in);
+
+	if (convertFile.is_open())
+	{
+		while (!convertFile.eof())
+		{
+			std::getline(convertFile, temp);
+			input += temp;
+		}
+		input += '@'; // sentinel for translation loop
+		return input;
+	}
+	else
+	{
+		std::cout << "Could not open convert file!" << std::endl;
+		return "INPUT FILE ERROR";
+	}
+	
+}
+
