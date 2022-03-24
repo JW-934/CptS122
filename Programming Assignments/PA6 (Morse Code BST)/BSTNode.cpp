@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA6
-* Date: March 21, 2022, March 23, 2022
+* Date: March 21, 2022, March 23, 2022, March 24, 2022
 * Description: A binary search tree based English to morse code converter.
 */
 
