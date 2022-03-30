@@ -20,6 +20,38 @@ using std::ostream;
 using std::ifstream;
 using std::string;
 
+//class Person
+//{
+//public:
+//	Person(const string newName = "", const int newAge = 0, const string newGender = "", const double newHeight = 0.0);
+//
+//	Person(const Person& copy);
+//
+//	~Person();
+//
+//	// Getters
+//	string getName() const;
+//	int getAge() const;
+//	string getGender() const;
+//	double getHeight() const;
+//
+//	// Setters
+//	void setName(const string newName);
+//	void setAge(const int newAge);
+//	void setGender(const string newGender);
+//	void setHeight(const double newHeight);
+//
+//	// Operations 
+//	Person& operator= (const Person& rhs);
+//
+//private:
+//	string mName;
+//	int mAge;
+//	string mGender;
+//	double mHeight;
+//};
+
+// Changing the data members to protected would allow my tests to not use getter functions because the subclass will have access to the actual data
 class Person
 {
 public:
@@ -44,7 +76,7 @@ public:
 	// Operations 
 	Person& operator= (const Person& rhs);
 
-private:
+protected:
 	string mName;
 	int mAge;
 	string mGender;
