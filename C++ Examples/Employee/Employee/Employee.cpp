@@ -2,6 +2,8 @@
 
 Employee::Employee(const string &newName, const double &newPayRate, const double &newHours)
 {
+	cout << "Inside Employee Constructor!!" << endl;
+
 	mName = newName;
 	mPayRate = newPayRate;
 	mHours = newHours;
@@ -9,6 +11,7 @@ Employee::Employee(const string &newName, const double &newPayRate, const double
 
 Employee::~Employee()
 {
+	cout << "Inside Employee Destructor" << endl;
 }
 
 string Employee::getName()

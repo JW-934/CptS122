@@ -14,5 +14,11 @@
 int main(void)
 {
 
+	Employee e1("Greg", 15.0, 40);
+	Manager m1("Z", 31000.00, 60, true);
+
+	cout << "Greg's pay: " << e1.calculatePay() << endl;
+	cout << "Z's pay: " << m1.calculatePay() << endl;
+
 	return 0;
 }
