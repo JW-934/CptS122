@@ -12,7 +12,8 @@ double Manager::calculatePay()
 	if (this->mIsSalaried)
 	{
 		// the manager is a salaried employee
-		pay = this->getPayRate();
+		//pay = this->getPayRate();
+		pay = this->mPayRate;
 	}
 	else
 	{

@@ -28,7 +28,7 @@ public:
 
 	double calculatePay();
 
-private:
+protected:
 	string mName;
 	double mPayRate;
 	double mHours;
