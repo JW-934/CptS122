@@ -26,7 +26,7 @@ public:
 	void setPayRate(const double &newPayRate);
 	void setHours(const double &newHours);
 
-	double calculatePay();
+	virtual double calculatePay(); // override a function
 
 protected:
 	string mName;
