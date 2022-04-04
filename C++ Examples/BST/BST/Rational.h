@@ -60,8 +60,6 @@ ostream& operator<< (ostream& lhs, const Rational& rhs);
 Rational operator+ (const Rational& lhs, const Rational& rhs);
 ifstream& operator>> (ifstream& lhs, Rational& rhs);
 
-bool operator< (const Rational& lhs, const Rational& rhs);
-
 template <typename T> //<class T>
 T operator- (const T& lhs, const T& rhs);
 
