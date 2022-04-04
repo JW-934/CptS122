@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA7
-* Date: March 27, 2022
+* Date: March 27, 2022, April 4, 2022
 * Description: This application manages attendance for a course.
 */
 
@@ -22,9 +22,9 @@ void Menu::print()
 	std::cout << "2. Load master list" << std::endl;
 	std::cout << "3. Store master list" << std::endl;
 	std::cout << "4. Mark absences" << std::endl;
-	std::cout << "5. Edit absences" << std::endl; // Bonus (optional)
-	std::cout << "6. Generate report" << std::endl;
-	std::cout << "7. Exit" << std::endl;
+	//std::cout << "5. Edit absences" << std::endl; // Bonus (optional)
+	std::cout << "5. Generate report" << std::endl;
+	std::cout << "6. Exit" << std::endl;
 	std::cout << std::endl;
 }
 
