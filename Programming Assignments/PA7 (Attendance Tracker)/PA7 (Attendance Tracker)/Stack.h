@@ -40,8 +40,8 @@ template <class T>
 Stack<T>::Stack(int newSize)
 {
 	mSize = newSize; 
-	mMaxSize = 100;
-	mTop = new T[100]; 
+	mMaxSize = 999;
+	mTop = new T[999]; 
 }
 
 template <class T>

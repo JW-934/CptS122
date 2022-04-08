@@ -14,7 +14,7 @@ int main()
 	int option = 0, reportType = 0;
 	Menu menu;
 	fstream infile, masterFile;
-	string current, discard;
+	string currentTok, current, discard;
 
 	// New record variables
 	int newRecNum, newID, newUnits;
@@ -36,19 +36,36 @@ int main()
 			infile >> discard; // discards csv header
 			while (!infile.eof())
 			{
-				getline(infile, current, ',');
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + ", ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				getline(infile, currentTok, ',');
+				current += currentTok + " ";
+
+				//getline(infile, currentTok, ',');
+				//current += currentTok;
+
+				///////////////////////////////////////////
+				//current[current.length()] = '\0';
 				
 				masterFile << current;
-				
-				if (infile.peek())///////////////////////////////////////////////////Current Problem//////////////////////////////////////
-				{
-					masterFile << " ";
-				}
-				else
-				{
-					
-				}
 
+				currentTok.clear();
 				current.clear();
 
 				//getline(infile, current, ',');
@@ -134,7 +151,14 @@ int main()
 				masterFile >> newEmail;
 
 				masterFile >> current;
-				newUnits = atoi(current.c_str());
+				if (current == "AU")
+				{
+					newUnits = -1;
+				}
+				else
+				{
+					newUnits = atoi(current.c_str());
+				}
 				//current.clear();
 
 				masterFile >> newMajor;
