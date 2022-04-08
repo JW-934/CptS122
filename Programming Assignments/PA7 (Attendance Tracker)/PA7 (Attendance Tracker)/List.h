@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA7
-* Date: March 27, 2022, April 4, 2022
+* Date: March 27, 2022, April 4, 2022, April 7, 2022
 * Description: This application manages attendance for a course.
 */
 
@@ -25,22 +25,25 @@ template <class T>
 class List
 {
 public:
-	List(const Node<T>* newPhead = nullptr);
+	List(Node<T>* newPhead = nullptr);
 
 	~List();
 
 	Node<T>* getPhead() const;
 
-	void setPhead(Node<T>* newPhead) const;
+	void setPhead(Node<T>* newPhead);
 
-	void insertFront(const T* newData);
+	void insertFront(T& newData);
+
+	void printListRec() const;
+	void printListRec(Node<T>* pList) const;
 
 private:
 	Node<T>* mpHead;
 };
 
 template <class T>
-List<T>::List(const Node<T>* newPhead)
+List<T>::List(Node<T>* newPhead)
 {
 	mpHead = newPhead;
 }
@@ -58,19 +61,39 @@ Node<T>* List<T>::getPhead() const
 }
 
 template <class T>
-void List<T>::setPhead(Node<T>* newPhead) const
+void List<T>::setPhead(Node<T>* newPhead)
 {
 	mpHead = newPhead;
 }
 
 template <class T>
-void List<T>::insertFront(const T* newData)
+void List<T>::insertFront(T& newData)
 {
 	Node<T>* pMem = new Node<T>;
 
-	pMem->mData = *newData;
+	pMem->setData(newData);
 
-	pMem->mpNext = mpHead;
+	pMem->setPnext(mpHead);
 
 	mpHead = pMem;
+}
+
+template <class T>
+void List<T>::printListRec() const
+{
+	printListRec(mpHead);
+}
+
+template <class T>
+void List<T>::printListRec(Node<T>* pList) const
+{
+	if (pList != nullptr)
+	{
+		cout << pList->getData() << endl;
+		printListRec(pList->getPnext());
+	}
+	else
+	{
+		cout << endl;
+	}
 }

@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA7
-* Date: March 27, 2022, April 4, 2022
+* Date: March 27, 2022, April 4, 2022, April 7, 2022
 * Description: This application manages attendance for a course.
 */
 
@@ -21,13 +21,13 @@ public:
 
 	~Data();
 
-	int getRecordNum();
-	int getID();
-	string getName();
-	string getEmail();
-	int getUnits();
-	string getMajor();
-	string getLevel();
+	int getRecordNum() const;
+	int getID() const;
+	string getName() const;
+	string getEmail() const;
+	int getUnits() const;
+	string getMajor() const;
+	string getLevel() const;
 
 private:
 	int mRecordNum;

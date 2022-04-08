@@ -2,7 +2,7 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA7
-* Date: March 27, 2022, April 4, 2022
+* Date: March 27, 2022, April 4, 2022, April 7, 2022
 * Description: This application manages attendance for a course.
 */
 

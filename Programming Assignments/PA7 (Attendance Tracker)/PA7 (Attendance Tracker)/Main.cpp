@@ -2,13 +2,12 @@
 * Programmer: Jesse Watson
 * Class: CptS 122, Spring 2022; Lab Section 6
 * Assignment: PA7
-* Date: March 27, 2022, April 4, 2022
+* Date: March 27, 2022, April 4, 2022, April 7, 2022
 * Description: This application manages attendance for a course.
 */
 
 #include "Menu.h"
 #include "List.h"
-#include "Data.h"
 
 int main()
 {
@@ -19,7 +18,8 @@ int main()
 
 	// New record variables
 	int newRecNum, newID, newUnits;
-	string newName, newEmail, newMajor, newLevel;
+	string newName, newEmail, newMajor, newLevel, newFirstN, newLastN;
+	Data* pnewData;
 
 	List<Data> masterList;
 
@@ -38,7 +38,54 @@ int main()
 			{
 				getline(infile, current, ',');
 				
-				masterFile << current << " ";
+				masterFile << current;
+				
+				if (infile.peek())///////////////////////////////////////////////////Current Problem//////////////////////////////////////
+				{
+					masterFile << " ";
+				}
+				else
+				{
+					
+				}
+
+				current.clear();
+
+				//getline(infile, current, ',');
+				//newRecNum = atoi(current.c_str());
+
+				//getline(infile, current, ',');
+				//newID = atoi(current.c_str());
+
+				//getline(infile, newLastN, ',');
+				//getline(infile, newFirstN, ',');
+				///*infile >> newLastN;
+				//infile >> newFirstN;*/
+				//newName += newLastN + ", ";
+				//newName += newFirstN;
+				////current.clear();
+
+				////infile >> newEmail;
+				//getline(infile, newEmail, ',');
+
+				//getline(infile, current, ',');
+				//newUnits = atoi(current.c_str());
+				////current.clear();
+
+				///*infile >> newMajor;
+				//infile >> newLevel*/;
+				//getline(infile, newMajor, ',');
+				//getline(infile, newLevel, ',');
+
+				//masterFile << newRecNum << " " << newID << " " << newName << " " << newEmail << " " << newUnits << " "
+				//	<< newMajor << " " << newLevel;
+
+				//newName.clear();
+				//newFirstN.clear();
+				//newLastN.clear();
+				//newEmail.clear();
+				//newMajor.clear();
+				//newLevel.clear();//
 			}
 
 			infile.close();
@@ -48,15 +95,17 @@ int main()
 		case 2: // Load master list
 			masterFile.open("master.txt", std::ios::in);
 
-			masterFile >> discard; // discards blank line
+			//masterFile >> discard; // discards blank line
 			
 			while (!masterFile.eof())
 			{
-				getline(masterFile, current, ',');
+				/*getline(masterFile, current, ',');
 				newRecNum = atoi(current.c_str());
+				current.clear();
 
 				getline(masterFile, current, ',');
 				newID = atoi(current.c_str());
+				current.clear();
 
 				getline(masterFile, newName, ',');
 
@@ -64,18 +113,50 @@ int main()
 
 				getline(masterFile, current, ',');
 				newUnits = atoi(current.c_str());
+				current.clear();
 
 				getline(masterFile, newMajor, ',');
 
-				getline(masterFile, newLevel, ',');
+				getline(masterFile, newLevel, ',');*/
 
-				masterList.insertFront(new Data(newRecNum, newID, newName, newEmail, newUnits, newMajor, newLevel));
+				masterFile >> current;
+				newRecNum = atoi(current.c_str());
+
+				masterFile >> current;
+				newID = atoi(current.c_str());
+
+				masterFile >> newLastN;
+				masterFile >> newFirstN;
+				newName += newLastN + ", ";
+				newName += newFirstN;
+				//current.clear();
+
+				masterFile >> newEmail;
+
+				masterFile >> current;
+				newUnits = atoi(current.c_str());
+				//current.clear();
+
+				masterFile >> newMajor;
+				masterFile >> newLevel;
+
+
+				pnewData = new Data(newRecNum, newID, newName, newEmail, newUnits, newMajor, newLevel);
+
+				masterList.insertFront(*pnewData);
+
+				newName.clear();
+				newFirstN.clear();
+				newLastN.clear();
+				newEmail.clear();
+				newMajor.clear();
+				newLevel.clear();
 			}
 
 			masterFile.close();
 
 			// Printing list for testing
-			cout << masterList.getPhead()->getData()
+			masterList.printListRec();
 
 
 
