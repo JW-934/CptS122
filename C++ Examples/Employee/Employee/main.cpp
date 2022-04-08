@@ -15,7 +15,6 @@ void printPay(Employee& emp);
 
 int main(void)
 {
-
 	Employee e1("Greg", 17.01, 45);
 	Manager m1("Z", 31000.00, 60, true);
 
@@ -24,8 +23,33 @@ int main(void)
 	//Manager* pM2 = new Employee("Zviko", 31000.00, 60);
 	Employee* pE2 = new Manager("Greg", 17.00, 45, true);
 
-	printPay(*pE1);
-	printPay(*pE2);
+	Employee* pEArr[100] = { nullptr };
+	int option = 0;
+	int index = 0;
+
+	cout << "Enter the number of employees to add to our Employee system: ";
+	cin >> option;
+
+	while (index < option)
+	{
+		int empType = 0;
+		cout << "What type of Employee? (1) Standard (2) Manager ";
+		cin >> empType;
+		switch (empType)
+		{
+		case 1: pEArr[index] = new Employee();
+			break;
+		case 2: pEArr[index] = new Manager();
+			break;
+		}
+
+		printPay(*pEArr[index]);
+		delete pEArr[index];
+		++index;
+	}
+
+	//printPay(*pE1);
+	//printPay(*pE2);
 
 	//cout << "Greg's pay: " << pE1->calculatePay() << endl;
 	//cout << "Greg's pay: " << pE2->calculatePay() << endl; // this only works because of virtual before calculatePay();

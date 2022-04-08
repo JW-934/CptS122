@@ -16,7 +16,7 @@ class Employee
 public:
 	Employee(const string &newName = "", const double &newPayRate = 8.55, 
 		const double &newHours = 0.0);
-	~Employee();
+	virtual ~Employee();
 
 	string getName();
 	double getPayRate();
@@ -26,7 +26,8 @@ public:
 	void setPayRate(const double &newPayRate);
 	void setHours(const double &newHours);
 
-	virtual double calculatePay(); // override a function
+	// With 1 pure virtual, the entire class becomes an abstract class that cannot be instantiated
+	virtual double calculatePay() = 0; // pure virtual function // override a function
 
 protected:
 	string mName;
