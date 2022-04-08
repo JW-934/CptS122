@@ -38,6 +38,9 @@ public:
 	void printListRec() const;
 	void printListRec(Node<T>* pList) const;
 
+	void fprintListRec(fstream& infile) const;
+	void fprintListRec(fstream& infile, Node<T>* pList) const;
+
 private:
 	Node<T>* mpHead;
 };
@@ -91,6 +94,26 @@ void List<T>::printListRec(Node<T>* pList) const
 	{
 		cout << pList->getData() << endl;
 		printListRec(pList->getPnext());
+	}
+	else
+	{
+		cout << endl;
+	}
+}
+
+template <class T>
+void List<T>::fprintListRec(fstream& infile) const
+{
+	fprintListRec(infile, mpHead);
+}
+
+template <class T>
+void List<T>::fprintListRec(fstream& infile, Node<T>* pList) const
+{
+	if (pList != nullptr)
+	{
+		infile << pList->getData() << endl;
+		fprintListRec(infile, pList->getPnext());
 	}
 	else
 	{

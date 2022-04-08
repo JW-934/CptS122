@@ -199,9 +199,15 @@ int main()
 
 			break;
 		case 3: // Store master list
+			masterFile.open("master.txt", std::ios::in);
 
+			masterList.fprintListRec(masterFile);
+
+			masterFile.close();
 			break;
 		case 4: // Mark absences
+			cout << endl;
+			masterList.printListRec();
 
 			break;
 		case 5: // Generate report
