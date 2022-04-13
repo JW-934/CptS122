@@ -14,11 +14,24 @@ template<class NODETYPE>
 
 class ListNode
 {
-	friend class List< NODETYPE >; // make List a friend
+	friend class List<NODETYPE>; // make List a friend
 public:
 	ListNode(const NODETYPE& newData);  // copy constructor
 	NODETYPE getData() const;      // return data in the node
 private:
 	NODETYPE data;                 // data
-	ListNode< NODETYPE >* nextPtr; // next node in the list
+	ListNode<NODETYPE>* nextPtr; // next node in the list
 };
+
+template<class NODETYPE>
+ListNode<NODETYPE>::ListNode(const NODETYPE& newData)  // copy constructor
+{
+	data = newData;
+	nextPtr = nullptr;
+}
+
+template<class NODETYPE>
+NODETYPE ListNode<NODETYPE>::getData() const      // return data in the node
+{
+	return data;
+}
