@@ -20,6 +20,7 @@ int main()
 		p1Paddle.getSize().y / 6, sf::Color::Green);
 
 	shape.setFillColor(sf::Color::Green);
+	int direction = 1;
 
 	while (window.isOpen())
 	{
@@ -28,10 +29,42 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			/*if (event.type == sf::Event::KeyPressed)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+				{
+					p1Paddle.move(0, 3);
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					p2Paddle.move(0, 3);
+				}
+			}*/
 		}
 
-		window.clear();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			p1Paddle.move(0, .1);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			p2Paddle.move(0, .1);
+		}
 
+		if (p2Paddle.getGlobalBounds().intersects(gameBall.getGlobalBounds()))
+		{
+			direction *= -1;
+		}
+
+		if (p1Paddle.getGlobalBounds().intersects(gameBall.getGlobalBounds()))
+		{
+			direction *= -1;
+		}
+
+		gameBall.move(.1 * direction, 0);
+		
+		window.clear();
 		window.draw(p1Paddle);
 		window.draw(p2Paddle);
 		window.draw(gameBall);
