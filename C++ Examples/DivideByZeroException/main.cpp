@@ -1,4 +1,7 @@
+#include <vector>
 #include "DivideByZeroException.h"
+
+using std::vector;
 
 int divide(int n1, int n2);
 
@@ -6,7 +9,12 @@ int main()
 {
 	// volatile int num3; // used for values that are thought to be unable to be reached (I think)
 
-	int num1 = 2, num2 = 1, result = 0;
+	vector<int> v1;
+
+	v1.push_back(5);
+	v1.push_back(10);
+
+	int num1 = 2, num2 = 0, result = 0;
 
 	try
 	{
