@@ -6,14 +6,18 @@
 * Description: Implementation of a binary search tree
 */
 
-#include "Task1.h"
+#pragma once
 
-void Base::testFunction()
-{
-    cout << "Base class" << endl;
-}
+#include "Mammal.h"
 
-void Derived::testFunction()
+class Cat : public Mammal
 {
-    cout << "Derived class" << endl;
-}
+public:
+    Cat(void);
+    ~Cat(void);
+
+    void Move() const;
+    void Speak() const;
+protected:
+    int itsAge;
+};

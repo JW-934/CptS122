@@ -7,20 +7,19 @@
 */
 
 #pragma once
-
 #include <iostream>
 
 using std::cout;
 using std::endl;
 
-class Base
+class Mammal
 {
 public:
-    virtual void testFunction();
-};
+    Mammal(void);
+    ~Mammal(void);
 
-class Derived : public Base
-{
-public:
-    void testFunction();
+    virtual void Move() const;
+    virtual void Speak() const;
+protected:
+    int itsAge;
 };

@@ -139,10 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cat.cpp" />
+    <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="GuineaPig.cpp" />
+    <ClCompile Include="Horse.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mammal.cpp" />
     <ClCompile Include="Task1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cat.h" />
+    <ClInclude Include="Dog.h" />
+    <ClInclude Include="GuineaPig.h" />
+    <ClInclude Include="Horse.h" />
+    <ClInclude Include="Mammal.h" />
     <ClInclude Include="Task1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

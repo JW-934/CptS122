@@ -8,19 +8,16 @@
 
 #pragma once
 
-#include <iostream>
+#include "Mammal.h"
 
-using std::cout;
-using std::endl;
-
-class Base
+class Horse : public Mammal
 {
 public:
-    virtual void testFunction();
-};
+    Horse(void);
+    ~Horse(void);
 
-class Derived : public Base
-{
-public:
-    void testFunction();
+    void Move() const;
+    void Speak() const;
+protected:
+    int itsAge;
 };
