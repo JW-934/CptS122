@@ -38,9 +38,13 @@ int main()
 		cout << dbz.what() << endl;
 		cout << "take a different path for dividing the numbers!" << endl;
 	}
-	catch (std::out_of_range &oor)
+	/*catch (std::out_of_range &oor)
 	{
 		cout << oor.what() << endl;
+	}*/
+	catch (...) // Catch all other exceptions
+	{
+		cout << "catch all" << endl;
 	}
 
 	cout << "rest of program!" << endl;
